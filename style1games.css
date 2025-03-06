@@ -30,15 +30,26 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     background-color: rgba(245, 222, 179, 0.83);
-    height: 50vh;
+    height: 55vh;
     box-sizing: border-box;
     padding: 1.2vh;
 }
 
+.item a {
+    font-family: "Outfit", sans-serif;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.has-image {
+    font-weight: 300;
+    display: flex;
+}
+
 .item img {
-    /* padding-top: 2vh; */
+    padding-top: 2vh;
     width: 90%;
     object-fit: scale-down;
     gap: 20px;
@@ -58,6 +69,11 @@ html, body {
   }
 
 .text p {
+    font-family: "Outfit", sans-serif;
+    font-weight: 300;
+}
+
+.text h2 {
     font-family: "Outfit", sans-serif;
     font-weight: 300;
 }
