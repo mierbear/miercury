@@ -31,10 +31,17 @@ html, body {
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    background-color: rgba(245, 222, 179, 0.83);
+    background-color: rgba(233, 237, 237, 0.83);
     height: 55vh;
     box-sizing: border-box;
     padding: 1.2vh;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+.item:hover {
+    background-color: rgba(210, 242, 250, 0.83);
+    transform: scale(1.05);
 }
 
 .item a {
