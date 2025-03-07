@@ -16,7 +16,7 @@
     flex-direction: row;
     box-sizing: border-box;
     opacity: 1;
-    transition: all 2s ease-in;
+    transition: all 2s ease;
 }
 
 .title {
@@ -51,4 +51,24 @@
 
 .title:hover {
     color: #bcdbfbd4;
+}
+
+/* ANIMATIONS */
+
+@keyframes header-slide-out {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(-150%);
+    }
+}
+
+@keyframes header-slide-in {
+    0% {
+        transform: translateY(-150%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
 }

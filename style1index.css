@@ -13,7 +13,7 @@ html, body {
     text-align: center;
     gap: 5px;
     color: rgb(255, 255, 255);
-    transition: all 2s ease-in;
+    transition: all 2s ease;
     opacity: 0;
     padding: 20px;
     padding-bottom: 80px;
@@ -76,7 +76,7 @@ html, body {
 
 .content-box p {
     font-weight: 100;
-    font-size: .8rem;
+    font-size: 0.9rem;
 }
 
 /* TOGGLES */
@@ -86,7 +86,7 @@ html, body {
     z-index: 100;
     bottom: 25%;
     right: 10px;
-    transition: all .2s ease-in;
+    transition: all .2s ease;
     color: #ffffff;
     opacity: 0;
     font-family: 'Courier New', Courier, monospace;
@@ -96,8 +96,13 @@ html, body {
     margin: 5px 0px;
 }
 
+.h:hover {
+    color: #3a48df;
+    cursor:pointer;
+}
+
 .x:hover {
-    color: #ff0000;
+    color: #3a48df;
     cursor:pointer;
 }
 
@@ -133,7 +138,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #1d1e1fc9;
+    background-color: #0d0f1156;
     color: rgb(255, 255, 255);
     margin-top: auto;
     position: fixed;
