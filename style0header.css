@@ -50,12 +50,29 @@
     .navigation a:hover {
         background-color: #bcdbfbd4;
     }
-
+    
     .title:hover {
         color: #bcdbfbd4;
     }
+    
+    .navigation .nav-characters {
+        animation: glow 2s ease infinite;
+    }
+
 
     /* ANIMATIONS */
+
+    @keyframes glow {
+        0% {
+            background-color: #abcee78c;
+        }
+        50% {
+            background-color: #eae4adb0;
+        }
+        100% {
+            background-color: #abcee78c;
+        }
+    }
 
     @keyframes header-slide-out {
         0% {
