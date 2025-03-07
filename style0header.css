@@ -19,7 +19,9 @@
         transition: all 2s ease;
         z-index: 12;
         transform: translateY(0);
+        position: fixed;
     }
+    
 
     .title {
         margin-left: 70px;

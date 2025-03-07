@@ -99,7 +99,8 @@ html, body {
 }
 
 .h:hover, 
-.x:hover {
+.x:hover,
+.t:hover {
     color: #ffffff;
     cursor:pointer;
 }
