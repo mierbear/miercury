@@ -7,7 +7,6 @@ html, body {
     min-height: 100vh;
     max-height: 100vh;
     flex: 1;
-    background-color: rgb(241, 244, 244);
 }
 
 /* CENTER!! */
@@ -17,5 +16,67 @@ html, body {
     height: 100vh;
     justify-content: center;
     align-items: center;
+    background-color: rgb(255, 255, 255);
+    /* gap: 20%; */
 }
 
+.about-me {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    background-color: transparent;
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.likes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dislikes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.kyle {
+    position: fixed;
+    bottom: -2%;
+    right: 18%;
+    transition: all 2s ease;
+    animation: popup 2s ease;
+    opacity: 0.1;
+}
+
+.kyle:hover {
+    cursor: pointer;
+}
+
+@keyframes popup {
+    0% {
+        bottom: -100%;
+    }
+    100% {
+        bottom: -2%;
+    }
+};
+
+@keyframes instapop {
+    0% {
+        opacity: 0.1;
+    }
+    100% {
+        opacity: 1;
+    }
+}

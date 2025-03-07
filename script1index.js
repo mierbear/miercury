@@ -87,60 +87,53 @@ window.addEventListener('scroll', function() {
 
     if (scrolledPercentage >= 10 && scrolledPercentage < 20) {
         mier.style.transform = `translateY(0vh)`;
-        bg.style.transform = `translateY(0%)`;
     } else if (scrolledPercentage >= 20 && scrolledPercentage < 30) {
         mier.style.transform = `translateY(25vh)`;
-        bg.style.transform = `translateY(-1.5%)`;
     } else if (scrolledPercentage >= 30 && scrolledPercentage < 40) {
         mier.style.transform = `translateY(50vh)`;
-        bg.style.transform = `translateY(-3%)`;
     } else if (scrolledPercentage >= 40 && scrolledPercentage < 50) {
         mier.style.transform = `translateY(75vh)`;
-        bg.style.transform = `translateY(-4.5%)`;
     } else if (scrolledPercentage >= 50 && scrolledPercentage < 60) {
         mier.style.transform = `translateY(100vh)`;
-        bg.style.transform = `translateY(-6%)`;
     } else if (scrolledPercentage >= 60 && scrolledPercentage < 70) {
         mier.style.transform = `translateY(125vh)`;
-        bg.style.transform = `translateY(-7.5%)`;
     } else if (scrolledPercentage >= 70 && scrolledPercentage < 80) {
         mier.style.transform = `translateY(150vh)`;
-        bg.style.transform = `translateY(-9%)`;
     } else if (scrolledPercentage >= 80 && scrolledPercentage < 90) {
         mier.style.transform = `translateY(175vh)`;
-        bg.style.transform = `translateY(-10.5%)`;
     } else if (scrolledPercentage >= 90) {
         mier.style.transform = `translateY(200vh)`;
-        bg.style.transform = `translateY(-12%)`;
     }
 });
 
 
 // BG PARALLAX 
 
-// window.addEventListener('scroll', function() {
-//     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-//     const scrolledPercentage = window.scrollY / scrollableHeight * 100;
+window.addEventListener('scroll', function() {
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolledPercentage = window.scrollY / scrollableHeight * 100;
 
-//     if (scrolledPercentage >= 10 && scrolledPercentage < 20) {
-//     } else if (scrolledPercentage >= 20 && scrolledPercentage < 30) {
-//         bg.style.transform = `translateY(0%)`;
-//     } else if (scrolledPercentage >= 30 && scrolledPercentage < 40) {
-//         bg.style.transform = `translateY(-1.5%)`;
-//     } else if (scrolledPercentage >= 40 && scrolledPercentage < 50) {
-//         bg.style.transform = `translateY(-3%)`;
-//     } else if (scrolledPercentage >= 50 && scrolledPercentage < 60) {
-//         bg.style.transform = `translateY(-4.5%)`;
-//     } else if (scrolledPercentage >= 60 && scrolledPercentage < 70) {
-//         bg.style.transform = `translateY(-6%)`;
-//     } else if (scrolledPercentage >= 70 && scrolledPercentage < 80) {
-//         bg.style.transform = `translateY(-7.5%)`;
-//     } else if (scrolledPercentage >= 80 && scrolledPercentage < 90) {
-//         bg.style.transform = `translateY(-9%)`;
-//     } else if (scrolledPercentage >= 90) {
-//         bg.style.transform = `translateY(-10.5%)`;
-//     }
-// });
+    if (scrolledPercentage >= 10 && scrolledPercentage < 20) {
+        bg.style.transform = `translateY(0%)`;
+    } else if (scrolledPercentage >= 20 && scrolledPercentage < 30) {
+        bg.style.transform = `translateY(-1.5%)`;
+    } else if (scrolledPercentage >= 30 && scrolledPercentage < 40) {
+        bg.style.transform = `translateY(-3%)`;
+    } else if (scrolledPercentage >= 40 && scrolledPercentage < 50) {
+        bg.style.transform = `translateY(-4.5%)`;
+    } else if (scrolledPercentage >= 50 && scrolledPercentage < 60) {
+        bg.style.transform = `translateY(-6%)`;
+    } else if (scrolledPercentage >= 60 && scrolledPercentage < 70) {
+        bg.style.transform = `translateY(-7.5%)`;
+    } else if (scrolledPercentage >= 70 && scrolledPercentage < 80) {
+        bg.style.transform = `translateY(-9%)`;
+    } else if (scrolledPercentage >= 80 && scrolledPercentage < 90) {
+        bg.style.transform = `translateY(-10.5%)`;
+    } else if (scrolledPercentage >= 90) {
+        bg.style.transform = `translateY(-12%)`;
+
+    }
+});
 
 
 // DELAYED FADE IN
