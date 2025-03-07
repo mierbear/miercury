@@ -87,7 +87,7 @@ html, body {
     bottom: 25%;
     right: 10px;
     transition: all .2s ease;
-    color: #ffffff;
+    color: #ffffff36;
     opacity: 0;
 }
 
@@ -95,17 +95,15 @@ html, body {
     margin: 5px 0px;
     font-family: "Outfit", sans-serif;
     font-size: large;
+    transition: all .2s ease;
 }
 
-.h:hover {
-    color: #3a48df;
-    cursor:pointer;
-}
-
+.h:hover, 
 .x:hover {
-    color: #3a48df;
+    color: #ffffff;
     cursor:pointer;
 }
+
 
 /* IMAGES */
 
