@@ -9,6 +9,7 @@ const skullsPos = document.querySelector(`.skulls`).offsetTop;
 const arrowR = document.querySelector(`.arrow-right`);
 const arrowL = document.querySelector(`.arrow-left`);
 
+
 window.addEventListener('scroll', function() {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrolledPercentage = window.scrollY / scrollableHeight * 100;
@@ -26,6 +27,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// ARROWS 
 
 arrowR.addEventListener(`click`, function() {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
