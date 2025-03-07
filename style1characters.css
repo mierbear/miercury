@@ -46,18 +46,30 @@
     background-color: rgb(222, 222, 215);
 } */
 
-.arrow-left {
+.arrows {
+    color: rgb(203, 113, 113);
+}
+
+.arrow-left,
+.arrow-right {
     position: fixed;
-    bottom: 30px;
-    right: 8rem;
     cursor: pointer;
-    font-size: 50px;
+    font-size: 40px;
+    transition: all 0.1s ease;
+    transform: scale(1);
+}
+
+.arrow-left {
+    bottom: 4.5rem;
+    right: 2rem;
 }
 
 .arrow-right {
-    position: fixed;
-    bottom: 30px;
-    right: 3rem;
-    cursor: pointer;
-    font-size: 50px;
+    bottom: 2rem;
+    right: 2rem;
 }
+
+.arrow-left:hover,
+.arrow-right:hover {
+    transform: scale(1.2);
+}   

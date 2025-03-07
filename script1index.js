@@ -29,6 +29,8 @@ window.addEventListener('scroll', function() {
 
 
 // QUOTES
+// hi :3
+// these are the principles that i live by. most of which are of course taken from CC.
 
 const quotes = [
     "How can you put forth your best fruit if you are not put forth within yourself first?",
@@ -47,6 +49,7 @@ const quotes = [
     "Fear is not a natural state of man.",
     "Hatred is reserved for fist fighting the demons.",
     "Forgive them for they know not what they do.",
+    "Unless you turn and become like children, you will never enter the kingdom of heaven.",
     "The fear of death distresses a man with a guilty conscience, but the man with a good witness within himself longs for death as for life.",
 	"Your thoughts determine your life.",
     "Each and every action are equally drastic, therefore no action is drastic. So you don't have to look at something as hard to do.",
@@ -156,12 +159,12 @@ x.addEventListener(`click`, function() {
     if (!closed) {
         contentBox.style.animation = `container-slide 1s ease-in`;
         contentBox.style.transform = `translateX(-150%)`;
-        x.textContent = `O`;
+        x.textContent = `X`;
         closed = true;
     } else if (closed === true) {
-        contentBox.style.animation = `container-slide-out 1.3s ease-out`;
+        contentBox.style.animation = `container-slide-out 1.8s ease-out`;
         contentBox.style.transform = `translateX(0%)`;
-        x.textContent = `X`;
+        x.textContent = `C`;
         closed = false;
     }
 });
@@ -175,6 +178,7 @@ h.addEventListener(`click`, function() {
         setTimeout(() => {
             centerText.style.opacity = `0`;
         }, 0.5 * second)
+        h.textContent = `X`;
         closed = true;
     } else if (closed === true) {
         header.style.animation = `header-slide-out .65s ease-out`;
@@ -182,6 +186,7 @@ h.addEventListener(`click`, function() {
         setTimeout(() => {
             centerText.style.opacity = `1`;
         }, 0.5 * second)
+        h.textContent = `H`;
         closed = false;
     }
 })

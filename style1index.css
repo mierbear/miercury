@@ -89,11 +89,12 @@ html, body {
     transition: all .2s ease;
     color: #ffffff;
     opacity: 0;
-    font-family: 'Courier New', Courier, monospace;
 }
 
 .toggles h2 {
     margin: 5px 0px;
+    font-family: "Outfit", sans-serif;
+    font-size: large;
 }
 
 .h:hover {
