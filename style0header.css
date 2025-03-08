@@ -9,7 +9,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #00000070;
+        background-color: #00000033;
         color: rgb(25, 25, 25);
         min-width: 100%;
         max-height: 70px;
@@ -29,8 +29,12 @@
         padding: 0;
         font-weight: bold;
         text-decoration: none;
-        color: #abcee78c;
+        color: #ffffff8c;
         transition: all 0.5s ease;
+    }
+
+    .title:hover {
+        color: #ffffffe2;
     }
 
     .navigation {
@@ -42,37 +46,37 @@
 
     .navigation a {
         text-decoration: none;
-        color: #000;
+        color: #ffffff;
         padding: 8px;
-        background-color: #abcee78c;
+        background-color: #ffffff1d;
         border-radius: 4px;
         transition: all 0.5s ease;
     }
 
     .navigation a:hover {
-        background-color: #bcdbfbd4;
-    }
-    
-    .title:hover {
-        color: #bcdbfbd4;
+        background-color: #ffffff51;
     }
     
     .navigation .nav-characters {
         animation: glow 2s ease infinite;
     }
 
+    .navigation .nav-characters:hover {
+        animation: none;
+        background-color: #fffce16a;
+    }
 
     /* ANIMATIONS */
 
     @keyframes glow {
         0% {
-            background-color: #abcee78c;
+            background-color: #ffffff1d;
         }
         50% {
-            background-color: #eae4adb0;
+            background-color: #fffce16a;
         }
         100% {
-            background-color: #abcee78c;
+            background-color: #ffffff1d;
         }
     }
 
