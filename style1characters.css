@@ -5,6 +5,10 @@
     font-family: "Xanh Mono", "Cutive Mono", serif;
 }
 
+body {
+    color: white;
+}
+
 .container {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
@@ -19,32 +23,97 @@
     flex-direction: row;
     padding: 0;
     margin: 0;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(255, 0, 0, 0);
 }
 
 .bg {
-    background-color: rgb(220, 247, 251);
+    background-color: rgb(12, 12, 13);
     transition: all 0.2s ease-in;
 }
 
-/* .mier {
-    background-color: rgb(220, 247, 251);
-}
+/* CHARACTERS */
 
-.simeon {
-    background-color: rgb(47, 44, 183);
-}
-
+.mier,
 .quince {
-    background-color: rgb(222, 91, 91);
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
 }
 
+.simeon,
 .pio {
-    background-color: rgb(44, 44, 52);
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
 }
+
 .skulls {
-    background-color: rgb(222, 222, 215);
-} */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.mier-right,
+.mier-left,
+.simeon-right,
+.simeon-left,
+.quince-right,
+.quince-left,
+.pio-right,
+.pio-left,
+.aurelius,
+.rufus,
+.ignatius,
+.brutus {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.img {
+    display: flex;
+}
+
+
+.container .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    /* background-color: rgba(255, 255, 255, 0.182); */
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.182), transparent);
+    height: 60vh;
+    width: 70%;
+    border-radius: 1%;
+    box-sizing: border-box;
+    padding: 10%;
+    text-align: center;
+    gap: 10%;
+}
+
+/* MIER */
+
+.mier-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 2s ease;
+    object-fit: contain;
+    transform: translateX(-3%) translateY(3%);
+}
+
+.mier-img:hover {
+    transform: scale(1.8) translateX(6.5%) translateY(15%);
+}
+
+container img {
+    transform: scale(1);
+}
+
+
+/* ARROWS */
 
 .arrows {
     color: rgb(119, 172, 192);

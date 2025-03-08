@@ -3,6 +3,8 @@
 const kyle = document.querySelector('.kyle');
 const center = document.querySelector('.center');
 const text = document.querySelector('.about-me');
+const headerText = document.querySelector(`.title`);
+const navText = document.querySelectorAll(`.link`);
 let smile = false;
 let knockFX;
 
@@ -27,6 +29,10 @@ kyle.addEventListener('click', function() {
         kyle.style.opacity = '1';
         center.style.backgroundColor = 'black';
         text.style.color = 'white';
+        headerText.style.color = `white`;
+        navText.forEach((link) => {
+            link.style.color = `white`;
+        })
         smile = true;
     } else {
         setTimeout(() => {
@@ -38,6 +44,10 @@ kyle.addEventListener('click', function() {
         kyle.style.opacity = '0.1';
         center.style.backgroundColor = 'white';
         text.style.color = 'black';
+        headerText.style.color = `black`;
+        navText.forEach((link) => {
+            link.style.color = `black`;
+        })
         smile = false;
     }
 });
