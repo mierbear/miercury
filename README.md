@@ -8,7 +8,10 @@ code mierventure
 think of something to write for the index content lol
 ✅implement header for character page
 
-finish index bg drawing
+✅finish index bg night
+finish index bg day
+finish index bg sunset
+finish index bg dawn
 draw match game assets
 draw mierventure assets
 draw assets for the character page
