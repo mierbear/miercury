@@ -9,6 +9,7 @@ const bg0 = document.querySelector(`.bg0`);
 const bg1 = document.querySelector(`.bg1`);
 const bg2 = document.querySelector(`.bg2`);
 const bg3 = document.querySelector(`.bg3`);
+const ground = document.querySelector(`.ground`);
 const minute = 60000;
 const second = 1000;
 const toggles = document.querySelector(`.toggles`);
@@ -111,7 +112,7 @@ window.addEventListener('scroll', function() {
 });
 
 
-// BG PARALLAX 
+// BG PARALLAX (NIGHT)
 
 window.addEventListener('scroll', function() {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -119,58 +120,67 @@ window.addEventListener('scroll', function() {
 
     if (scrolledPercentage >= 10 && scrolledPercentage < 20) {
         bg.style.transform = `translateY(0%)`;
-        bg0.style.transform = `translateY(0%)`;
+        bg0.style.transform = `translateY(0%)`; 
         bg1.style.transform = `translateY(0%)`;
         bg2.style.transform = `translateY(0%)`;
         bg3.style.transform = `translateY(0%)`;
+        ground.style.transform = `translateY(0%)`;
     } else if (scrolledPercentage >= 20 && scrolledPercentage < 30) {
         bg.style.transform = `translateY(-1.5%)`;
         bg0.style.transform = `translateY(-1.4%)`;
         bg1.style.transform = `translateY(-1.2%)`;
         bg2.style.transform = `translateY(-1%)`;
         bg3.style.transform = `translateY(-1.3%)`;
+        ground.style.transform = `translateY(-.8%)`;
     } else if (scrolledPercentage >= 30 && scrolledPercentage < 40) {
         bg.style.transform = `translateY(-3%)`;
         bg0.style.transform = `translateY(-2.8%)`;
         bg1.style.transform = `translateY(-2.4%)`;
         bg2.style.transform = `translateY(-2%)`;
         bg3.style.transform = `translateY(-2.6%)`;
+        ground.style.transform = `translateY(-1.6%)`;
     } else if (scrolledPercentage >= 40 && scrolledPercentage < 50) {
         bg.style.transform = `translateY(-4.5%)`;
         bg0.style.transform = `translateY(-4.2%)`;
         bg1.style.transform = `translateY(-3.6%)`;
         bg2.style.transform = `translateY(-3%)`;
         bg3.style.transform = `translateY(-3.9%)`;
+        ground.style.transform = `translateY(-2.4%)`;
     } else if (scrolledPercentage >= 50 && scrolledPercentage < 60) {
         bg.style.transform = `translateY(-6%)`;
         bg0.style.transform = `translateY(-5.6%)`;
         bg1.style.transform = `translateY(-4.8%)`;
         bg2.style.transform = `translateY(-4%)`;
         bg3.style.transform = `translateY(-5.2%)`;
+        ground.style.transform = `translateY(-3.2%)`;
     } else if (scrolledPercentage >= 60 && scrolledPercentage < 70) {
         bg.style.transform = `translateY(-7.5%)`;
         bg0.style.transform = `translateY(-7%)`;
         bg1.style.transform = `translateY(-6%)`;
         bg2.style.transform = `translateY(-5%)`;
         bg3.style.transform = `translateY(-6.5%)`;
+        ground.style.transform = `translateY(-4%)`;
     } else if (scrolledPercentage >= 70 && scrolledPercentage < 80) {
         bg.style.transform = `translateY(-9%)`;
         bg0.style.transform = `translateY(-8.4%)`;
         bg1.style.transform = `translateY(-7.2%)`;
         bg2.style.transform = `translateY(-6%)`;
         bg3.style.transform = `translateY(-7.8%)`;
+        ground.style.transform = `translateY(-4.8%)`;
     } else if (scrolledPercentage >= 80 && scrolledPercentage < 90) {
         bg.style.transform = `translateY(-10.5%)`;
         bg0.style.transform = `translateY(-9.4%)`;
         bg1.style.transform = `translateY(-8.4%)`;
         bg2.style.transform = `translateY(-7%)`;
         bg3.style.transform = `translateY(-9.1%)`;
+        ground.style.transform = `translateY(-5.6%)`;
     } else if (scrolledPercentage >= 90) {
         bg.style.transform = `translateY(-12%)`;
         bg0.style.transform = `translateY(-10.8%)`;
         bg1.style.transform = `translateY(-9.6%)`;
         bg2.style.transform = `translateY(-8%)`;
         bg3.style.transform = `translateY(-10.4%)`;
+        ground.style.transform = `translateY(-6.4%)`;
     }
 });
 

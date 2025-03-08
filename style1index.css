@@ -68,7 +68,7 @@ html, body {
     background-color: #00000033;
     min-height: 300vh;
     max-height: 300vh;
-    width: 70%;
+    width: 75%;
     opacity: 0;
     text-align: justify;
     color: #ffffff;
@@ -112,8 +112,6 @@ html, body {
     z-index: -1;
     position: absolute;
     top: 20%;   
-    /* transform: translateX(-10%); */
-    /* transform: translateY(-5%); */
     width: 25em;
     animation: fall-in 3.5s ease;
     transition: all 2s ease;
@@ -127,7 +125,8 @@ html, body {
 .bg0,
 .bg1,
 .bg2,
-.bg3 {
+.bg3,
+.ground {
     z-index: -10;
     position: fixed;
     width: 100%;
@@ -137,7 +136,7 @@ html, body {
 
 .bg0 {
     z-index: -9;
-    animation: twinkle 3s ease infinite;
+    animation: twinkle 6s ease infinite;
 }
 
 .bg1 {
@@ -154,6 +153,10 @@ html, body {
     z-index: -6;
 }
 
+.ground {
+    z-index: -5;
+}
+
 /* FOOTER */
 
 .footer {
@@ -168,8 +171,7 @@ html, body {
     bottom: -100px;
     width: 100%;
     padding: 7px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    transition: bottom 0.7s;
+    transition: bottom 3s;
 }
 
 .quote {

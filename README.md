@@ -19,6 +19,6 @@ pages done:
 index
 games
 characters
-about
+✅about
 match
 mierventure
