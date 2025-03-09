@@ -255,14 +255,76 @@ const hours = now.getHours();
 let timeOfDay;
 console.log(hours);
 
+const removeAssets = function() {
+    mier.src = `none`;
+    bg.src = `none`;
+    bg0.src = `none`;
+    bg1.src = `none`;
+    bg2.src = `none`;
+    bg3.src = `none`;
+    ground.src = `none`;
+}
+
+// const eveningAssets = function() {
+//     mier.src = 
+// }
+
+const timeSetDawn = function() {
+    mier.src = `./assets/mierfalldawn.png`;
+    bg.src = `./assets/dawn.png`;
+    bg0.src = `./assets/none.png`;
+    bg1.src = `./assets/none.png`;
+    bg2.src = `./assets/none.png`;
+    bg3.src = `./assets/none.png`;
+    ground.src = `./assets/none.png`;
+}
+const timeSetMorning = function() {
+    mier.src = `./assets/mierfallmorning.png`;
+    bg.src = `./assets/morning.png`;
+    bg0.src = `./assets/none.png`;
+    bg1.src = `./assets/none.png`;
+    bg2.src = `./assets/none.png`;
+    bg3.src = `./assets/none.png`;
+    ground.src = `./assets/none.png`;
+}
+const timeSetSunset = function() {
+    mier.src = `./assets/mierfallsunset.png`;
+    bg.src = `./assets/sunset.png`;
+    bg0.src = `./assets/none.png`;
+    bg1.src = `./assets/none.png`;
+    bg2.src = `./assets/none.png`;
+    bg3.src = `./assets/none.png`;
+    ground.src = `./assets/none.png`;
+}
+const timeSetEvening = function() {
+    timeOfDay = `evening`;
+    removeAssets();
+    mier.src = `./assets/mierfall.png`;
+    bg.src = `./assets/night2.png`;
+    bg0.src = `./assets/stars00.png`;
+    bg1.src = `./assets/stars11.png`;
+    bg2.src = `./assets/stars22.png`;
+    bg3.src = `./assets/shootingstars.png`;
+    ground.src = `./assets/ground.png`;
+}
+
+
 if (hours >= 5 && hours < 7) {
     timeOfDay = `dawn`;
-} else if (hours >= 7 && hours < 12) {
+    removeAssets();
+    timeSetDawn();
+} else if (hours >= 7 && hours < 17) {
     timeOfDay = `morning`;
-} else if (hours >= 12 && hours < 18) {
-    timeOfDay = `afternoon`;
+    removeAssets();
+    timeSetMorning();
+} else if (hours >= 17 && hours < 19) {
+    timeOfDay = `sunset`;
+    removeAssets();
+    timeSetSunset();
 } else {
     timeOfDay = `evening`;
+    removeAssets();
+    timeSetEvening();
 }
 
 console.log(timeOfDay)
@@ -270,18 +332,26 @@ console.log(timeOfDay)
 t.addEventListener(`click`, function() {
     if (timeOfDay === `dawn`) {
         timeOfDay = `morning`;
+        removeAssets();
+        timeSetMorning();
         console.log(timeOfDay);
         t.textContent = `M`;
     } else if (timeOfDay === `morning`) {
-        timeOfDay = `afternoon`;
+        timeOfDay = `sunset`;
+        removeAssets();
+        timeSetSunset();
         console.log(timeOfDay);
-        t.textContent = `A`;
-    } else if (timeOfDay === `afternoon`) {
+        t.textContent = `S`;
+    } else if (timeOfDay === `sunset`) {
         timeOfDay = `evening`;
+        removeAssets();
+        timeSetEvening();
         console.log(timeOfDay);
         t.textContent = `E`;
     } else if (timeOfDay === `evening`) {
         timeOfDay = `dawn`;
+        removeAssets();
+        timeSetDawn();
         console.log(timeOfDay);
         t.textContent = `D`;
     }

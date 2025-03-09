@@ -7,6 +7,8 @@ code match game
 code mierventure
 think of something to write for the index content lol
 ✅implement header for character page
+implement mobile support
+add artists i like in about me
 
 ✅finish index bg night
 finish index bg day

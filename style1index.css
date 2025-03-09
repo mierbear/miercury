@@ -5,6 +5,8 @@ html, body {
     flex-direction: column;
     height: 300vh;
     flex: 1;
+    z-index: -20;
+    background-color: rgb(31, 37, 44);
 }
 
 /* CENTER!! */
@@ -121,7 +123,7 @@ html, body {
     top: 20%;   
     width: 25em;
     animation: fall-in 3.5s ease;
-    transition: all 2s ease;
+    transition: all 1.8s ease;
     padding-right: 2.5%;
 }
 
