@@ -43,7 +43,6 @@ html, body {
 
 .two-halves {
     display: grid;
-    /* grid-template-columns: 40fr 60fr; */
     grid-template-columns: 5% 1fr 40%;
     flex-direction: row;
     width: 100%;
@@ -74,7 +73,8 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    background-color: #00000033;
+    /* background-color: #00000033; */
+    background: linear-gradient(to bottom, #00000033, #00000033, #00000033, #00000033, transparent);
     min-height: 300vh;
     max-height: 300vh;
     width: 90%;
@@ -102,14 +102,12 @@ html, body {
 
 .toggles h2 {
     margin: 5px 0px;
-    font-family: "Outfit", sans-serif;
+    font-family: "Outfit";
     font-size: large;
     transition: all .2s ease;
 }
 
-.h:hover, 
-.x:hover,
-.t:hover {
+.toggles h2:hover {
     color: #ffffff;
     cursor:pointer;
 }
@@ -194,6 +192,15 @@ html, body {
 
 
 /* ANIMATIONS */
+
+@keyframes go-up {
+    0% {
+        top: 20%;
+    }
+    100% {
+        top: -100%;
+    }
+}
 
 @keyframes fall-in {
     0% {

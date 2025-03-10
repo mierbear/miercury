@@ -50,6 +50,10 @@ html, body {
     flex-direction: column;
 }
 
+.q {
+    font-weight: 1000;
+}
+
 .kyle {
     position: fixed;
     bottom: -2%;
@@ -63,20 +67,120 @@ html, body {
     cursor: pointer;
 }
 
+.overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(3px);
+    z-index: 200;
+}
+
+.anime, .music {
+    text-decoration: underline;
+}
+
+.anime:hover, .music:hover {
+    cursor: pointer;
+}
+
+.anime-list,
+.music-list {
+    position: absolute;
+    display: flex;
+    padding: 2rem 5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+    border: .1rem solid rgb(0, 0, 0);
+    border-radius: 0.2rem;  
+    gap: 1rem;
+    z-index: 250;
+    transition: all 2s ease;
+}
+
+.xa,
+.xm {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    transition: all .2s ease;
+}
+
+.xa:hover,
+.xm:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.hidden {
+    display: none;
+}   
+
+.best {
+    animation: rainbow 0.5s ease-in-out infinite;
+}
+
+.love {
+    animation: love 2s ease-in-out infinite;
+}
+
+/* ANIMATIONS */
+
+@keyframes rainbow {
+    0% {
+        color: red;
+    }
+    20% {
+        color: rgb(255, 221, 117);
+    }
+    40% {
+        color: rgb(167, 255, 140);
+    }
+    60% {
+        color: rgb(59, 59, 255);
+    }
+    80% {
+        color: rgb(225, 94, 255);
+    }
+    100% {
+        color: red;
+    }
+}
+
+@keyframes love {
+    0% {
+        color: rgb(255, 227, 113);
+    }
+    50% {
+        color: rgb(0, 0, 0);
+    }
+    100% {
+        color: rgb(255, 220, 80);
+    }
+}
+
+@keyframes love2 {
+    0% {
+        color: rgb(255, 227, 113);
+    }
+    50% {
+        color: rgb(255, 255, 255);
+    }
+    100% {
+        color: rgb(255, 220, 80);
+    }
+}
+
 @keyframes popup {
     0% {
         bottom: -100%;
     }
     100% {
         bottom: -2%;
-    }
-};
-
-@keyframes instapop {
-    0% {
-        opacity: 0.1;
-    }
-    100% {
-        opacity: 1;
     }
 }

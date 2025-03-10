@@ -18,6 +18,7 @@ const centerText = document.querySelector(`.center-text`);
 const x = document.querySelector(`.x`);
 const h = document.querySelector(`.h`);
 const t = document.querySelector(`.t`);
+const m = document.querySelector(`.m`);
 
 
 // FOOTER
@@ -212,12 +213,12 @@ let closed = false;
 
 x.addEventListener(`click`, function() {
     if (!closed) {
-        contentBox.style.animation = `container-slide 1s ease-in`;
+        contentBox.style.animation = `container-slide 1.5s ease-in`;
         contentBox.style.transform = `translateX(-150%)`;
-        x.textContent = `X`;
+        x.textContent = `O`;
         closed = true;
     } else if (closed === true) {
-        contentBox.style.animation = `container-slide-out 1.8s ease-out`;
+        contentBox.style.animation = `container-slide-out 2.2s ease-out`;
         contentBox.style.transform = `translateX(0%)`;
         x.textContent = `C`;
         closed = false;
@@ -235,7 +236,7 @@ h.addEventListener(`click`, function() {
         setTimeout(() => {
             centerText.style.opacity = `0`;
         }, 0.5 * second)
-        h.textContent = `X`;
+        h.textContent = `O`;
         closed = true;
     } else if (closed === true) {
         header.style.animation = `header-slide-out .65s ease-out`;
@@ -248,6 +249,27 @@ h.addEventListener(`click`, function() {
     }
 });
 
+// MIER
+
+let mierPresent = true;
+
+m.addEventListener(`click`, function() {
+    if (mierPresent) {
+        mierPresent = false;
+        console.log(mierPresent);
+        mier.style.animation = `go-up 3s ease`;
+        mier.style.top = `-100%`;
+        m.textContent = `O`;
+    } else {
+        mierPresent = true;
+        console.log(mierPresent);
+        mier.style.display = `block`;
+        mier.style.animation = `fall-in 3.5s ease`;
+        mier.style.top = `20%`;
+        m.textContent = `M`;
+    }
+});
+
 // TIME
 
 const now = new Date();
@@ -255,58 +277,52 @@ const hours = now.getHours();
 let timeOfDay;
 console.log(hours);
 
-const removeAssets = function() {
-    mier.src = `none`;
-    bg.src = `none`;
-    bg0.src = `none`;
-    bg1.src = `none`;
-    bg2.src = `none`;
-    bg3.src = `none`;
-    ground.src = `none`;
-}
-
-// const eveningAssets = function() {
-//     mier.src = 
+// const removeAssets = function() {
+//     mier.src = `none`;
+//     bg.src = `none`;
+//     bg0.src = `none`;
+//     bg1.src = `none`;
+//     bg2.src = `none`;
+//     bg3.src = `none`;
+//     ground.src = `none`;
 // }
 
-const timeSetDawn = function() {
-    mier.src = `./assets/mierfalldawn.png`;
-    bg.src = `./assets/dawn.png`;
-    bg0.src = `./assets/none.png`;
-    bg1.src = `./assets/none.png`;
-    bg2.src = `./assets/none.png`;
-    bg3.src = `./assets/none.png`;
-    ground.src = `./assets/none.png`;
-}
-const timeSetMorning = function() {
-    mier.src = `./assets/mierfallmorning.png`;
-    bg.src = `./assets/morning.png`;
-    bg0.src = `./assets/none.png`;
-    bg1.src = `./assets/none.png`;
-    bg2.src = `./assets/none.png`;
-    bg3.src = `./assets/none.png`;
-    ground.src = `./assets/none.png`;
-}
-const timeSetSunset = function() {
-    mier.src = `./assets/mierfallsunset.png`;
-    bg.src = `./assets/sunset.png`;
-    bg0.src = `./assets/none.png`;
-    bg1.src = `./assets/none.png`;
-    bg2.src = `./assets/none.png`;
-    bg3.src = `./assets/none.png`;
-    ground.src = `./assets/none.png`;
-}
-const timeSetEvening = function() {
-    timeOfDay = `evening`;
-    removeAssets();
-    mier.src = `./assets/mierfall.png`;
-    bg.src = `./assets/night2.png`;
-    bg0.src = `./assets/stars00.png`;
-    bg1.src = `./assets/stars11.png`;
-    bg2.src = `./assets/stars22.png`;
-    bg3.src = `./assets/shootingstars.png`;
-    ground.src = `./assets/ground.png`;
-}
+// const timeSetDawn = function() {
+//     mier.src = `./assets/mierfalldawn.png`;
+//     bg.src = `./assets/dawn.png`;
+//     bg0.src = `./assets/none.png`;
+//     bg1.src = `./assets/none.png`;
+//     bg2.src = `./assets/none.png`;
+//     bg3.src = `./assets/none.png`;
+//     ground.src = `./assets/none.png`;
+// }
+// const timeSetMorning = function() {
+//     mier.src = `./assets/mierfallmorning.png`;
+//     bg.src = `./assets/clouds.png`;
+//     bg0.src = `./assets/none.png`;
+//     bg1.src = `./assets/none.png`;
+//     bg2.src = `./assets/none.png`;
+//     bg3.src = `./assets/none.png`;
+//     ground.src = `./assets/none.png`;
+// }
+// const timeSetSunset = function() {
+//     mier.src = `./assets/mierfallsunset.png`;
+//     bg.src = `./assets/sunset.png`;
+//     bg0.src = `./assets/none.png`;
+//     bg1.src = `./assets/none.png`;
+//     bg2.src = `./assets/none.png`;
+//     bg3.src = `./assets/none.png`;
+//     ground.src = `./assets/none.png`;
+// }
+// const timeSetEvening = function() {
+//     mier.src = `./assets/mierfall.png`;
+//     bg.src = `./assets/bgnew.png`;
+//     bg0.src = `./assets/stars00.png`;
+//     bg1.src = `./assets/stars11.png`;
+//     bg2.src = `./assets/stars22.png`;
+//     bg3.src = `./assets/shootingstars.png`;
+//     ground.src = `./assets/ground.png`;
+// }
 
 
 if (hours >= 5 && hours < 7) {
@@ -329,30 +345,30 @@ if (hours >= 5 && hours < 7) {
 
 console.log(timeOfDay)
 
-t.addEventListener(`click`, function() {
-    if (timeOfDay === `dawn`) {
-        timeOfDay = `morning`;
-        removeAssets();
-        timeSetMorning();
-        console.log(timeOfDay);
-        t.textContent = `M`;
-    } else if (timeOfDay === `morning`) {
-        timeOfDay = `sunset`;
-        removeAssets();
-        timeSetSunset();
-        console.log(timeOfDay);
-        t.textContent = `S`;
-    } else if (timeOfDay === `sunset`) {
-        timeOfDay = `evening`;
-        removeAssets();
-        timeSetEvening();
-        console.log(timeOfDay);
-        t.textContent = `E`;
-    } else if (timeOfDay === `evening`) {
-        timeOfDay = `dawn`;
-        removeAssets();
-        timeSetDawn();
-        console.log(timeOfDay);
-        t.textContent = `D`;
-    }
-});
+// t.addEventListener(`click`, function() {
+//     if (timeOfDay === `dawn`) {
+//         timeOfDay = `morning`;
+//         removeAssets();
+//         timeSetMorning();
+//         console.log(timeOfDay);
+//         t.textContent = `M`;
+//     } else if (timeOfDay === `morning`) {
+//         timeOfDay = `sunset`;
+//         removeAssets();
+//         timeSetSunset();
+//         console.log(timeOfDay);
+//         t.textContent = `S`;
+//     } else if (timeOfDay === `sunset`) {
+//         timeOfDay = `evening`;
+//         removeAssets();
+//         timeSetEvening();
+//         console.log(timeOfDay);
+//         t.textContent = `E`;
+//     } else if (timeOfDay === `evening`) {
+//         timeOfDay = `dawn`;
+//         removeAssets();
+//         timeSetDawn();
+//         console.log(timeOfDay);
+//         t.textContent = `D`;
+//     }
+// });
