@@ -17,8 +17,10 @@ const contentBox = document.querySelector(`.content-box`);
 const centerText = document.querySelector(`.center-text`);
 const x = document.querySelector(`.x`);
 const h = document.querySelector(`.h`);
-const t = document.querySelector(`.t`);
+// const t = document.querySelector(`.t`);
 const m = document.querySelector(`.m`);
+const slider = document.querySelector(`.slider`);
+const overlay = document.querySelector(`.overlay`);
 
 
 // FOOTER
@@ -269,6 +271,11 @@ m.addEventListener(`click`, function() {
         m.textContent = `M`;
     }
 });
+
+
+slider.addEventListener(`input`, function() {
+    overlay.style.opacity = slider.value;
+})
 
 // TIME
 
