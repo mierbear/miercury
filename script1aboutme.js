@@ -7,10 +7,13 @@ const headerText = document.querySelector(`.title`);
 const navText = document.querySelectorAll(`.link`);
 const anime = document.querySelector(`.anime`);
 const music = document.querySelector(`.music`);
+const games = document.querySelector(`.games`);
 const animeList = document.querySelector(`.anime-list`);
 const musicList = document.querySelector(`.music-list`);
+const gameList = document.querySelector(`.game-list`);
 const overlay = document.querySelector(`.overlay`);
 const love = document.querySelectorAll(`.love`);
+const xg = document.querySelector(`.xg`);
 const xa = document.querySelector(`.xa`);
 const xm = document.querySelector(`.xm`);
 let smile = false;
@@ -30,6 +33,11 @@ function stopKnock() {
     }
 };
 
+games.addEventListener(`click`, function() {
+    gameList.classList.toggle(`hidden`);
+    overlay.classList.toggle(`hidden`);
+})
+
 anime.addEventListener(`click`, function() {
     animeList.classList.toggle(`hidden`);
     overlay.classList.toggle(`hidden`);
@@ -39,6 +47,11 @@ music.addEventListener(`click`, function() {
     musicList.classList.toggle(`hidden`);
     overlay.classList.toggle(`hidden`);
 })
+
+xg.addEventListener(`click`, function() {
+    gameList.classList.toggle(`hidden`);
+    overlay.classList.toggle(`hidden`);
+});
 
 xa.addEventListener(`click`, function() {
     animeList.classList.toggle(`hidden`);
@@ -68,6 +81,9 @@ kyle.addEventListener('click', function() {
         musicList.style.color = `white`;
         musicList.style.border = `.1rem solid rgb(255, 255, 255)`;
         musicList.style.backgroundColor = `black`;
+        gameList.style.color = `white`;
+        gameList.style.border = `.1rem solid rgb(255, 255, 255)`;
+        gameList.style.backgroundColor = `black`;
         love.forEach((love) => {
             love.style.animation = `love2 2s ease-in-out infinite`;
         })
@@ -92,6 +108,9 @@ kyle.addEventListener('click', function() {
         musicList.style.color = `black`;
         musicList.style.border = `.1rem solid rgb(0, 0, 0)`;
         musicList.style.backgroundColor = `white`;
+        gameList.style.color = `black`;
+        gameList.style.border = `.1rem solid rgb(0, 0, 0)`;
+        gameList.style.backgroundColor = `white`;
         love.forEach((love) => {
             love.style.animation = `love 2s ease-in-out infinite`;
         })

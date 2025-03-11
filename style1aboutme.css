@@ -76,14 +76,15 @@ html, body {
     z-index: 200;
 }
 
-.anime, .music {
+.anime, .music, .games {
     text-decoration: underline;
 }
 
-.anime:hover, .music:hover {
+.anime:hover, .music:hover, .games:hover {
     cursor: pointer;
 }
 
+.game-list,
 .anime-list,
 .music-list {
     position: absolute;
@@ -104,7 +105,8 @@ html, body {
 }
 
 .xa,
-.xm {
+.xm,
+.xg {
     position: absolute;
     right: 10px;
     top: 0;
@@ -112,6 +114,7 @@ html, body {
 }
 
 .xa:hover,
+.xg:hover,
 .xm:hover {
     cursor: pointer;
     color: red;
@@ -133,7 +136,7 @@ html, body {
 
 @keyframes rainbow {
     0% {
-        color: red;
+        color: rgb(255, 70, 70);
     }
     20% {
         color: rgb(255, 221, 117);
@@ -148,7 +151,7 @@ html, body {
         color: rgb(225, 94, 255);
     }
     100% {
-        color: red;
+        color: rgb(255, 70, 70);
     }
 }
 
