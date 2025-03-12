@@ -16,7 +16,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
+    background-color: rgb(45, 45, 45);
 }
 
 .game {
@@ -24,21 +24,44 @@ html, body {
     grid-template-columns: 70% 1fr;
     width: 60%;
     height: 80vh;
-    background-color: bisque;
+    background-color: rgba(255, 228, 196, 0);
 }
 
 .game-left {
-    background-color: rgb(215, 212, 207);
+    background-color: rgba(255, 255, 255, 0.596);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.overlay {
+    width: 42%;
+    height: 80vh;
+    background-color: black;
+    position: absolute;
+    opacity: 0;
+    z-index: 1000;
+}
+
+.win {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* opacity: 0; */
+    /* display: none; */
+    background-color: #ffffffdc;
+    z-index: 1001;
+    padding: 1%;
+    animation: win 2s ease-in-out infinite;
+    box-shadow: 0px 0px 26px -5px #FFFFFF;
 }
 
 .desk {
     display: grid;
     width: 85%;
     height: 100%;
-    background-color: thistle;
+    background-color: rgba(216, 191, 216, 0);
     gap: 2px;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
@@ -50,7 +73,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: blanchedalmond;
+    background-color: rgba(255, 235, 205, 0);
     width: 12vh;
     height: 13vh;
 }
@@ -64,20 +87,28 @@ html, body {
 
 .card:hover {
     cursor: pointer;
-    transform: scale(1.2);
-}
-
-.cover {
-    z-index: 100;
-    pointer-events: none;
 }
 
 .game-right {
-    background-color: wheat;
+    background-color: rgba(255, 255, 255, 0.274);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+}
+
+.scores {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.game-right .highscore,
+.game-right .score,
+.game-right .start,
+.scores h4,
+.win h1 {
+    font-family: "Outfit", sans-serif;
 }
 
 .start,
@@ -85,30 +116,37 @@ html, body {
     cursor: pointer;
 }
 
+.clicked {
+    pointer-events: none;
+}
+
 .hidden {
     opacity: 0;
 }
 
-/* .slot .abri,
-.slot .bluestrings,
-.slot .blank,
-.slot .confetti,
-.slot .floo,
-.slot .genki,
-.slot .jelly,
-.slot .jett,
-.slot .lance,
-.slot .mierangel,
-.slot .miertyrant,
-.slot .nico,
-.slot .partack,
-.slot .pp,
-.slot .temer,
-.slot .twelves,
-.slot .vert,
-.slot .widow,
-.slot .yobu { */
-
+@keyframes win {
+    0% {
+        color: rgb(255, 70, 70);
+    }
+    20% {
+        color: rgb(255, 221, 117);
+    }
+    40% {
+        color: rgb(167, 255, 140);
+    }
+    50% {
+        transform: scale(2);
+    }
+    60% {
+        color: rgb(59, 59, 255);
+    }
+    80% {
+        color: rgb(225, 94, 255);
+    }
+    100% {
+        color: rgb(255, 70, 70);
+    }
+}
 
 @keyframes flip {
     0% {
