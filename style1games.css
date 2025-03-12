@@ -84,3 +84,8 @@ html, body {
     font-family: "Outfit", sans-serif;
     font-weight: 300;
 }
+
+.item a:link,
+.item a:visited {
+    color: rgb(113, 175, 255);
+}

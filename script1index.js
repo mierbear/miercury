@@ -332,25 +332,25 @@ console.log(hours);
 // }
 
 
-if (hours >= 5 && hours < 7) {
-    timeOfDay = `dawn`;
-    removeAssets();
-    timeSetDawn();
-} else if (hours >= 7 && hours < 17) {
-    timeOfDay = `morning`;
-    removeAssets();
-    timeSetMorning();
-} else if (hours >= 17 && hours < 19) {
-    timeOfDay = `sunset`;
-    removeAssets();
-    timeSetSunset();
-} else {
-    timeOfDay = `evening`;
-    removeAssets();
-    timeSetEvening();
-}
+// if (hours >= 5 && hours < 7) {
+//     timeOfDay = `dawn`;
+//     removeAssets();
+//     timeSetDawn();
+// } else if (hours >= 7 && hours < 17) {
+//     timeOfDay = `morning`;
+//     removeAssets();
+//     timeSetMorning();
+// } else if (hours >= 17 && hours < 19) {
+//     timeOfDay = `sunset`;
+//     removeAssets();
+//     timeSetSunset();
+// } else {
+//     timeOfDay = `evening`;
+//     removeAssets();
+//     timeSetEvening();
+// }
 
-console.log(timeOfDay)
+// console.log(timeOfDay)
 
 // t.addEventListener(`click`, function() {
 //     if (timeOfDay === `dawn`) {
