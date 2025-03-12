@@ -27,7 +27,7 @@ const startGame = () => {
     for (let i = 0; i < cards.length; i++) {
         desk.insertAdjacentHTML("beforeend", `
             <div class="slot">
-                <img class="card ${cards[i]}" src="./assets/pp/${cards[i]}.png">
+                <img class="incorrect card ${cards[i]}" src="./assets/pp/${cards[i]}.png">
             </div>
         `);
     }
@@ -36,21 +36,47 @@ const startGame = () => {
 start.addEventListener(`click`, function() {
     startGame();
     const newCards = desk.querySelectorAll(`.card`);
+    newCards.forEach(function(card) {
+        card.style.animation = `fade-in 1s ease-in`;
+        card.style.transition = `none`;
+    });
     setTimeout(() => {
         newCards.forEach(function(card) {
-            card.classList.add('flip');
+            card.style.animation = `flip 2s ease`;
             setTimeout(() => {
                 card.src = `./assets/pp/blank.png`;
-                setTimeout(() => {
-                    card.style.transform = `rotateY(180deg)`;
-                    card.classList.remove('flip');
-                }, 1000);
+                card.style.transform = `rotateY(180deg)`;
+                card.style.transition = `all 1s ease`;
+                // setTimeout(() => {
+                //     card.style.animation = `none`;
+                // }, 1000)
             }, 1000);
         });
-    }, sec * .5);
+    }, sec * 1.5);
+    let selectedCards = [];
+    const incorrect = document.querySelectorAll(`.incorrect`);
     newCards.forEach(function(card) {
         card.addEventListener(`click`, function() {
-            console.log(`meow`);
+            card.style.animation = `none`;
+            card.style.transform = `rotateY(0deg)`;
+            setTimeout(() => {
+                card.src = `./assets/pp/${card.classList[card.classList.length - 1]}.png`;
+            }, sec * .3);
+            selectedCards.push(card.classList[card.classList.length - 1]);
+            console.log(selectedCards);
+            if (selectedCards.length === 2) {
+                selectedCards = [];
+                console.log(`meow`);
+                setTimeout(() => {
+                    incorrect.forEach(function(incCard) {
+                        incCard.style.animation = `flip 1s ease`;
+                        setTimeout(() => {
+                            incCard.src = `./assets/pp/blank.png`;
+                            incCard.style.transform = `rotateY(180deg)`;
+                        }, 500);
+                    });
+                }, 1000);
+            };
         });
     });
 });
@@ -64,13 +90,3 @@ start2.addEventListener(`click`, function() {
         card.style.transform = `rotateY(180deg)`;
     });
 });
-
-// card.forEach(function(card) {
-//     card.addEventListener(`click`, function() {
-//         console.log(`meow`);
-//     })
-// });
-
-// card.addEventListener(`click`, function() {
-//     console.log(`meow`);
-// })

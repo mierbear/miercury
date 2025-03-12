@@ -59,10 +59,12 @@ html, body {
     max-width: 100%;
     max-height: 100%;
     /* animation: flip 2s ease; */
+    /* transition: all 1s ease; */
 }
 
 .card:hover {
     cursor: pointer;
+    transform: scale(1.2);
 }
 
 .cover {
@@ -87,6 +89,27 @@ html, body {
     opacity: 0;
 }
 
+/* .slot .abri,
+.slot .bluestrings,
+.slot .blank,
+.slot .confetti,
+.slot .floo,
+.slot .genki,
+.slot .jelly,
+.slot .jett,
+.slot .lance,
+.slot .mierangel,
+.slot .miertyrant,
+.slot .nico,
+.slot .partack,
+.slot .pp,
+.slot .temer,
+.slot .twelves,
+.slot .vert,
+.slot .widow,
+.slot .yobu { */
+
+
 @keyframes flip {
     0% {
         transform: rotateY(0deg);
@@ -99,6 +122,11 @@ html, body {
     }
 }
 
-.flip {
-    animation: flip 2s ease;
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
