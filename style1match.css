@@ -120,6 +120,10 @@ html, body {
     pointer-events: none;
 }
 
+.correct {
+    pointer-events: none;
+}
+
 .hidden {
     opacity: 0;
 }
@@ -166,5 +170,17 @@ html, body {
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes win-glow {
+    0% {
+        filter: drop-shadow(0px 0px 5px #FFFFFF);
+    }
+    50% {
+        filter: drop-shadow(0px 0px 5px #ffffff4e);
+    }
+    100% {
+        filter: drop-shadow(0px 0px 5px #FFFFFF);
     }
 }

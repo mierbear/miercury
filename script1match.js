@@ -13,6 +13,16 @@ const highscoreEl = document.querySelector(`.highscore`);
 let score = 0;
 let highscore = 0;
 
+function flip() {
+    const flipFX = new Audio('./assets/flip.mp3');
+    flipFX.play();
+}
+
+function flip2() {
+    const flipFX2 = new Audio('./assets/flip2.mp3');
+    flipFX2.play();
+}
+
 const names = [
     'abri', 'bluestrings', 'confetti', 'floo', 'genki',
     'jelly', 'jett', 'lance', 'mierangel', 'miertyrant',
@@ -82,6 +92,7 @@ start.addEventListener(`click`, function() {
             if (!card.classList.contains(`clicked`)) {
                 card.classList.add(`clicked`);
             }
+            flip();
 
             card.style.animation = `none`;
             card.style.transform = `rotateY(0deg)`;
@@ -105,6 +116,7 @@ start.addEventListener(`click`, function() {
                         card.classList.toggle(`incorrect`);
                         card.classList.toggle(`current`);
                         card.classList.toggle(`clicked`);
+                        card.style.animation = `win-glow 5s ease-in-out infinite`;
                         overlay.style.display = `none`;
                     });
                     if (Array.from(newCards).every(card => card.classList.contains(`correct`))) {
@@ -125,6 +137,7 @@ start.addEventListener(`click`, function() {
                         card.classList.toggle(`clicked`);
                     });
                     setTimeout(() => {
+                        flip2();
                         const incorrect = document.querySelectorAll('.incorrect');
                         incorrect.forEach(function(incCard) {
                             incCard.style.animation = `flip .6s ease`;
