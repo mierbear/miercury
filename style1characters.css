@@ -25,6 +25,7 @@ body {
     padding: 0;
     margin: 0;
     background-color: rgba(255, 0, 0, 0);
+    box-sizing: border-box;
 }
 
 .bg {
@@ -94,6 +95,25 @@ body {
     gap: 10%;
 }
 
+.skulls .info {
+    width: 80%;
+}
+
+.skull-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+/* .skull-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+} */
+
 /* MIER */
 
 .mier-img {
@@ -105,14 +125,48 @@ body {
     transform: translateX(-3%) translateY(3%);
 }
 
-.mier-img:hover {
+/* .mier-img:hover {
     transform: scale(1.8) translateX(6.5%) translateY(15%);
-}
+} */
 
 container img {
     transform: scale(1);
 }
 
+.mierology {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: absolute;
+    bottom: 15%;
+    gap: 1.5vh;
+    z-index: 1000;
+}
+
+.miertype {
+    width: 15vh;
+    height: 15vh;
+    border-radius: 10%;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.miertype img {
+    max-width: 100%;
+    max-height: 100%;
+    opacity: .2;
+    border-radius: 10%;
+    transition: all 1s ease;
+}
+
+.miertype img:hover {
+    opacity: 1;
+}
+
+.mierology .current-mier {
+    opacity: 1;
+    box-shadow: 0px 0px 10px -5px #FFFFFF;
+    background-color: rgb(255, 255, 255);
+    animation: glow 2s infinite;
+}
 
 /* ARROWS */
 
@@ -127,6 +181,7 @@ container img {
     font-size: 40px;
     transition: all 0.1s ease;
     transform: scale(1);
+    z-index: 500;
 }
 
 .arrow-left {
@@ -143,3 +198,16 @@ container img {
 .arrow-right:hover {
     transform: scale(1.2);
 }   
+
+
+@keyframes glow {
+    0% {
+        filter: drop-shadow(0px 0px 10px #FFFFFF);
+    }
+    50% {
+        filter: drop-shadow(0px 0px 5px #ffffff4e);
+    }
+    100% {
+        filter: drop-shadow(0px 0px 10px #FFFFFF);
+    }
+}
