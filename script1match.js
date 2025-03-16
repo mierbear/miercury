@@ -1,34 +1,38 @@
 'use strict';
 
-const start = document.querySelector(`.start`);
-const start2 = document.querySelector(`.start2`);
-const desk = document.querySelector(`.desk`);
-const card = document.querySelectorAll(`.card`);
 const sec = 1000;
-const overlay = document.querySelector(`.overlay`);
-const win = document.querySelector(`.win`);
-const scoreEl = document.querySelector(`.score`);
+
+const start       = document.querySelector(`.start`);
+const start2      = document.querySelector(`.start2`);
+const desk        = document.querySelector(`.desk`);
+const card        = document.querySelectorAll(`.card`);
+const overlay     = document.querySelector(`.overlay`);
+const win         = document.querySelector(`.win`);
+const scoreEl     = document.querySelector(`.score`);
 const highscoreEl = document.querySelector(`.highscore`);
 
-let score = 0;
-let highscore = 0;
-
-function flip() {
-    const flipFX = new Audio('./assets/flip.mp3');
-    flipFX.play();
-}
-
-function flip2() {
-    const flipFX2 = new Audio('./assets/flip2.mp3');
-    flipFX2.play();
-}
-
+// prioritizing making it easy to tweak game variables
 const names = [
     'abri', 'bluestrings', 'confetti', 'floo', 'genki',
     'jelly', 'jett', 'lance', 'mierangel', 'miertyrant',
     'nico', 'partack', 'pp', 'temer', 'twelves',
     'vert', 'widow', 'yobu'
 ];
+
+const scoreCorrect   = 20
+const scoreIncorrect =  3
+
+let score = 0;
+let highscore = 0;
+
+function playFlipSound() {
+    const flipFX = new Audio('./assets/flip.mp3');
+    flipFX.play();
+}
+function playFlip2Sound() {
+    const flipFX2 = new Audio('./assets/flip2.mp3');
+    flipFX2.play();
+}
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -38,8 +42,7 @@ const shuffleArray = (array) => {
 };
 
 const resetGame = () => {
-    score = 100;
-    scoreEl.textContent = `100`;
+    setScore(100)
 }
 
 const updateScore = () => {
@@ -47,12 +50,26 @@ const updateScore = () => {
     highscoreEl.textContent = String(highscore);
 }
 
+const setScore = (amount) => {
+    score = amount
+    scoreEl.textContent = String(score);
+}
+
+const setHighscore = () => {
+    if (score > highscore) {
+        highscore = score;
+        highscoreEl.textContent = String(highscore);
+    }
+}
+
 const startGame = () => {
     resetGame();
-    win.style.display = `none`;
-    desk.innerHTML = ""
+    
     let cards = [...names, ...names];
     shuffleArray(cards);
+
+    win.style.display = `none`;
+    desk.innerHTML = ""
     for (let i = 0; i < cards.length; i++) {
         desk.insertAdjacentHTML("beforeend", `
             <div class="slot">
@@ -89,66 +106,65 @@ start.addEventListener(`click`, function() {
 
     newCards.forEach(function(card) {
         card.addEventListener(`click`, function() {
-            if (!card.classList.contains(`clicked`)) {
-                card.classList.add(`clicked`);
-            }
-            flip();
+            let cardName = card.classList[0];
 
+            playFlipSound();
+            card.classList.add(`clicked`, `current`);
             card.style.animation = `none`;
             card.style.transform = `rotateY(0deg)`;
-            card.classList.toggle(`current`)
+            
             setTimeout(() => {
-                card.src = `./assets/pp/${card.classList[0]}.png`;
+                card.src = `./assets/pp/${cardName}.png`;
             }, sec * .3);
 
-            selectedCards.push(card.classList[0]);
+            selectedCards.push(cardName);
             console.log(selectedCards);
 
-            if (selectedCards.length === 2) {
-                overlay.style.display = `flex`;
-                const currentHand = document.querySelectorAll(`.current`);
-                if (selectedCards[0] === selectedCards[1]) {
-                    selectedCards = [];
-                    score += 20;
-                    updateScore();
-                    currentHand.forEach(function(card) {
-                        card.classList.toggle(`correct`);
-                        card.classList.toggle(`incorrect`);
-                        card.classList.toggle(`current`);
-                        card.classList.toggle(`clicked`);
-                        card.style.animation = `win-glow 5s ease-in-out infinite`;
-                        overlay.style.display = `none`;
+
+            if (selectedCards.length !== 2) { return }
+
+            overlay.style.display = `flex`;            
+            
+
+            const currentHand = document.querySelectorAll(`.current`);
+            if (selectedCards[0] === selectedCards[1]) {
+                setScore(score + scoreCorrect)
+                selectedCards = [];
+
+                currentHand.forEach(function(card) {
+                    card.classList.add(`correct`);
+                    card.classList.remove(`incorrect`, `current`, `clicked`);
+                    
+                    card.style.animation = `win-glow 5s ease-in-out infinite`;
+                    overlay.style.display = `none`;
+                });
+
+                if (Array.from(newCards).every(card => card.classList.contains(`correct`))) {
+                    setHighscore()
+
+                    win.style.display = `flex`;
+                    overlay.style.display = `flex`;
+                    start.textContent = `play again?`;
+
+                }
+            } else {
+                selectedCards = [];
+                setScore(score - scoreIncorrect)
+                                
+                setTimeout(() => {
+                    playFlip2Sound();
+                    currentHand.forEach(function(incCard) {
+                        incCard.classList.remove(`current`, `clicked`);
+                        
+                        incCard.style.animation = `flip .6s ease`;
+                        setTimeout(() => {
+                            incCard.src = `./assets/pp/blank.png`;
+                            incCard.style.transform = `rotateY(180deg)`;
+                            overlay.style.display = `none`;
+                        }, 300);
                     });
-                    if (Array.from(newCards).every(card => card.classList.contains(`correct`))) {
-                        win.style.display = `flex`;
-                        overlay.style.display = `flex`;
-                        start.textContent = `play again?`;
-                        if (score > highscore) {
-                            highscore = score;
-                            highscoreEl.textContent = String(highscore);
-                        }
-                    }
-                } else {
-                    selectedCards = [];
-                    score -= 3;
-                    updateScore();
-                    currentHand.forEach(function(card) {
-                        card.classList.toggle(`current`);
-                        card.classList.toggle(`clicked`);
-                    });
-                    setTimeout(() => {
-                        flip2();
-                        const incorrect = document.querySelectorAll('.incorrect');
-                        incorrect.forEach(function(incCard) {
-                            incCard.style.animation = `flip .6s ease`;
-                            setTimeout(() => {
-                                incCard.src = `./assets/pp/blank.png`;
-                                incCard.style.transform = `rotateY(180deg)`;
-                                overlay.style.display = `none`;
-                            }, 300);
-                        });
-                    }, 800);
-                };
+                }, 800);
+                
             };
         });
     });

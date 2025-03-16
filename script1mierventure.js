@@ -1,4 +1,7 @@
 'use strict';
+//ill implement bongli's critique here later, currently not my priority but tyty :3
+
+const second = 1000;
 
 const popup = document.querySelector(`.popup`);
 const overlay = document.querySelector(`.overlay`);
@@ -10,7 +13,6 @@ const center = document.querySelector(`.center`);
 let player;
 let playerBuild;
 let playerColor;
-const second = 1000;
 
 
 const fadeOut = function() {

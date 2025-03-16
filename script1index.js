@@ -92,102 +92,26 @@ setInterval(changeQuote, minute / 6);
 window.addEventListener('scroll', function() {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrolledPercentage = window.scrollY / scrollableHeight * 100;
-
-    if (scrolledPercentage >= 10 && scrolledPercentage < 20) {
-        mier.style.transform = `translateY(0vh)`;
-    } else if (scrolledPercentage >= 20 && scrolledPercentage < 30) {
-        mier.style.transform = `translateY(25vh)`;
-    } else if (scrolledPercentage >= 30 && scrolledPercentage < 40) {
-        mier.style.transform = `translateY(50vh)`;
-    } else if (scrolledPercentage >= 40 && scrolledPercentage < 50) {
-        mier.style.transform = `translateY(75vh)`;
-    } else if (scrolledPercentage >= 50 && scrolledPercentage < 60) {
-        mier.style.transform = `translateY(100vh)`;
-    } else if (scrolledPercentage >= 60 && scrolledPercentage < 70) {
-        mier.style.transform = `translateY(125vh)`;
-    } else if (scrolledPercentage >= 70 && scrolledPercentage < 80) {
-        mier.style.transform = `translateY(150vh)`;
-    } else if (scrolledPercentage >= 80 && scrolledPercentage < 90) {
-        mier.style.transform = `translateY(175vh)`;
-    } else if (scrolledPercentage >= 90) {
-        mier.style.transform = `translateY(200vh)`;
-    }
+    let y = scrolledPercentage * 2;
+    mier.style.transform = `translateY(${y}vh)`;
 });
 
 
 // BG PARALLAX (NIGHT)
 
+const bg_layers   = [bg,   bg0,   bg1,   bg2,  bg3,  ground];
+const bg_parallax = [1.5,  0.8,   0.9,   1,    1.3,  0.8];
+
 window.addEventListener('scroll', function() {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrolledPercentage = window.scrollY / scrollableHeight * 100;
 
-    if (scrolledPercentage >= 10 && scrolledPercentage < 20) {
-        bg.style.transform = `translateY(0%)`;
-        bg0.style.transform = `translateY(0%)`; 
-        bg1.style.transform = `translateY(0%)`;
-        bg2.style.transform = `translateY(0%)`;
-        bg3.style.transform = `translateY(0%)`;
-        ground.style.transform = `translateY(0%)`;
-    } else if (scrolledPercentage >= 20 && scrolledPercentage < 30) {
-        bg.style.transform = `translateY(-1.5%)`;
-        bg0.style.transform = `translateY(-1.4%)`;
-        bg1.style.transform = `translateY(-1.2%)`;
-        bg2.style.transform = `translateY(-1%)`;
-        bg3.style.transform = `translateY(-1.3%)`;
-        ground.style.transform = `translateY(-.8%)`;
-    } else if (scrolledPercentage >= 30 && scrolledPercentage < 40) {
-        bg.style.transform = `translateY(-3%)`;
-        bg0.style.transform = `translateY(-2.8%)`;
-        bg1.style.transform = `translateY(-2.4%)`;
-        bg2.style.transform = `translateY(-2%)`;
-        bg3.style.transform = `translateY(-2.6%)`;
-        ground.style.transform = `translateY(-1.6%)`;
-    } else if (scrolledPercentage >= 40 && scrolledPercentage < 50) {
-        bg.style.transform = `translateY(-4.5%)`;
-        bg0.style.transform = `translateY(-4.2%)`;
-        bg1.style.transform = `translateY(-3.6%)`;
-        bg2.style.transform = `translateY(-3%)`;
-        bg3.style.transform = `translateY(-3.9%)`;
-        ground.style.transform = `translateY(-2.4%)`;
-    } else if (scrolledPercentage >= 50 && scrolledPercentage < 60) {
-        bg.style.transform = `translateY(-6%)`;
-        bg0.style.transform = `translateY(-5.6%)`;
-        bg1.style.transform = `translateY(-4.8%)`;
-        bg2.style.transform = `translateY(-4%)`;
-        bg3.style.transform = `translateY(-5.2%)`;
-        ground.style.transform = `translateY(-3.2%)`;
-    } else if (scrolledPercentage >= 60 && scrolledPercentage < 70) {
-        bg.style.transform = `translateY(-7.5%)`;
-        bg0.style.transform = `translateY(-7%)`;
-        bg1.style.transform = `translateY(-6%)`;
-        bg2.style.transform = `translateY(-5%)`;
-        bg3.style.transform = `translateY(-6.5%)`;
-        ground.style.transform = `translateY(-4%)`;
-    } else if (scrolledPercentage >= 70 && scrolledPercentage < 80) {
-        bg.style.transform = `translateY(-9%)`;
-        bg0.style.transform = `translateY(-8.4%)`;
-        bg1.style.transform = `translateY(-7.2%)`;
-        bg2.style.transform = `translateY(-6%)`;
-        bg3.style.transform = `translateY(-7.8%)`;
-        ground.style.transform = `translateY(-4.8%)`;
-    } else if (scrolledPercentage >= 80 && scrolledPercentage < 90) {
-        bg.style.transform = `translateY(-10.5%)`;
-        bg0.style.transform = `translateY(-9.4%)`;
-        bg1.style.transform = `translateY(-8.4%)`;
-        bg2.style.transform = `translateY(-7%)`;
-        bg3.style.transform = `translateY(-9.1%)`;
-        ground.style.transform = `translateY(-5.6%)`;
-    } else if (scrolledPercentage >= 90) {
-        bg.style.transform = `translateY(-12%)`;
-        bg0.style.transform = `translateY(-10.8%)`;
-        bg1.style.transform = `translateY(-9.6%)`;
-        bg2.style.transform = `translateY(-8%)`;
-        bg3.style.transform = `translateY(-10.4%)`;
-        ground.style.transform = `translateY(-6.4%)`;
-    }
+    bg_layers.forEach((bg, i) => {
+        let y = scrolledPercentage * -0.1 * bg_parallax[i]
+        bg.style.transform = `translateY(${y}%)`;
+        
+    });
 });
-
-
 
 // DELAYED FADE IN
 
