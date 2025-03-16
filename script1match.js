@@ -16,7 +16,7 @@ const names = [
     'abri', 'bluestrings', 'confetti', 'floo', 'genki',
     'jelly', 'jett', 'lance', 'mierangel', 'miertyrant',
     'nico', 'partack', 'pp', 'temer', 'twelves',
-    'vert', 'widow', 'yobu'
+    'vert', 'widow', 'yobu', 'kags', 'phrog', 'the', 'davy'
 ];
 
 const scoreCorrect   = 20
@@ -80,9 +80,12 @@ const startGame = () => {
 };
 
 start.addEventListener(`click`, function() {
-    start.textContent = `reset`;
     startGame();
     const newCards = desk.querySelectorAll(`.card`);
+
+    start.textContent = `reset`;
+    overlay.style.display = `flex`;
+    
     newCards.forEach(function(card) {
         card.style.animation = `fade-in 1s ease-in`;
         card.style.transition = `none`;
