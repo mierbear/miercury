@@ -30,7 +30,7 @@ html, body {
 }
 
 .game-left {
-    background-color: rgb(153, 165, 170);
+    background-color: rgb(195, 195, 195);
     display: flex;
     justify-content: center;
     align-items: center;
