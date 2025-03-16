@@ -16,22 +16,100 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(45, 45, 45);
+    background-color: rgb(20, 20, 20);
 }
 
 .game {
     display: grid;
     grid-template-columns: 80% 1fr;
+    grid-template-rows: 1fr 1fr;
     width: 90%;
     height: 80vh;
     background-color: rgba(255, 228, 196, 0);
+    gap: 1.5vw; 
 }
 
 .game-left {
-    background-color: rgba(255, 255, 255, 0.596);
+    background-color: rgb(153, 165, 170);
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+    grid-area: span 2;
+}
+
+.game-right {
+    background-color: rgb(236, 241, 242);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.game-right-bottom  {
+    background-color: rgb(236, 241, 242);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.credit-img {
+    height: 70%;
+    animation: credit 3.5s infinite;
+}
+
+.arrows {
+    font-size: 2em;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.credit-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(61, 126, 224);
+    font-size: .8em;
+}
+
+.arrow-left,
+.arrow-right {
+    transition: all 0.5s ease;
+}
+
+.arrow-left:hover,
+.arrow-right:hover {
+    color: rgb(61, 126, 224);
+    cursor: pointer;
+}
+
+.scores {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.game-right .highscore,
+.game-right .score,
+.game-right .start,
+.game-right-bottom a,
+.scores h4,
+.win h1 {
+    font-family: "Outfit", sans-serif;
+    z-index: 800;
+    transition: all 0.5s ease;
+}
+
+.start:hover,
+.start2:hover {
+    cursor: pointer;
+    color: rgb(61, 126, 224);
 }
 
 .overlay {
@@ -87,33 +165,6 @@ html, body {
 }
 
 .card:hover {
-    cursor: pointer;
-}
-
-.game-right {
-    background-color: rgba(255, 255, 255, 0.768);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.scores {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-.game-right .highscore,
-.game-right .score,
-.game-right .start,
-.scores h4,
-.win h1 {
-    font-family: "Outfit", sans-serif;
-}
-
-.start,
-.start2 {
     cursor: pointer;
 }
 
@@ -183,5 +234,17 @@ html, body {
     }
     100% {
         filter: drop-shadow(0px 0px 5px #FFFFFF);
+    }
+}
+
+@keyframes credit {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
     }
 }

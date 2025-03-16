@@ -13,10 +13,28 @@ const highscoreEl = document.querySelector(`.highscore`);
 
 // prioritizing making it easy to tweak game variables
 const names = [
-    'abri', 'bluestrings', 'confetti', 'floo', 'genki',
-    'jelly', 'jett', 'lance', 'mierangel', 'miertyrant',
-    'nico', 'partack', 'pp', 'temer', 'twelves',
-    'vert', 'widow', 'yobu', 'kags', 'phrog', 'the', 'davy'
+    'mierangel', 
+    'abri', 
+    'bluestrings',
+    'floo', 
+    'confetti', 
+    'genki',
+    'jelly', 
+    'jett', 
+    'lance', 
+    'miertyrant',
+    'nico', 
+    'partack', 
+    'pp', 
+    'temer', 
+    'twelves',
+    'vert', 
+    'widow',
+    'yobu', 
+    'kags', 
+    'phrog', 
+    'the', 
+    'davy',
 ];
 
 const scoreCorrect   = 20
@@ -24,6 +42,88 @@ const scoreIncorrect =  3
 
 let score = 0;
 let highscore = 0;
+
+// credits
+
+const creditNames = names.filter(name => name !== `miertyrant` && name !== `pp` && name !== `bluestrings`);
+
+const creditLinks = [
+    'https://x.com/miermiermierlol', 
+    'https://www.instagram.com/23.bleu/', 
+    'https://x.com/fbrush_', 
+    'https://x.com/96Ghosts', 
+    'https://x.com/GoodbyeCricket',
+    'https://x.com/sr__jelly', 
+    'https://x.com/Jett1586', 
+    '#', 
+    'https://x.com/nixnnixie', 
+    '#',
+    '#',
+    'https://x.com/HymanGi_12',
+    'https://x.com/d4ff33', 
+    'https://www.instagram.com/widow_ghost/',
+    'https://www.instagram.com/yooyobu/', 
+    '#', 
+    '#', 
+    'https://x.com/BonbliStar', 
+    'https://x.com/gigaegg2',
+];
+
+const creditLinkNames = [
+    'mier', 
+    'abri', 
+    'floo', 
+    'confetti', 
+    'genki',
+    'sr_jelly', 
+    'jett', 
+    'lance', 
+    'nico', 
+    'partack', 
+    'temer', 
+    '12s',
+    'd4ff33', 
+    'widow_ghost',
+    'yobu', 
+    'kags', 
+    'phrog', 
+    'bonbli', 
+    'gigaegg',
+];
+
+const creditImg = document.querySelector(`.credit-img`);
+const creditName = document.querySelector(`.credit-name`);
+const arrowLeft = document.querySelector(`.arrow-left`);
+const arrowRight = document.querySelector(`.arrow-right`);
+let currentImg = 0;
+
+const updateCredit = () => {
+    creditImg.src = `./assets/pp/${creditNames[currentImg]}.png`;
+    creditName.textContent = `${creditLinkNames[currentImg]}`;
+    creditName.href = `${creditLinks[currentImg]}`;
+    creditName.rel = `noopener noreferrer`;
+    creditName.target = `_blank`;
+}
+
+arrowRight.addEventListener(`click`, function() {
+    currentImg++;
+    if (currentImg >= creditNames.length) {
+        currentImg = 0;
+    }   
+    updateCredit();
+    console.log(currentImg);
+})
+
+arrowLeft.addEventListener(`click`, function() {
+    if (currentImg === 0) {
+        currentImg = creditNames.length - 1;
+    } else {
+        currentImg--;
+    }
+    updateCredit();
+    console.log(currentImg);
+})
+
 
 function playFlipSound() {
     const flipFX = new Audio('./assets/flip.mp3');
