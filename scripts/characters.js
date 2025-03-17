@@ -17,7 +17,6 @@ const skullsPos = document.querySelector(`.skulls`).offsetTop;
 const arrows = document.querySelector(`.arrows`);
 const arrowR = document.querySelector(`.arrow-right`);
 const arrowL = document.querySelector(`.arrow-left`);
-const mierimg = document.querySelector(`.mier-img`);
 
 const mierbio = document.querySelector(`.mier-bio`);
 const mierdesc = document.querySelector(`.mier-desc`);
@@ -52,7 +51,7 @@ const leaveAngel = () => {
     mierAngelImg.style.bottom = `-100%`;
     setTimeout(() => {
         mierAngelImg.style.display = `none`;
-        mierPeek = true;
+        mierPeek = false;
     }, 1500);
 }
 
@@ -69,9 +68,12 @@ const setMierStyles = (element) => {
     element.style.opacity = `1`;
 };
 
+// MIER BUTTONS
+
 mierangel.addEventListener(`click`, function() {
     if (!mierangel.classList.contains(`current-mier`)) {
         setMierStyles(mierangel);
+        mierImg.src = `./assets/characters/mierangelalt.png`;
     } else {
         patMier();
     }
@@ -79,22 +81,39 @@ mierangel.addEventListener(`click`, function() {
 
 miertyrant.addEventListener(`click`, function() {
     if (!miertyrant.classList.contains(`current-mier`)) {
-        setMierStyles(miertyrant);
-        leaveAngel();
-    }
-});
-
-
-miericemage.addEventListener(`click`, function() {
-    if (!miericemage.classList.contains(`current-mier`)) {
-        setMierStyles(miericemage);
         if (mierPeek) {
             leaveAngel();
-            console.log(`meow`);
+            mierImg.style.transition = `all 2s ease`;
+            mierImg.style.right = `0`;
+        }
+        setMierStyles(miertyrant);
+        mierImg.src = `./assets/characters/miertyrant.png`;
+        mierImg.style.right = `0`;
+        if (mierImg.style.transform !== `translateX(0%)`) {
+            setTimeout(() => {
+                mierImg.style.transform = `translateX(0%)`
+            }, 300);
         }
     }
 });
 
+miericemage.addEventListener(`click`, function() {
+    if (!miericemage.classList.contains(`current-mier`)) {
+        if (mierPeek) {
+            leaveAngel();
+            mierImg.style.transition = `all 2s ease`;
+            mierImg.style.right = `0`;
+        }
+        setMierStyles(miericemage);
+        mierImg.src = `./assets/characters/miericemage.png`;
+        mierImg.style.right = `0`;
+        if (mierImg.style.transform !== `translateX(0%)`) {
+            setTimeout(() => {
+                mierImg.style.transform = `translateX(0%)`
+            }, 300);
+        }
+    }
+});
 
 
 // SCROLL LISTENER
@@ -105,14 +124,13 @@ window.addEventListener('scroll', function() {
     
     // MIER POPDOWN ANIM
 
-    if (scrolledPercentage > 10) {
+    if (scrolledPercentage > 10 && mierPeek) {
         leaveAngel();
-        if (mierangel.classList[mierangel.classList.length - 1] === `current-mier`) {
-            setTimeout(() => {
-                mierImg.style.animation = `mierangel-popup 2s ease`;
-                mierImg.style.right = `0%`;
-            }, 800);
-        }
+        console.log(`meow`);
+        mierImg.src = `./assets/characters/mierangelalt.png`;
+        setTimeout(() => {
+            mierImg.style.transform = `translateX(0%)`
+        }, 100);
     } 
 
     // BACKGROUND COLOR FOR EACH CHARACTER

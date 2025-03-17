@@ -41,7 +41,7 @@ p, h1, h2, h3, h4, h5, h6 {
 .mier,
 .quince {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 45% 55%;
 }
 
 .simeon,
@@ -113,10 +113,6 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* MIER */
 
-.container img {
-    transform: scale(1);
-}
-
 .mierology {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -156,29 +152,18 @@ p, h1, h2, h3, h4, h5, h6 {
     animation: glow 2s infinite;
 }
 
-/* .miertyrant-img { */
 .mier-img {
-    position: absolute;
-    height: 100%;
-    padding-right: 4%;
+    height: 100vh;
+    padding-right: 5%;
     transition: all 2s ease;
+    transform: translateX(200%);
 }
-
-.mier-img {
-    right: -100%;
-    transition: all 2s ease;
-}
-
-/* .miertyrant-img {
-    opacity: 0;
-} */
 
 .mierangel-img {
     position: fixed;
     height: 100%;
     object-fit: contain;
     transition: all 2s ease;
-    /* bottom: -100%; */
     animation: mier-popup 2s ease;
     z-index: 2000;
     pointer-events: none;
@@ -244,26 +229,5 @@ p, h1, h2, h3, h4, h5, h6 {
     }
     100% {
         bottom: -100%;
-    }
-}
-
-@keyframes mierangel-popup {
-    0% {
-        right: -100%;
-    }
-    60% {
-        right: 2%;
-    }
-    100% {
-        right: 0;
-    }
-}
-
-@keyframes mierangel-popdown {
-    0% {
-        right: 0%;
-    }
-    100% {
-        right: -100%;
     }
 }
