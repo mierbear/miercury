@@ -76,11 +76,6 @@ p, h1, h2, h3, h4, h5, h6 {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.img {
-    display: flex;
-}
-
-
 .container .info {
     display: flex;
     flex-direction: column;
@@ -118,20 +113,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* MIER */
 
-.mier-img {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    /* transition: all 4s ease-in-out; */
-    /* transform: translateX(-3%) translateY(3%); */
-}
-
-/* .mier-img:hover {
-    transform: scale(1.8) translateX(6.5%) translateY(15%);
-} */
-
-container img {
+.container img {
     transform: scale(1);
 }
 
@@ -151,6 +133,10 @@ container img {
     background-color: rgba(255, 255, 255, 0.25);
 }
 
+.miertype:hover {
+    cursor: pointer;
+}
+
 .miertype img {
     max-width: 100%;
     max-height: 100%;
@@ -168,6 +154,35 @@ container img {
     box-shadow: 0px 0px 10px -5px #FFFFFF;
     background-color: rgb(255, 255, 255);
     animation: glow 2s infinite;
+}
+
+/* .miertyrant-img { */
+.mier-img {
+    position: absolute;
+    height: 100%;
+    padding-right: 4%;
+    transition: all 2s ease;
+}
+
+.mier-img {
+    right: -100%;
+    transition: all 2s ease;
+}
+
+/* .miertyrant-img {
+    opacity: 0;
+} */
+
+.mierangel-img {
+    position: fixed;
+    height: 100%;
+    object-fit: contain;
+    transition: all 2s ease;
+    /* bottom: -100%; */
+    animation: mier-popup 2s ease;
+    z-index: 2000;
+    pointer-events: none;
+    padding-right: 5%;
 }
 
 /* ARROWS */
@@ -211,5 +226,44 @@ container img {
     }
     100% {
         filter: drop-shadow(0px 0px 10px #FFFFFF);
+    }
+}
+
+@keyframes mier-popup {
+    0% {
+        bottom: -100%;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes mier-popdown {
+    0% {
+        bottom: 0%;
+    }
+    100% {
+        bottom: -100%;
+    }
+}
+
+@keyframes mierangel-popup {
+    0% {
+        right: -100%;
+    }
+    60% {
+        right: 2%;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes mierangel-popdown {
+    0% {
+        right: 0%;
+    }
+    100% {
+        right: -100%;
     }
 }

@@ -66,7 +66,7 @@ xm.addEventListener(`click`, function() {
 kyle.addEventListener('click', function() {
     if (!smile) {
         knock();
-        kyle.src = './assets/smile.png';
+        kyle.src = './assets/aboutme/smile.png';
         kyle.style.opacity = '1';
         center.style.backgroundColor = 'black';
         text.style.color = 'white';
@@ -92,7 +92,7 @@ kyle.addEventListener('click', function() {
             kyle.style.transition = 'all 2s ease';
         }, 0);
         stopKnock();
-        kyle.src = './assets/normal.png';
+        kyle.src = './assets/aboutme/normal.png';
         kyle.style.transition = 'none';
         kyle.style.opacity = '0.1';
         center.style.backgroundColor = 'white';
