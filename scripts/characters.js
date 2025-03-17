@@ -1,31 +1,32 @@
 "use strict";
 
-const mier = document.querySelector(`.mier`);
+// PER 100vh
+const mier   = document.querySelector(`.mier`);
 const simeon = document.querySelector(`.simeon`);
 const quince = document.querySelector(`.quince`);
-const pio = document.querySelector(`.pio`);
+const pio    = document.querySelector(`.pio`);
 const skulls = document.querySelector(`.skulls`);
 
-const bg = document.querySelector(`.bg`);
-
+// CHARACTER POSITION
 const mierPos = document.querySelector(`.mier`).offsetTop;
 const simeonPos = document.querySelector(`.simeon`).offsetTop;
 const quincePos = document.querySelector(`.quince`).offsetTop;
 const pioPos = document.querySelector(`.pio`).offsetTop;
 const skullsPos = document.querySelector(`.skulls`).offsetTop;
 
+const bg = document.querySelector(`.bg`);
+
 const arrows = document.querySelector(`.arrows`);
 const arrowR = document.querySelector(`.arrow-right`);
 const arrowL = document.querySelector(`.arrow-left`);
 
+// MIER
+const miername = document.querySelector(`.mier-name`);
 const mierbio = document.querySelector(`.mier-bio`);
-const mierdesc = document.querySelector(`.mier-desc`);
+const mierdesc = document.querySelector(`.mier-description`);
 const mierangel = document.querySelector(`.mierangel`);
 const miertyrant = document.querySelector(`.miertyrant`);
 const miericemage = document.querySelector(`.miericemage`);
-const mierangeldiv = document.querySelector(`.mierangeldiv`);
-const miertyrantdiv = document.querySelector(`.miertyrantdiv`);
-const miericemagediv = document.querySelector(`.miericemagediv`);
 
 const miericons = [mierangel, miertyrant, miericemage];
 
@@ -33,6 +34,45 @@ const mierAngelImg = document.querySelector(`.mierangel-img`);
 const mierImg = document.querySelector(`.mier-img`);
 
 let mierPeek = true;
+
+const mierNames = [`Mier Boreas`, `Mier`, `Mier Morozov`];
+const mierBios = [`The Weakest Ice Mage`, `The one who guides. Be not afraid!`, `The Tyrant of Pacific Purgatory`];
+const mierDescs = [
+    // ICEMAGE
+    `Yet born with a deficient affinity with magic,<br>
+    he strives to be the strongest mage in the world.<br>    
+    A gurren lagann ripoff that I<br>
+    plan on making into a comic someday.`,
+    // ANGEL
+    `Created as an original character back in 2018.<br>
+    Many revisions were done and now<br>
+    finalized as some sort of messenger.<br>
+    He's also who I draw very frequently<br>
+    <br>
+    (i may have same hair syndrome..)`,
+    // TYRANT
+    `Made as the captain of <span class="pp">Pacific Purgatory (?)</span>,<br>
+    an art community I grew since the May of 2023.<br>
+    He has a deep seated hatred for furries and nsfw artists. (just like me)<br>
+    <br>
+    (he also bullies abri a lot, just like me)`,
+];
+
+const ppInfo =  document.querySelector(`.ppinfo`);
+const pp = document.querySelector(`.pp`);
+
+// pp.addEventListener('mouseenter', () => {
+//     ppInfo.style.display = 'block';
+// });
+
+// pp.addEventListener('mousemove', (event) => {
+//     ppInfo.style.left = `${event.clientX + 10}px`;
+//     ppInfo.style.top = `${event.clientY + 10}px`;
+// });
+
+// pp.addEventListener('mouseleave', () => {
+//     ppInfo.style.display = 'none';
+// });
 
 setTimeout(() => {
     mierAngelImg.src = `./assets/characters/mierangel2.png`;
@@ -74,6 +114,9 @@ mierangel.addEventListener(`click`, function() {
     if (!mierangel.classList.contains(`current-mier`)) {
         setMierStyles(mierangel);
         mierImg.src = `./assets/characters/mierangelalt.png`;
+        miername.textContent = `${mierNames[1]}`;
+        mierbio.textContent = `${mierBios[1]}`;
+        mierdesc.innerHTML = `${mierDescs[1]}`;
     } else {
         patMier();
     }
@@ -89,11 +132,32 @@ miertyrant.addEventListener(`click`, function() {
         setMierStyles(miertyrant);
         mierImg.src = `./assets/characters/miertyrant.png`;
         mierImg.style.right = `0`;
+        miername.textContent = `${mierNames[2]}`;
+        mierbio.textContent = `${mierBios[2]}`;
+        mierdesc.innerHTML = `${mierDescs[2]}`;
         if (mierImg.style.transform !== `translateX(0%)`) {
             setTimeout(() => {
                 mierImg.style.transform = `translateX(0%)`
             }, 300);
-        }
+        };
+
+        setTimeout(() => {
+            const pp = document.querySelector('.pp');
+            if (pp) {
+                pp.addEventListener('mouseenter', () => {
+                    ppInfo.style.display = 'flex';
+                });
+
+                pp.addEventListener('mousemove', (event) => {
+                    ppInfo.style.left = `${event.clientX + 20}px`;
+                    ppInfo.style.top = `${event.clientY + 20}px`;
+                });
+
+                pp.addEventListener('mouseleave', () => {
+                    ppInfo.style.display = 'none';
+                });
+            }
+        }, 0);
     }
 });
 
@@ -106,6 +170,9 @@ miericemage.addEventListener(`click`, function() {
         }
         setMierStyles(miericemage);
         mierImg.src = `./assets/characters/miericemage.png`;
+        miername.textContent = `${mierNames[0]}`;
+        mierbio.textContent = `${mierBios[0]}`;
+        mierdesc.innerHTML = `${mierDescs[0]}`;
         mierImg.style.right = `0`;
         if (mierImg.style.transform !== `translateX(0%)`) {
             setTimeout(() => {

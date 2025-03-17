@@ -9,9 +9,33 @@ body {
     overflow-x: hidden;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p, h1, h2, h3, h4, h5, h6, .pp {
     font-family: monospace;
 }
+
+.pp {
+    text-decoration: underline;
+}
+
+.pp:hover {
+    cursor: pointer;
+}
+
+.ppinfo {
+    position: absolute;
+    display: none; 
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    pointer-events: none; /* Ensures the tooltip doesn't interfere with the hover effect */
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 
 .container {
     display: grid;
@@ -229,5 +253,23 @@ p, h1, h2, h3, h4, h5, h6 {
     }
     100% {
         bottom: -100%;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
