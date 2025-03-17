@@ -49,7 +49,7 @@ const mierDescs = [
     `Created as an original character back in 2018.<br>
     Many revisions were done and now<br>
     finalized as some sort of messenger.<br>
-    He's also who I draw very frequently<br>
+    He's also who I draw very frequently.<br>
     <br>
     (i may have same hair syndrome..)`,
     // TYRANT
@@ -76,10 +76,11 @@ const pp = document.querySelector(`.pp`);
 //     ppInfo.style.display = 'none';
 // });
 
-setTimeout(() => {
-    mierAngelImg.src = `./assets/characters/mierangel2.png`;
-}, 1600);
-
+const preloadImage = (src, callback) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = callback;
+}
 
 const patMier = () => {
     mierInc += .05;
@@ -132,17 +133,27 @@ const setMierText = (arr) => {
     mierdesc.innerHTML = `${mierDescs[arr]}`;
 }
 
+const preloadMier = `./assets/characters/mierangel2.png`
+
+setTimeout(() => {
+    mierAngelImg.src = preloadMier;
+}, 1000);
+
 // MIER BUTTONS
 
 mierangel.addEventListener(`click`, function() {
     if (!mierangel.classList.contains(`current-mier`)) {
         fadeOut();
-        setTimeout(() => {
-            setMierStyles(mierangel);
-            mierImg.src = `./assets/characters/mierangelalt.png`;
-            setMierText(1);
-            fadeIn();
-        }, 300);
+        setMierStyles(mierangel);
+
+        const newSrc = `./assets/characters/mierangelalt.png`;
+        preloadImage(newSrc, () => {
+            setTimeout(() => {
+                mierImg.src = newSrc;
+                setMierText(1);
+                fadeIn();
+            }, 300);
+        });
     } else {
         patMier();
     }
@@ -151,64 +162,71 @@ mierangel.addEventListener(`click`, function() {
 miertyrant.addEventListener(`click`, function() {
     if (!miertyrant.classList.contains(`current-mier`)) {
         fadeOut();
-        setTimeout(() => {
-            if (mierPeek) {
-                leaveAngel();
-                mierImg.style.transition = `all 2s ease`;
-                mierImg.style.right = `0`;
-            }
-            setMierStyles(miertyrant);
-            mierImg.src = `./assets/characters/miertyrant.png`;
-            mierImg.style.right = `0`;
-            setMierText(2);
-            fadeIn();
-            if (mierImg.style.transform !== `translateX(0%)`) {
-                setTimeout(() => {
-                    mierImg.style.transform = `translateX(0%)`
-                }, 300);
-            };
-    
+        setMierStyles(miertyrant);
+
+        const newSrc = `./assets/characters/miertyrant.png`;
+        preloadImage(newSrc, () => {
             setTimeout(() => {
-                const pp = document.querySelector('.pp');
-                if (pp) {
-                    pp.addEventListener('mouseenter', () => {
-                        ppInfo.style.display = 'flex';
-                    });
-    
-                    pp.addEventListener('mousemove', (event) => {
-                        ppInfo.style.left = `${event.clientX + 20}px`;
-                        ppInfo.style.top = `${event.clientY + 20}px`;
-                    });
-    
-                    pp.addEventListener('mouseleave', () => {
-                        ppInfo.style.display = 'none';
-                    });
+                if (mierPeek) {
+                    leaveAngel();
+                    mierImg.style.transition = `all 2s ease`;
+                    mierImg.style.right = `0`;
                 }
-            }, 0);
-        }, 300);
+                mierImg.src = newSrc;
+                mierImg.style.right = `0`;
+                setMierText(2);
+                fadeIn();
+                if (mierImg.style.transform !== `translateX(0%)`) {
+                    setTimeout(() => {
+                        mierImg.style.transform = `translateX(0%)`
+                    }, 300);
+                };
+                setTimeout(() => {
+                    const pp = document.querySelector('.pp');
+                    if (pp) {
+                        pp.addEventListener('mouseenter', () => {
+                            ppInfo.style.display = 'flex';
+                        });
+        
+                        pp.addEventListener('mousemove', (event) => {
+                            ppInfo.style.left = `${event.clientX + 20}px`;
+                            ppInfo.style.top = `${event.clientY + 20}px`;
+                        });
+        
+                        pp.addEventListener('mouseleave', () => {
+                            ppInfo.style.display = 'none';
+                        });
+                    }
+                }, 0);
+            }, 300);
+        });
     }
 });
 
 miericemage.addEventListener(`click`, function() {
     if (!miericemage.classList.contains(`current-mier`)) {
         fadeOut();
-        setTimeout(() => {
-            if (mierPeek) {
-                leaveAngel();
-                mierImg.style.transition = `all 2s ease`;
+        setMierStyles(miericemage);
+
+        const newSrc = `./assets/characters/miericemage.png`;
+        preloadImage(newSrc, () => {
+            setTimeout(() => {
+                if (mierPeek) {
+                    leaveAngel();
+                    mierImg.style.transition = `all 2s ease`;
+                    mierImg.style.right = `0`;
+                }
+                mierImg.src = newSrc;
                 mierImg.style.right = `0`;
-            }
-            setMierStyles(miericemage);
-            mierImg.src = `./assets/characters/miericemage.png`;
-            mierImg.style.right = `0`;
-            setMierText(0);
-            fadeIn();
-            if (mierImg.style.transform !== `translateX(0%)`) {
-                setTimeout(() => {
-                    mierImg.style.transform = `translateX(0%)`
-                }, 300);
-            }
-        }, 300);
+                setMierText(0);
+                fadeIn();
+                if (mierImg.style.transform !== `translateX(0%)`) {
+                    setTimeout(() => {
+                        mierImg.style.transform = `translateX(0%)`
+                    }, 300);
+                }
+            }, 300);
+        });
     }
 });
 
