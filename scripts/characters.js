@@ -21,6 +21,7 @@ const arrowR = document.querySelector(`.arrow-right`);
 const arrowL = document.querySelector(`.arrow-left`);
 
 // MIER
+const mierinfo = document.querySelector(`.mier-info`);
 const miername = document.querySelector(`.mier-name`);
 const mierbio = document.querySelector(`.mier-bio`);
 const mierdesc = document.querySelector(`.mier-description`);
@@ -34,6 +35,7 @@ const mierAngelImg = document.querySelector(`.mierangel-img`);
 const mierImg = document.querySelector(`.mier-img`);
 
 let mierPeek = true;
+let mierInc = 1;
 
 const mierNames = [`Mier Boreas`, `Mier`, `Mier Morozov`];
 const mierBios = [`The Weakest Ice Mage`, `The one who guides. Be not afraid!`, `The Tyrant of Pacific Purgatory`];
@@ -80,7 +82,9 @@ setTimeout(() => {
 
 
 const patMier = () => {
+    mierInc += .05;
     mierAngelImg.src = `./assets/characters/mierangel.png`;
+    mierAngelImg.style.transform = `scale(${mierInc})`;
     setTimeout(() => {
         mierAngelImg.src = `./assets/characters/mierangel2.png`;
     }, 400);
@@ -108,15 +112,37 @@ const setMierStyles = (element) => {
     element.style.opacity = `1`;
 };
 
+const fadeIn = () => {
+    mierImg.style.animation = `fade-in .2s ease`;
+    miername.style.animation = `fade-in .2s ease`;
+    mierbio.style.animation = `fade-in .2s ease`;
+    mierdesc.style.animation = `fade-in .2s ease`;
+}
+
+const fadeOut = () => {
+    mierImg.style.animation = `fade-out .3s ease`;
+    miername.style.animation = `fade-out .3s ease`;
+    mierbio.style.animation = `fade-out .3s ease`;
+    mierdesc.style.animation = `fade-out .3s ease`;
+}
+
+const setMierText = (arr) => {
+    miername.textContent = `${mierNames[arr]}`;
+    mierbio.textContent = `${mierBios[arr]}`;
+    mierdesc.innerHTML = `${mierDescs[arr]}`;
+}
+
 // MIER BUTTONS
 
 mierangel.addEventListener(`click`, function() {
     if (!mierangel.classList.contains(`current-mier`)) {
-        setMierStyles(mierangel);
-        mierImg.src = `./assets/characters/mierangelalt.png`;
-        miername.textContent = `${mierNames[1]}`;
-        mierbio.textContent = `${mierBios[1]}`;
-        mierdesc.innerHTML = `${mierDescs[1]}`;
+        fadeOut();
+        setTimeout(() => {
+            setMierStyles(mierangel);
+            mierImg.src = `./assets/characters/mierangelalt.png`;
+            setMierText(1);
+            fadeIn();
+        }, 300);
     } else {
         patMier();
     }
@@ -124,61 +150,65 @@ mierangel.addEventListener(`click`, function() {
 
 miertyrant.addEventListener(`click`, function() {
     if (!miertyrant.classList.contains(`current-mier`)) {
-        if (mierPeek) {
-            leaveAngel();
-            mierImg.style.transition = `all 2s ease`;
-            mierImg.style.right = `0`;
-        }
-        setMierStyles(miertyrant);
-        mierImg.src = `./assets/characters/miertyrant.png`;
-        mierImg.style.right = `0`;
-        miername.textContent = `${mierNames[2]}`;
-        mierbio.textContent = `${mierBios[2]}`;
-        mierdesc.innerHTML = `${mierDescs[2]}`;
-        if (mierImg.style.transform !== `translateX(0%)`) {
-            setTimeout(() => {
-                mierImg.style.transform = `translateX(0%)`
-            }, 300);
-        };
-
+        fadeOut();
         setTimeout(() => {
-            const pp = document.querySelector('.pp');
-            if (pp) {
-                pp.addEventListener('mouseenter', () => {
-                    ppInfo.style.display = 'flex';
-                });
-
-                pp.addEventListener('mousemove', (event) => {
-                    ppInfo.style.left = `${event.clientX + 20}px`;
-                    ppInfo.style.top = `${event.clientY + 20}px`;
-                });
-
-                pp.addEventListener('mouseleave', () => {
-                    ppInfo.style.display = 'none';
-                });
+            if (mierPeek) {
+                leaveAngel();
+                mierImg.style.transition = `all 2s ease`;
+                mierImg.style.right = `0`;
             }
-        }, 0);
+            setMierStyles(miertyrant);
+            mierImg.src = `./assets/characters/miertyrant.png`;
+            mierImg.style.right = `0`;
+            setMierText(2);
+            fadeIn();
+            if (mierImg.style.transform !== `translateX(0%)`) {
+                setTimeout(() => {
+                    mierImg.style.transform = `translateX(0%)`
+                }, 300);
+            };
+    
+            setTimeout(() => {
+                const pp = document.querySelector('.pp');
+                if (pp) {
+                    pp.addEventListener('mouseenter', () => {
+                        ppInfo.style.display = 'flex';
+                    });
+    
+                    pp.addEventListener('mousemove', (event) => {
+                        ppInfo.style.left = `${event.clientX + 20}px`;
+                        ppInfo.style.top = `${event.clientY + 20}px`;
+                    });
+    
+                    pp.addEventListener('mouseleave', () => {
+                        ppInfo.style.display = 'none';
+                    });
+                }
+            }, 0);
+        }, 300);
     }
 });
 
 miericemage.addEventListener(`click`, function() {
     if (!miericemage.classList.contains(`current-mier`)) {
-        if (mierPeek) {
-            leaveAngel();
-            mierImg.style.transition = `all 2s ease`;
+        fadeOut();
+        setTimeout(() => {
+            if (mierPeek) {
+                leaveAngel();
+                mierImg.style.transition = `all 2s ease`;
+                mierImg.style.right = `0`;
+            }
+            setMierStyles(miericemage);
+            mierImg.src = `./assets/characters/miericemage.png`;
             mierImg.style.right = `0`;
-        }
-        setMierStyles(miericemage);
-        mierImg.src = `./assets/characters/miericemage.png`;
-        miername.textContent = `${mierNames[0]}`;
-        mierbio.textContent = `${mierBios[0]}`;
-        mierdesc.innerHTML = `${mierDescs[0]}`;
-        mierImg.style.right = `0`;
-        if (mierImg.style.transform !== `translateX(0%)`) {
-            setTimeout(() => {
-                mierImg.style.transform = `translateX(0%)`
-            }, 300);
-        }
+            setMierText(0);
+            fadeIn();
+            if (mierImg.style.transform !== `translateX(0%)`) {
+                setTimeout(() => {
+                    mierImg.style.transform = `translateX(0%)`
+                }, 300);
+            }
+        }, 300);
     }
 });
 
