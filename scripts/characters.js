@@ -63,13 +63,109 @@ const mierDescs = [
 const ppInfo =  document.querySelector(`.ppinfo`);
 const pp = document.querySelector(`.pp`);
 
+// SKULL BOYS
+
+const aurelius = document.querySelector(`.aurelius`);
+const rufus = document.querySelector(`.rufus`);
+const ignatius = document.querySelector(`.ignatius`);
+const brutus = document.querySelector(`.brutus`);
+
+const aureliusImg = document.querySelector(`.aurelius-img`);
+const rufusImg = document.querySelector(`.rufus-img`);
+const ignatiusImg = document.querySelector(`.ignatius-img`);
+const brutusImg = document.querySelector(`.brutus-img`);
+
+const aureliusInfo = document.querySelector(`.aurelius-info`);
+const rufusInfo = document.querySelector(`.rufus-info`);
+const ignatiusInfo = document.querySelector(`.ignatius-info`);
+const brutusInfo = document.querySelector(`.brutus-info`);
+
+
+// PLEASE FIND A WAY TO MAKE THIS DRY X_X T_T
+
+aurelius.addEventListener(`mouseenter`, () => {
+    aureliusInfo.style.display = 'flex';
+    aureliusImg.style.transform = `translateY(20%)`;
+    skulls.style.gridTemplateColumns = `2fr 1fr 1fr 1fr`;
+});
+
+aurelius.addEventListener('mousemove', (event) => {
+    const tooltipWidth = aureliusInfo.offsetWidth;
+    const tooltipHeight = aureliusInfo.offsetHeight;
+    aureliusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
+    aureliusInfo.style.top = `${event.pageY - tooltipHeight}px`;
+});
+
+aurelius.addEventListener(`mouseleave`, () => {
+    aureliusInfo.style.display = 'none';
+    aureliusImg.style.transform = `translateY(23%)`;
+    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
+});
+
+rufus.addEventListener(`mouseenter`, () => {
+    rufusInfo.style.display = 'flex';
+    rufusImg.style.transform = `translateY(20%)`;
+    skulls.style.gridTemplateColumns = `1fr 2fr 1fr 1fr`;
+});
+
+rufus.addEventListener('mousemove', (event) => {
+    const tooltipWidth = rufusInfo.offsetWidth;
+    const tooltipHeight = rufusInfo.offsetHeight;
+    rufusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
+    rufusInfo.style.top = `${event.pageY - tooltipHeight}px`;
+});
+
+rufus.addEventListener(`mouseleave`, () => {
+    rufusInfo.style.display = 'none';
+    rufusImg.style.transform = `translateY(23%)`;
+    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
+});
+
+ignatius.addEventListener(`mouseenter`, () => {
+    ignatiusInfo.style.display = 'flex';
+    ignatiusImg.style.transform = `translateY(20%)`;
+    skulls.style.gridTemplateColumns = `1fr 1fr 2fr 1fr`;
+});
+
+ignatius.addEventListener('mousemove', (event) => {
+    const tooltipWidth = ignatiusInfo.offsetWidth;
+    const tooltipHeight = ignatiusInfo.offsetHeight;
+    ignatiusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
+    ignatiusInfo.style.top = `${event.pageY - tooltipHeight}px`;
+});
+
+ignatius.addEventListener(`mouseleave`, () => {
+    ignatiusInfo.style.display = 'none';
+    ignatiusImg.style.transform = `translateY(23%)`;
+    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
+});
+
+brutus.addEventListener(`mouseenter`, () => {
+    brutusInfo.style.display = 'flex';
+    brutusImg.style.transform = `translateY(20%)`;
+    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 2fr`;
+});
+
+brutus.addEventListener('mousemove', (event) => {
+    const tooltipWidth = brutusInfo.offsetWidth;
+    const tooltipHeight = brutusInfo.offsetHeight;
+    brutusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
+    brutusInfo.style.top = `${event.pageY - tooltipHeight}px`;
+});
+
+brutus.addEventListener(`mouseleave`, () => {
+    brutusInfo.style.display = 'none';
+    brutusImg.style.transform = `translateY(23%)`;
+    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
+});
+
 // pp.addEventListener('mouseenter', () => {
-//     ppInfo.style.display = 'block';
+//     ppInfo.style.display = 'flex';
 // });
 
 // pp.addEventListener('mousemove', (event) => {
-//     ppInfo.style.left = `${event.clientX + 10}px`;
-//     ppInfo.style.top = `${event.clientY + 10}px`;
+//     ppInfo.style.left = `${event.clientX + 20}px`;
+//     ppInfo.style.top = `${event.clientY + 20}px`;
 // });
 
 // pp.addEventListener('mouseleave', () => {
@@ -189,8 +285,8 @@ miertyrant.addEventListener(`click`, function() {
                         });
         
                         pp.addEventListener('mousemove', (event) => {
-                            ppInfo.style.left = `${event.clientX + 20}px`;
-                            ppInfo.style.top = `${event.clientY + 20}px`;
+                            ppInfo.style.left = `${event.pageX + 20}px`;
+                            ppInfo.style.top = `${event.pageY + 20}px`;
                         });
         
                         pp.addEventListener('mouseleave', () => {

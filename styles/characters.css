@@ -21,15 +21,17 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     cursor: pointer;
 }
 
-.ppinfo {
+.char-info {
     position: absolute;
     display: none; 
+    flex-direction: column;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 10px;
     border-radius: 5px;
-    white-space: nowrap;
-    pointer-events: none; /* Ensures the tooltip doesn't interfere with the hover effect */
+    min-width: 20vw;
+    max-width: 25vw;
+    pointer-events: none;
     z-index: 100;
     justify-content: center;
     align-items: center;
@@ -74,11 +76,6 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     grid-template-columns: 1.2fr 0.8fr;
 }
 
-.skulls {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
 .mier-right,
 .mier-left,
 .simeon-right,
@@ -86,18 +83,16 @@ p, h1, h2, h3, h4, h5, h6, .pp {
 .quince-right,
 .quince-left,
 .pio-right,
-.pio-left,
-.aurelius,
-.rufus,
-.ignatius,
-.brutus {
+.pio-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0;
     margin: 0;
+    /* height: 100vh; */
     background-color: rgba(0, 0, 0, 0);
+    overflow: hidden;
 }
 
 .container .info {
@@ -116,16 +111,29 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     gap: 10%;
 }
 
-.skulls .info {
-    width: 80%;
+.skulls {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    overflow: hidden;
+    transition: all 1s ease;
 }
 
-.skull-game {
+.brother {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: space-between;
     align-items: center;
     height: 100vh;
+    position: relative;
+}
+
+.skulls img {
+    position: absolute;
+    width: 40vw;
+    transform: translateY(23%);
+    transition: all 1.3s ease;
 }
 
 /* .skull-info {
