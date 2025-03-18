@@ -13,6 +13,7 @@ const simeonPos = document.querySelector(`.simeon`).offsetTop;
 const quincePos = document.querySelector(`.quince`).offsetTop;
 const pioPos = document.querySelector(`.pio`).offsetTop;
 const skullsPos = document.querySelector(`.skulls`).offsetTop;
+const bottom = document.documentElement.scrollHeight;
 
 const bg = document.querySelector(`.bg`);
 
@@ -62,78 +63,6 @@ const mierDescs = [
 
 const ppInfo =  document.querySelector(`.ppinfo`);
 const pp = document.querySelector(`.pp`);
-
-// SKULL BOYS
-
-const aurelius = document.querySelector(`.aurelius`);
-const rufus = document.querySelector(`.rufus`);
-const ignatius = document.querySelector(`.ignatius`);
-const brutus = document.querySelector(`.brutus`);
-const brother = document.querySelectorAll(`.brother`);
-
-const aureliusImg = document.querySelector(`.aurelius-img`);
-const rufusImg = document.querySelector(`.rufus-img`);
-const ignatiusImg = document.querySelector(`.ignatius-img`);
-const brutusImg = document.querySelector(`.brutus-img`);
-
-const aureliusInfo = document.querySelector(`.aurelius-info`);
-const rufusInfo = document.querySelector(`.rufus-info`);
-const ignatiusInfo = document.querySelector(`.ignatius-info`);
-const brutusInfo = document.querySelector(`.brutus-info`);
-
-const skullBrothers = [
-    {
-        id: `aurelius`,
-        info: `aureliusInfo`,
-        img: `aureliusImg`,
-        column: `2fr 1fr 1fr 1fr`,
-    },
-    {
-        id: `rufus`,
-        info: `rufusInfo`,
-        img: `rufusImg`,
-        column: `1fr 2fr 1fr 1fr`,
-    },
-    {
-        id: `ignatius`,
-        info: `ignatiusInfo`,
-        img: `ignatiusImg`,
-        column: `1fr 1fr 2fr 1fr`,
-    },
-    {
-        id: `brutus`,
-        info: `brutusInfo`,
-        img: `brutusImg`,
-        column: `1fr 1fr 1fr 2fr`,
-    },
-];
-
-skullBrothers.forEach(({ id, info, img, column }) => {
-    const brother = document.getElementById(id);
-    const brotherInfo = document.getElementById(info);
-    const brotherImg = document.getElementById(img);
-
-    brother.addEventListener(`mouseenter`, () => {
-        brotherInfo.style.display = `flex`;
-        brotherImg.style.transform = `translateY(20%)`;
-        brotherImg.style.zIndex = `99`;
-        skulls.style.gridTemplateColumns = column; 
-    });
-
-    brother.addEventListener(`mouseleave`, () => {
-        brotherInfo.style.display = `none`;
-        brotherImg.style.transform = `translateY(23%)`;
-        brotherImg.style.zIndex = `1`;
-        skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
-    });
-
-    brother.addEventListener(`mousemove`, (event) => {
-        const tooltipWidth = brotherInfo.offsetWidth;
-        const tooltipHeight = brotherInfo.offsetHeight;
-        brotherInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
-        brotherInfo.style.top = `${event.pageY - tooltipHeight}px`;
-    });
-});
 
 // TOOLTIP CODE
 
@@ -342,6 +271,83 @@ window.addEventListener('scroll', function() {
     }
 });
 
+
+// SKULL BOYS
+
+const aurelius = document.querySelector(`.aurelius`);
+const rufus = document.querySelector(`.rufus`);
+const ignatius = document.querySelector(`.ignatius`);
+const brutus = document.querySelector(`.brutus`);
+const brother = document.querySelectorAll(`.brother`);
+
+const aureliusImg = document.querySelector(`.aurelius-img`);
+const rufusImg = document.querySelector(`.rufus-img`);
+const ignatiusImg = document.querySelector(`.ignatius-img`);
+const brutusImg = document.querySelector(`.brutus-img`);
+
+const aureliusInfo = document.querySelector(`.aurelius-info`);
+const rufusInfo = document.querySelector(`.rufus-info`);
+const ignatiusInfo = document.querySelector(`.ignatius-info`);
+const brutusInfo = document.querySelector(`.brutus-info`);
+
+const skullBrothers = [
+    {
+        id: `aurelius`,
+        info: `aureliusInfo`,
+        img: `aureliusImg`,
+        column: `2fr 1fr 1fr 1fr`,
+    },
+    {
+        id: `rufus`,
+        info: `rufusInfo`,
+        img: `rufusImg`,
+        column: `1fr 2fr 1fr 1fr`,
+    },
+    {
+        id: `ignatius`,
+        info: `ignatiusInfo`,
+        img: `ignatiusImg`,
+        column: `1fr 1fr 2fr 1fr`,
+    },
+    {
+        id: `brutus`,
+        info: `brutusInfo`,
+        img: `brutusImg`,
+        column: `1fr 1fr 1fr 2fr`,
+    },
+];
+
+skullBrothers.forEach(({ id, info, img, column }) => {
+    const brother = document.getElementById(id);
+    const brotherInfo = document.getElementById(info);
+    const brotherImg = document.getElementById(img);
+
+    brother.addEventListener(`mouseenter`, () => {
+        brotherInfo.style.display = `flex`;
+        brotherImg.style.transform = `translateY(20%)`;
+        brotherImg.style.zIndex = `99`;
+        skulls.style.gridTemplateColumns = column; 
+    });
+
+    brother.addEventListener(`mouseleave`, () => {
+        brotherInfo.style.display = `none`;
+        brotherImg.style.transform = `translateY(23%)`;
+        if (id === `rufus` || id === `ignatius`) {
+            brotherImg.style.zIndex = `2`;
+        } else {
+            brotherImg.style.zIndex = `1`;
+        }
+        skulls.style.gridTemplateColumns = `1fr .6fr 1fr 1fr`;
+    });
+
+    brother.addEventListener(`mousemove`, (event) => {
+        const tooltipWidth = brotherInfo.offsetWidth;
+        const tooltipHeight = brotherInfo.offsetHeight;
+        brotherInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
+        brotherInfo.style.top = `${event.pageY - tooltipHeight}px`;
+    });
+});
+
 // ARROWS 
 
 arrowR.addEventListener(`click`, function() {
@@ -355,7 +361,7 @@ arrowR.addEventListener(`click`, function() {
     } else if (scrolledPercentage >= 40 && scrolledPercentage < 60) {
         window.scrollTo({ top: pioPos, behavior: 'smooth' });
     } else if (scrolledPercentage >= 60 && scrolledPercentage < 80) {
-        window.scrollTo({ top: skullsPos, behavior: 'smooth' });
+        window.scrollTo({ top: bottom, behavior: 'smooth' });
     } else {
         console.log(`meow :3`)
     }
@@ -375,5 +381,22 @@ arrowL.addEventListener(`click`, function() {
         window.scrollTo({ top: quincePos, behavior: 'smooth' });
     } else {
         window.scrollTo({ top: pioPos, behavior: 'smooth' });
+    }
+});
+
+const footer = document.querySelector(`.footer`);
+
+window.addEventListener('scroll', function() {
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolledPercentage = window.scrollY / scrollableHeight * 100;
+
+    if (scrolledPercentage >= 98) {
+        footer.style.bottom = '0';
+        arrowL.style.bottom = `7.5rem`;
+        arrowR.style.bottom = `5rem`;
+    } else {
+        footer.style.bottom = '-100px';
+        arrowL.style.bottom = `4.5rem`;
+        arrowR.style.bottom = `2rem`;
     }
 });

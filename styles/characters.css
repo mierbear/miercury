@@ -114,8 +114,8 @@ p, h1, h2, h3, h4, h5, h6, .pp {
 .skulls {
     display: grid;
     width: 100%;
-    height: 100vh;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 110vh;
+    grid-template-columns: 1fr .6fr 1fr 1fr;
     overflow: hidden;
     transition: all 1s ease;
 }
@@ -136,12 +136,15 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     transition: all 1.3s ease;
 }
 
-/* .skull-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-} */
+.rufus-img,
+.ignatius-img {
+    z-index: 2;
+}
+
+.aurelius-img,
+.brutus-img {
+    z-index: 1;
+}
 
 /* MIER */
 
@@ -213,7 +216,7 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     position: fixed;
     cursor: pointer;
     font-size: 40px;
-    transition: all 0.1s ease;
+    transition: all 1.7s ease;
     transform: scale(1);
     z-index: 500;
 }
@@ -231,8 +234,40 @@ p, h1, h2, h3, h4, h5, h6, .pp {
 .arrow-left:hover,
 .arrow-right:hover {
     transform: scale(1.2);
+    color: rgb(255, 255, 255);
+    animation: glow 2s infinite;
 }   
 
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0000006a;
+    color: rgb(255, 255, 255);
+    margin-top: auto;
+    position: fixed;
+    bottom: -100px;
+    width: 100%;
+    padding: 7px;
+    transition: ease 2s;
+    z-index: 499;
+}
+
+.footer button {
+    font-family: monospace;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #00000000;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    transition: all 1s ease;
+}
+
+.footer button:hover {
+    cursor: pointer;
+}
 
 @keyframes glow {
     0% {
