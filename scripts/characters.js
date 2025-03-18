@@ -23,6 +23,20 @@ const arrows = document.querySelector(`.arrows`);
 const arrowR = document.querySelector(`.arrow-right`);
 const arrowL = document.querySelector(`.arrow-left`);
 
+// X BUTTON
+
+const galleryBtn = document.querySelector(`.gallery-button`);
+const x = document.querySelector(`.x`);
+const gallery = document.querySelector(`.gallery`);
+
+galleryBtn.addEventListener(`click`, () => {
+    gallery.style.display = `flex`;
+})
+
+x.addEventListener(`click`, () => {
+    gallery.style.display = `none`;
+})
+
 // SCROLL LISTENER
 
 window.addEventListener('scroll', function() {
@@ -55,7 +69,7 @@ window.addEventListener('scroll', function() {
         bg.style.backgroundColor = `rgb(44, 44, 52)`;
         arrows.style.color = `rgb(158, 169, 176)`;
     } else {
-        bg.style.backgroundColor = `rgb(34, 34, 35)`;
+        bg.style.backgroundColor = `rgb(17, 17, 18)`;
         arrows.style.color = `rgb(211, 211, 211)`;
     }
 });
