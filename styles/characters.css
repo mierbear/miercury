@@ -18,14 +18,14 @@ p, h1, h2, h3, h4, h5, h6, .pp {
 }
 
 .pp:hover {
-    cursor: pointer;
+    cursor: help;
 }
 
 .char-info {
     position: absolute;
     display: none; 
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgb(15, 15, 18);
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -111,57 +111,6 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     gap: 10%;
 }
 
-.skulls {
-    display: grid;
-    width: 100%;
-    height: 110vh;
-    grid-template-columns: 1fr .6fr 1fr 1fr;
-    overflow: hidden;
-    transition: all 2s ease;
-}
-
-.brother {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    position: relative;
-}
-
-.skulls img {
-    position: absolute;
-    width: 38vw;
-    transform: translateY(23%);
-    transition: all 1.3s ease;
-}
-
-.rufus-img {
-    z-index: 3;
-}
-
-.ignatius-img,
-.aurelius-img,
-.brutus-img {
-    z-index: 1;
-}
-
-.aurelius-info {
-    background-color: rgba(117, 162, 172, 0.8);
-}
-
-.rufus-info {
-    background-color: rgba(102, 132, 77, 0.8);
-}
-
-.ignatius-info {
-    background-color: rgba(121, 112, 84, 0.8);
-}
-
-.brutus-info {
-    background-color: rgba(86, 97, 115, 0.8);
-}
-
 /* MIER */
 
 .mierology {
@@ -231,18 +180,82 @@ p, h1, h2, h3, h4, h5, h6, .pp {
 }
 
 .mier-why:hover {
-    cursor: pointer;
+    cursor: help;
 }
 
+/* SIMEON */
+
+.simeon-img {
+    max-width: 55vw;
+    padding-left: 10%;
+    transition: all 2s ease;
+    animation: underwater 20s infinite;
+}
 
 /* QUINCE */
 
 .quince-img {
-    height: 90vh;
-    padding-right: 8%;
+    max-width: 55vw;
+    padding-right: 12%;
     transition: all 2s ease;
 }
 
+.quince-img:hover {
+    cursor: pointer;
+}
+
+/* THE BROTHERS */
+
+.skulls {
+    display: grid;
+    width: 100%;
+    height: 110vh;
+    grid-template-columns: 1fr .6fr 1fr 1fr;
+    overflow: hidden;
+    transition: all 2s ease;
+}
+
+.brother {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.skulls img {
+    position: absolute;
+    width: 37vw;
+    transform: translateY(23%);
+    transition: all 1.3s ease;
+}
+
+.rufus-img {
+    z-index: 3;
+}
+
+.ignatius-img,
+.aurelius-img,
+.brutus-img {
+    z-index: 1;
+}
+
+.aurelius-info {
+    background-color: rgba(117, 162, 172, 0.8);
+}
+
+.rufus-info {
+    background-color: rgba(102, 132, 77, 0.8);
+}
+
+.ignatius-info {
+    background-color: rgba(121, 112, 84, 0.8);
+}
+
+.brutus-info {
+    background-color: rgba(86, 97, 115, 0.8);
+}
 
 /* ARROWS */
 
@@ -355,3 +368,21 @@ p, h1, h2, h3, h4, h5, h6, .pp {
         opacity: 1;
     }
 }
+
+@keyframes underwater {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(8px, -6px);
+    }
+    50% {
+      transform: translate(-7px, 7px);
+    }
+    75% {
+      transform: translate(6px, -8px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }

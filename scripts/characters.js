@@ -1,6 +1,7 @@
 "use strict";
 
 // PER 100vh
+
 const mier   = document.querySelector(`.mier`);
 const simeon = document.querySelector(`.simeon`);
 const quince = document.querySelector(`.quince`);
@@ -8,6 +9,7 @@ const pio    = document.querySelector(`.pio`);
 const skulls = document.querySelector(`.skulls`);
 
 // CHARACTER POSITION
+
 const mierPos = document.querySelector(`.mier`).offsetTop;
 const simeonPos = document.querySelector(`.simeon`).offsetTop;
 const quincePos = document.querySelector(`.quince`).offsetTop;
@@ -21,7 +23,45 @@ const arrows = document.querySelector(`.arrows`);
 const arrowR = document.querySelector(`.arrow-right`);
 const arrowL = document.querySelector(`.arrow-left`);
 
+// SCROLL LISTENER
+
+window.addEventListener('scroll', function() {
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolledPercentage = window.scrollY / scrollableHeight * 100;
+    
+    // MIER POPDOWN ANIM
+
+    if (scrolledPercentage > 10 && mierPeek) {
+        leaveAngel();
+        console.log(`meow`);
+        mierImg.src = `./assets/characters/mierangelalt.png`;
+        setTimeout(() => {
+            mierImg.style.transform = `translateX(0%)`
+        }, 100);
+    } 
+
+    // BACKGROUND COLOR FOR EACH CHARACTER
+
+    if (scrolledPercentage >= 0 && scrolledPercentage < 20) {
+        bg.style.backgroundColor = `rgb(15, 15, 18)`;
+        arrows.style.color = `rgb(191, 201, 201)`;
+    } else if (scrolledPercentage >= 20 && scrolledPercentage < 40) {
+        bg.style.backgroundColor = `rgb(60, 81, 109)`;
+        arrows.style.color = `rgb(68, 119, 169)`;
+    } else if (scrolledPercentage >= 40 && scrolledPercentage < 60) {
+        bg.style.backgroundColor = `rgb(45, 29, 29)`;
+        arrows.style.color = `rgb(125, 69, 69)`;
+    } else if (scrolledPercentage >= 60 && scrolledPercentage < 80) {
+        bg.style.backgroundColor = `rgb(44, 44, 52)`;
+        arrows.style.color = `rgb(158, 169, 176)`;
+    } else {
+        bg.style.backgroundColor = `rgb(33, 33, 33)`;
+        arrows.style.color = `rgb(211, 211, 211)`;
+    }
+});
+
 // MIER
+
 const mierinfo = document.querySelector(`.mier-info`);
 const miername = document.querySelector(`.mier-name`);
 const mierbio = document.querySelector(`.mier-bio`);
@@ -150,9 +190,12 @@ const setMierText = (arr) => {
 
 const preloadMier = `./assets/characters/mierangel2.png`
 
-setTimeout(() => {
-    mierAngelImg.src = preloadMier;
-}, 1000);
+preloadImage(preloadMier, () => {    
+    setTimeout(() => {
+        mierAngelImg.src = preloadMier;
+    }, 1000);
+});
+
 
 // MIER BUTTONS
 
@@ -266,43 +309,33 @@ mierWhy.addEventListener('mouseleave', () => {
     mierWhyInfo.style.display = 'none';
 });
 
-// SCROLL LISTENER
+// QUINCE 
 
-window.addEventListener('scroll', function() {
-    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolledPercentage = window.scrollY / scrollableHeight * 100;
-    
-    // MIER POPDOWN ANIM
+const quinceImg = document.querySelector(`.quince-img`);
+let blood = false;
 
-    if (scrolledPercentage > 10 && mierPeek) {
-        leaveAngel();
-        console.log(`meow`);
-        mierImg.src = `./assets/characters/mierangelalt.png`;
+quinceImg.addEventListener(`click`, () => {
+
+    if (!blood) {
+        quinceImg.style.animation = `fade-out .3s ease`;
+        quinceImg.style.opacity = `0`;
         setTimeout(() => {
-            mierImg.style.transform = `translateX(0%)`
-        }, 100);
-    } 
-
-    // BACKGROUND COLOR FOR EACH CHARACTER
-
-    if (scrolledPercentage >= 0 && scrolledPercentage < 20) {
-        bg.style.backgroundColor = `rgb(12, 12, 13)`;
-        arrows.style.color = `rgb(191, 201, 201)`;
-    } else if (scrolledPercentage >= 20 && scrolledPercentage < 40) {
-        bg.style.backgroundColor = `rgb(20, 20, 41)`;
-        arrows.style.color = `rgb(42, 42, 55)`;
-    } else if (scrolledPercentage >= 40 && scrolledPercentage < 60) {
-        bg.style.backgroundColor = `rgb(45, 29, 29)`;
-        arrows.style.color = `rgb(125, 69, 69)`;
-    } else if (scrolledPercentage >= 60 && scrolledPercentage < 80) {
-        bg.style.backgroundColor = `rgb(44, 44, 52)`;
-        arrows.style.color = `rgb(158, 169, 176)`;
+            quinceImg.src = `./assets/characters/quince.png`;
+            quinceImg.style.animation = `fade-in .2s ease`;
+            quinceImg.style.opacity = `1`;
+        }, 300);
+        blood = true;
     } else {
-        bg.style.backgroundColor = `rgb(12, 12, 13)`;
-        arrows.style.color = `rgb(211, 211, 211)`;
+        quinceImg.style.animation = `fade-out .3s ease`;
+        quinceImg.style.opacity = `0`;
+        setTimeout(() => {
+            quinceImg.src = `./assets/characters/quincealt.png`;
+            quinceImg.style.animation = `fade-in .2s ease`;
+            quinceImg.style.opacity = `1`;
+        }, 300);
+        blood = false;
     }
 });
-
 
 // SKULL BOYS
 
