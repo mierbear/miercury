@@ -55,7 +55,7 @@ window.addEventListener('scroll', function() {
         bg.style.backgroundColor = `rgb(44, 44, 52)`;
         arrows.style.color = `rgb(158, 169, 176)`;
     } else {
-        bg.style.backgroundColor = `rgb(33, 33, 33)`;
+        bg.style.backgroundColor = `rgb(34, 34, 35)`;
         arrows.style.color = `rgb(211, 211, 211)`;
     }
 });
@@ -95,7 +95,7 @@ const mierDescs = [
     <br>
     (i may have same hair syndrome..)`,
     // TYRANT
-    `Made as the captain of <span class="pp">Pacific Purgatory(?)</span>,<br>
+    `Made as the captain of <span class="pp" draggable="true">Pacific Purgatory(?)</span>,<br>
     an art community I grew since the May of 2023.<br>
     He has a deep seated hatred for furries and nsfw artists. (just like me)<br>
     <br>
@@ -360,25 +360,25 @@ const skullBrothers = [
         id: `aurelius`,
         info: `aureliusInfo`,
         img: `aureliusImg`,
-        column: `2fr 1fr 1fr 1fr`,
+        column: `1.5fr .6fr 1fr 1fr`,
     },
     {
         id: `rufus`,
         info: `rufusInfo`,
         img: `rufusImg`,
-        column: `1fr 2fr 1fr 1fr`,
+        column: `1fr 1.2fr 1fr 1fr`,
     },
     {
         id: `ignatius`,
         info: `ignatiusInfo`,
         img: `ignatiusImg`,
-        column: `1fr 1fr 2fr 1fr`,
+        column: `1fr .6fr 1.5fr 1fr`,
     },
     {
         id: `brutus`,
         info: `brutusInfo`,
         img: `brutusImg`,
-        column: `1fr 1fr 1fr 2fr`,
+        column: `1fr .6fr 1fr 1.5fr`,
     },
 ];
 
@@ -390,6 +390,7 @@ skullBrothers.forEach(({ id, info, img, column }) => {
     brother.addEventListener(`mouseenter`, () => {
         brotherInfo.style.display = `flex`;
         brotherImg.style.transform = `translateY(20%)`;
+        brotherImg.style.animation = `glow 4s infinite`;
         brotherImg.style.zIndex = `99`;
         skulls.style.gridTemplateColumns = column; 
     });
@@ -397,6 +398,7 @@ skullBrothers.forEach(({ id, info, img, column }) => {
     brother.addEventListener(`mouseleave`, () => {
         brotherInfo.style.display = `none`;
         brotherImg.style.transform = `translateY(23%)`;
+        brotherImg.style.animation = `none`;
         if (id === `rufus`) {
             brotherImg.style.zIndex = `2`;
         } else {
