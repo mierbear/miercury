@@ -25,7 +25,7 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     position: absolute;
     display: none; 
     flex-direction: column;
-    background-color: rgb(15, 15, 18);
+    background-color: rgba(15, 15, 18, 0.7);
     color: white;
     padding: 10px;
     border-radius: 5px;
