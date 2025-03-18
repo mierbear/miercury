@@ -69,7 +69,7 @@ window.addEventListener('scroll', function() {
         bg.style.backgroundColor = `rgb(44, 44, 52)`;
         arrows.style.color = `rgb(158, 169, 176)`;
     } else {
-        bg.style.backgroundColor = `rgb(17, 17, 18)`;
+        bg.style.backgroundColor = `rgb(24, 25, 29)`;
         arrows.style.color = `rgb(211, 211, 211)`;
     }
 });

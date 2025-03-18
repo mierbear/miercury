@@ -101,7 +101,7 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     justify-content: center;
     align-items: center;
     z-index: 10;
-    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.182), transparent);
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
     height: 60vh;
     width: 70%;
     border-radius: 1%;
