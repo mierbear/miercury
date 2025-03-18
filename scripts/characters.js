@@ -37,6 +37,7 @@ const mierImg = document.querySelector(`.mier-img`);
 
 let mierPeek = true;
 let mierInc = 1;
+let mierSwitchCount = 0;
 
 const mierNames = [`Mier Boreas`, `Mier`, `Mier Morozov`];
 const mierBios = [`The Weakest Ice Mage`, `The one who guides. Be not afraid!`, `The Tyrant of Pacific Purgatory`];
@@ -54,7 +55,7 @@ const mierDescs = [
     <br>
     (i may have same hair syndrome..)`,
     // TYRANT
-    `Made as the captain of <span class="pp">Pacific Purgatory (?)</span>,<br>
+    `Made as the captain of <span class="pp">Pacific Purgatory(?)</span>,<br>
     an art community I grew since the May of 2023.<br>
     He has a deep seated hatred for furries and nsfw artists. (just like me)<br>
     <br>
@@ -93,6 +94,17 @@ const patMier = () => {
         mierAngelImg.src = `./assets/characters/mierangel2.png`;
     }, 400);
 };
+
+const mierCount = () => {
+    mierSwitchCount++;
+    if (mierSwitchCount === 2) {
+        mierWhy.style.display = `block`;
+        mierWhy.style.animation = `fade-in 3s ease`;
+        setTimeout(() => {
+            mierWhy.style.opacity = `1`
+        }, 3000);
+    }
+}
 
 const leaveAngel = () => {
     mierAngelImg.style.animation = `mier-popdown 1.5s ease`;
@@ -148,7 +160,7 @@ mierangel.addEventListener(`click`, function() {
     if (!mierangel.classList.contains(`current-mier`)) {
         fadeOut();
         setMierStyles(mierangel);
-
+        mierCount();
         const newSrc = `./assets/characters/mierangelalt.png`;
         preloadImage(newSrc, () => {
             setTimeout(() => {
@@ -166,7 +178,7 @@ miertyrant.addEventListener(`click`, function() {
     if (!miertyrant.classList.contains(`current-mier`)) {
         fadeOut();
         setMierStyles(miertyrant);
-
+        mierCount();
         const newSrc = `./assets/characters/miertyrant.png`;
         preloadImage(newSrc, () => {
             setTimeout(() => {
@@ -210,7 +222,7 @@ miericemage.addEventListener(`click`, function() {
     if (!miericemage.classList.contains(`current-mier`)) {
         fadeOut();
         setMierStyles(miericemage);
-
+        mierCount();
         const newSrc = `./assets/characters/miericemage.png`;
         preloadImage(newSrc, () => {
             setTimeout(() => {
@@ -233,6 +245,26 @@ miericemage.addEventListener(`click`, function() {
     }
 });
 
+const mierWhy = document.querySelector('.mier-why');
+const mierWhyInfo = document.querySelector('.mier-why-info');
+
+mierWhy.addEventListener('mouseenter', () => {
+    mierWhyInfo.style.display = 'flex';
+});
+
+mierWhy.addEventListener('mousemove', (event) => {
+    const tooltipWidth = mierWhyInfo.offsetWidth;
+    const tooltipHeight = mierWhyInfo.offsetHeight;
+    mierWhyInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
+    mierWhyInfo.style.top = `${event.pageY - tooltipHeight}px`;
+});
+
+// ${event.pageX - tooltipWidth / 2}px`;
+// brotherInfo.style.top = `${event.pageY - tooltipHeight}px`;
+
+mierWhy.addEventListener('mouseleave', () => {
+    mierWhyInfo.style.display = 'none';
+});
 
 // SCROLL LISTENER
 
@@ -255,19 +287,19 @@ window.addEventListener('scroll', function() {
 
     if (scrolledPercentage >= 0 && scrolledPercentage < 20) {
         bg.style.backgroundColor = `rgb(12, 12, 13)`;
-        arrows.style.color = `rgb(119, 172, 192)`;
+        arrows.style.color = `rgb(191, 201, 201)`;
     } else if (scrolledPercentage >= 20 && scrolledPercentage < 40) {
         bg.style.backgroundColor = `rgb(20, 20, 41)`;
         arrows.style.color = `rgb(42, 42, 55)`;
     } else if (scrolledPercentage >= 40 && scrolledPercentage < 60) {
         bg.style.backgroundColor = `rgb(45, 29, 29)`;
-        arrows.style.color = `rgb(125, 23, 23)`;
+        arrows.style.color = `rgb(125, 69, 69)`;
     } else if (scrolledPercentage >= 60 && scrolledPercentage < 80) {
         bg.style.backgroundColor = `rgb(44, 44, 52)`;
-        arrows.style.color = `rgb(14, 14, 21)`;
-    } else if (scrolledPercentage >= 80 && scrolledPercentage <= 100) {
+        arrows.style.color = `rgb(158, 169, 176)`;
+    } else {
         bg.style.backgroundColor = `rgb(12, 12, 13)`;
-        arrows.style.color = `rgb(167, 167, 146)`;
+        arrows.style.color = `rgb(211, 211, 211)`;
     }
 });
 
@@ -332,7 +364,7 @@ skullBrothers.forEach(({ id, info, img, column }) => {
     brother.addEventListener(`mouseleave`, () => {
         brotherInfo.style.display = `none`;
         brotherImg.style.transform = `translateY(23%)`;
-        if (id === `rufus` || id === `ignatius`) {
+        if (id === `rufus`) {
             brotherImg.style.zIndex = `2`;
         } else {
             brotherImg.style.zIndex = `1`;

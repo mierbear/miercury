@@ -32,7 +32,7 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     min-width: 20vw;
     max-width: 25vw;
     pointer-events: none;
-    z-index: 100;
+    z-index: 10000;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -117,7 +117,7 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     height: 110vh;
     grid-template-columns: 1fr .6fr 1fr 1fr;
     overflow: hidden;
-    transition: all 1s ease;
+    transition: all 2s ease;
 }
 
 .brother {
@@ -131,19 +131,35 @@ p, h1, h2, h3, h4, h5, h6, .pp {
 
 .skulls img {
     position: absolute;
-    width: 40vw;
+    width: 38vw;
     transform: translateY(23%);
     transition: all 1.3s ease;
 }
 
-.rufus-img,
-.ignatius-img {
-    z-index: 2;
+.rufus-img {
+    z-index: 3;
 }
 
+.ignatius-img,
 .aurelius-img,
 .brutus-img {
     z-index: 1;
+}
+
+.aurelius-info {
+    background-color: rgba(117, 162, 172, 0.8);
+}
+
+.rufus-info {
+    background-color: rgba(102, 132, 77, 0.8);
+}
+
+.ignatius-info {
+    background-color: rgba(121, 112, 84, 0.8);
+}
+
+.brutus-info {
+    background-color: rgba(86, 97, 115, 0.8);
 }
 
 /* MIER */
@@ -205,10 +221,33 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     padding-right: 5%;
 }
 
+.mier-why {
+    display: none;
+    position: absolute;
+    bottom: 12%;
+    text-decoration: underline;
+    color: #ffffff6f;
+    opacity: 0;
+}
+
+.mier-why:hover {
+    cursor: pointer;
+}
+
+
+/* QUINCE */
+
+.quince-img {
+    height: 90vh;
+    padding-right: 8%;
+    transition: all 2s ease;
+}
+
+
 /* ARROWS */
 
 .arrows {
-    color: rgb(119, 172, 192);
+    color: rgb(191, 201, 201);
 }
 
 .arrow-left,
@@ -243,7 +282,7 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #0000006a;
+    background-color: #0000007c;
     color: rgb(255, 255, 255);
     margin-top: auto;
     position: fixed;
