@@ -69,6 +69,7 @@ const aurelius = document.querySelector(`.aurelius`);
 const rufus = document.querySelector(`.rufus`);
 const ignatius = document.querySelector(`.ignatius`);
 const brutus = document.querySelector(`.brutus`);
+const brother = document.querySelectorAll(`.brother`);
 
 const aureliusImg = document.querySelector(`.aurelius-img`);
 const rufusImg = document.querySelector(`.rufus-img`);
@@ -80,84 +81,61 @@ const rufusInfo = document.querySelector(`.rufus-info`);
 const ignatiusInfo = document.querySelector(`.ignatius-info`);
 const brutusInfo = document.querySelector(`.brutus-info`);
 
+const skullBrothers = [
+    {
+        id: `aurelius`,
+        info: `aureliusInfo`,
+        img: `aureliusImg`,
+        column: `2fr 1fr 1fr 1fr`,
+    },
+    {
+        id: `rufus`,
+        info: `rufusInfo`,
+        img: `rufusImg`,
+        column: `1fr 2fr 1fr 1fr`,
+    },
+    {
+        id: `ignatius`,
+        info: `ignatiusInfo`,
+        img: `ignatiusImg`,
+        column: `1fr 1fr 2fr 1fr`,
+    },
+    {
+        id: `brutus`,
+        info: `brutusInfo`,
+        img: `brutusImg`,
+        column: `1fr 1fr 1fr 2fr`,
+    },
+];
 
-// PLEASE FIND A WAY TO MAKE THIS DRY X_X T_T
+skullBrothers.forEach(({ id, info, img, column }) => {
+    const brother = document.getElementById(id);
+    const brotherInfo = document.getElementById(info);
+    const brotherImg = document.getElementById(img);
 
-aurelius.addEventListener(`mouseenter`, () => {
-    aureliusInfo.style.display = 'flex';
-    aureliusImg.style.transform = `translateY(20%)`;
-    skulls.style.gridTemplateColumns = `2fr 1fr 1fr 1fr`;
+    brother.addEventListener(`mouseenter`, () => {
+        brotherInfo.style.display = `flex`;
+        brotherImg.style.transform = `translateY(20%)`;
+        brotherImg.style.zIndex = `99`;
+        skulls.style.gridTemplateColumns = column; 
+    });
+
+    brother.addEventListener(`mouseleave`, () => {
+        brotherInfo.style.display = `none`;
+        brotherImg.style.transform = `translateY(23%)`;
+        brotherImg.style.zIndex = `1`;
+        skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
+    });
+
+    brother.addEventListener(`mousemove`, (event) => {
+        const tooltipWidth = brotherInfo.offsetWidth;
+        const tooltipHeight = brotherInfo.offsetHeight;
+        brotherInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
+        brotherInfo.style.top = `${event.pageY - tooltipHeight}px`;
+    });
 });
 
-aurelius.addEventListener('mousemove', (event) => {
-    const tooltipWidth = aureliusInfo.offsetWidth;
-    const tooltipHeight = aureliusInfo.offsetHeight;
-    aureliusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
-    aureliusInfo.style.top = `${event.pageY - tooltipHeight}px`;
-});
-
-aurelius.addEventListener(`mouseleave`, () => {
-    aureliusInfo.style.display = 'none';
-    aureliusImg.style.transform = `translateY(23%)`;
-    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
-});
-
-rufus.addEventListener(`mouseenter`, () => {
-    rufusInfo.style.display = 'flex';
-    rufusImg.style.transform = `translateY(20%)`;
-    skulls.style.gridTemplateColumns = `1fr 2fr 1fr 1fr`;
-});
-
-rufus.addEventListener('mousemove', (event) => {
-    const tooltipWidth = rufusInfo.offsetWidth;
-    const tooltipHeight = rufusInfo.offsetHeight;
-    rufusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
-    rufusInfo.style.top = `${event.pageY - tooltipHeight}px`;
-});
-
-rufus.addEventListener(`mouseleave`, () => {
-    rufusInfo.style.display = 'none';
-    rufusImg.style.transform = `translateY(23%)`;
-    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
-});
-
-ignatius.addEventListener(`mouseenter`, () => {
-    ignatiusInfo.style.display = 'flex';
-    ignatiusImg.style.transform = `translateY(20%)`;
-    skulls.style.gridTemplateColumns = `1fr 1fr 2fr 1fr`;
-});
-
-ignatius.addEventListener('mousemove', (event) => {
-    const tooltipWidth = ignatiusInfo.offsetWidth;
-    const tooltipHeight = ignatiusInfo.offsetHeight;
-    ignatiusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
-    ignatiusInfo.style.top = `${event.pageY - tooltipHeight}px`;
-});
-
-ignatius.addEventListener(`mouseleave`, () => {
-    ignatiusInfo.style.display = 'none';
-    ignatiusImg.style.transform = `translateY(23%)`;
-    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
-});
-
-brutus.addEventListener(`mouseenter`, () => {
-    brutusInfo.style.display = 'flex';
-    brutusImg.style.transform = `translateY(20%)`;
-    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 2fr`;
-});
-
-brutus.addEventListener('mousemove', (event) => {
-    const tooltipWidth = brutusInfo.offsetWidth;
-    const tooltipHeight = brutusInfo.offsetHeight;
-    brutusInfo.style.left = `${event.pageX - tooltipWidth / 2}px`;
-    brutusInfo.style.top = `${event.pageY - tooltipHeight}px`;
-});
-
-brutus.addEventListener(`mouseleave`, () => {
-    brutusInfo.style.display = 'none';
-    brutusImg.style.transform = `translateY(23%)`;
-    skulls.style.gridTemplateColumns = `1fr 1fr 1fr 1fr`;
-});
+// TOOLTIP CODE
 
 // pp.addEventListener('mouseenter', () => {
 //     ppInfo.style.display = 'flex';

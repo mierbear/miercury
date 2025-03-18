@@ -90,9 +90,9 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     align-items: center;
     padding: 0;
     margin: 0;
-    /* height: 100vh; */
     background-color: rgba(0, 0, 0, 0);
-    overflow: hidden;
+    /* height: 100vh; */
+    /* overflow: hidden; */
 }
 
 .container .info {
