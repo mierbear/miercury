@@ -320,6 +320,7 @@ p, h1, h2, h3, h4, h5, h6, .pp {
     padding: 5px 10px;
     margin: 5px;
     margin-bottom: 0px;
+    margin-top: 0px;
     border-radius: 5px;
     background-color: #00000000;
     color: rgb(255, 255, 255);

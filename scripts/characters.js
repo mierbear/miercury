@@ -60,7 +60,7 @@ window.addEventListener('scroll', function() {
         bg.style.backgroundColor = `rgb(15, 15, 18)`;
         arrows.style.color = `rgb(191, 201, 201)`;
     } else if (scrolledPercentage >= 20 && scrolledPercentage < 40) {
-        bg.style.backgroundColor = `rgb(60, 81, 109)`;
+        bg.style.backgroundColor = `rgb(37, 55, 79)`;
         arrows.style.color = `rgb(68, 119, 169)`;
     } else if (scrolledPercentage >= 40 && scrolledPercentage < 60) {
         bg.style.backgroundColor = `rgb(45, 29, 29)`;
