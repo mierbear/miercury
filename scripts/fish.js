@@ -2,6 +2,7 @@
 
 const sec = 1000;
 
+const img = document.querySelector(`.img`);
 const playBtn = document.querySelector(`.play`);
 const keysDiv = document.querySelector(`.keys`);
 const timer = document.querySelector(`.timer`);
@@ -10,6 +11,7 @@ const keys = [`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `W`, `A`, `S`, 
 
 let firstKeyInput;
 let timerID;
+let timeOriginal;
 let timeRemaining;
 let timerActive = false;
 let start = false;
@@ -52,22 +54,46 @@ const startRound = (level) => {
 }
 
 
+
 const startTimer = (time) => {
     timerActive = true;
+    timeOriginal = time;
     timeRemaining = Number(time);
     timerText.textContent = `${timeRemaining}`;
     timer.style.opacity = `1`;
+    keysDiv.style.opacity = `1`;
+    timer.style.backgroundColor = `black`;
+
+    updateTimerBar();
 
     timerID = setInterval(() => {
         if (timeRemaining > 0 && timerActive) {
             timeRemaining--;
             timerText.textContent = `${timeRemaining}`;
+            updateTimerBar();
+            if (timeRemaining == 3) {
+                timer.style.backgroundColor = `rgb(94, 7, 7)`;
+            } else if (timeRemaining == 2) {
+                timer.style.backgroundColor = `rgb(183, 10, 10)`;
+            } else if (timeRemaining == 1) {
+                timer.style.backgroundColor = `red`;
+            }
+        // LOSE
         } else {
             stopTimer();
             console.log(`you lose!`);
             timer.style.opacity = `0`;
+            keysDiv.style.opacity = `0`;
+            inputPlayer = [];
+            inputGame = [];
+            keysDiv.innerHTML = ``;
         }
     }, 1000);
+};
+
+const updateTimerBar = () => {
+    const percentage = (timeRemaining / timeOriginal) * 50;
+    timer.style.width = `${percentage}%`;
 };
 
 const stopTimer = () => {
@@ -79,18 +105,20 @@ const startFishing = (l, r, time) => {
     level = l;
     rounds = r;
     currentRound = 0;
+    img.src = `./assets/fish/mierfishing.png`;
+    
 
     startRound(level);
     startTimer(time);
-    timer.style.animation = `timer ${time}s`;
 
+    const keyFirst = document.querySelector(`.keys img`);
     firstKeyInput = document.querySelector(`.keys img`).src.split(`/`).pop().split(`.`).shift();
-    const firstKey = document.querySelector(`.keys img`);
-    firstKey.style.transform = `scale(1.2)`;
     console.log("First key set to:", firstKeyInput);
+    keyFirst.style.transform = `scale(1.2)`;
 };
 
 const handleKeyPress = (event) => {
+    const keyAll = document.querySelectorAll(`.keys img`);
     console.log(event.key);
 
     // WRONG KEY
@@ -98,6 +126,11 @@ const handleKeyPress = (event) => {
         console.log(`wrong!`);
         timeRemaining--;
         timerText.textContent = `${timeRemaining}`;
+        updateTimerBar();
+        keysDiv.style.animation = `wrong .1s ease-in-out`;
+        setTimeout(() => {
+            keysDiv.style.animation = `none`;
+        }, 100);
     }
 
     // RIGHT KEY
@@ -118,28 +151,23 @@ const handleKeyPress = (event) => {
             if (currentRound !== rounds) {
                 startRound(level); 
                 timer.style.width = `50%`;
-                timer.style.animation = `none`;
                 stopTimer();
                 startTimer(timeRemaining + 3);
-
-                setTimeout(() => {
-                    timer.style.animation = `timer ${timeRemaining}s`;
-                }, 0);
             // WIN LEVEL
             } else { 
                 stopTimer();
-                timer.style.animation = `none`;
                 setTimeout(() => {
                     timer.style.opacity = `0`;
                 }, 500);
                 console.log(`you win!!`);
+                img.src = `./assets/fish/mierfishingwin.png`;
             }
         }
 
         if (inputPlayer.length !== inputGame.length) {
             firstKeyInput = document.querySelector(`.keys img`).src.split(`/`).pop().split(`.`).shift();
-            const firstKey = document.querySelector(`.keys img`);
-            firstKey.style.transform = `scale(1.2)`;
+            const keyFirst = document.querySelector(`.keys img`);
+            keyFirst.style.transform = `scale(1.2)`;
         }
     }
 };
@@ -151,5 +179,7 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 playBtn.addEventListener(`click`, () => {
+    if (timerActive) { return }
     startFishing(6, 5, 8);
+    // startFishing(1, 2, 20);
 });

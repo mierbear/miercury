@@ -23,15 +23,16 @@ body {
     background-color: aliceblue;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .play {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    font-size: 200px;
+    font-size: 130px;
 }
 
 .bottom {
@@ -56,12 +57,15 @@ body {
 } */
 
 .keys {
+    margin-top: 5%;
     display: flex;
-    gap: 2%;
+    gap: 1%;
     justify-content: center;
     align-items: center;
     width: 100%;
+    z-index: 15;
     transition: all 0.5s ease;
+    opacity: 0;
 }
 
 .key-item {
@@ -74,7 +78,7 @@ body {
 
 .keys img {
     position: relative;
-    width: 7%;
+    width: 6%;
     z-index: 15;
     transition: all 0.5s ease;
 }
@@ -83,23 +87,36 @@ body {
     margin-top: 2%;
     z-index: 15;
     background-color: black;
-    width: 0%;
+    width: 50%;
     border-radius: 5px;
-    transition: all 3s ease;
-    /* font-size: 0; */
+    transition: all 2s;
     color: white;
     height: 5%;
+    display: flex;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .water {
     position: absolute;
-    top: 70%;
+    top: 80%;
     left: 0;
     max-width: 100vw;
     z-index: 10;
     object-fit: fill;
     transform: scale(1.2);
     animation: waves 5s ease-in-out infinite;
+}
+
+.img {
+    position: absolute;
+    bottom: -15%;
+    right: -15%;
+    max-height: 90vh;
+    z-index: 9;
+    object-fit: fill;
+    pointer-events: none;
 }
 
 @keyframes waves {
@@ -124,14 +141,24 @@ body {
     }
 }
 
-@keyframes timer {
+@keyframes wrong {
     0% {
-        width: 50%;
-        background-color: black;
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(8px, -6px);
+    }
+
+    50% {
+        transform: translate(-7px, 7px);
+    }
+
+    75% {
+        transform: translate(6px, -8px);
     }
 
     100% {
-        width: 0%;
-        background-color: red;
+        transform: translate(0, 0);
     }
 }
