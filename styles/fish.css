@@ -113,11 +113,12 @@ body {
 .mier-img {
     position: absolute;
     /* bottom: -15%; */
-    right: 0%;
+    right: -5%;
     max-height: 100vh;
     z-index: 9;
     object-fit: fill;
     pointer-events: none;
+    transition: all .5s ease;
 }
 
 @keyframes waves {

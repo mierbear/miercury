@@ -2,7 +2,7 @@
 
 const sec = 1000;
 
-const img = document.querySelector(`.img`);
+const mierImg = document.querySelector(`.mier-img`);
 const playBtn = document.querySelector(`.play`);
 const keysDiv = document.querySelector(`.keys`);
 const timer = document.querySelector(`.timer`);
@@ -22,6 +22,8 @@ let currentRound;
 let rounds;
 let level;
 let extraLife = true;
+let mierState = 0;
+let mierSlide = 0;
 
 const randomizer = (arr) => {
     return Math.trunc((Math.random() * arr.length));
@@ -32,6 +34,15 @@ const addKeys = (count) => {
         inputGame.push(keys[randomizer(keys)]);
     }
 };
+
+const setMier = () => {
+    if (mierState < 7) { mierState++ }
+    mierImg.src = `./assets/fish/mier-${mierState}.png`;
+    if (mierState > 3) {
+        mierSlide += -15;
+        mierImg.style.transform = `translateX(${mierSlide}px)`
+    }
+}
 
 
 
@@ -114,7 +125,9 @@ const startFishing = (l, r, time) => {
     level = l;
     rounds = r;
     currentRound = 0;
-    img.src = `./assets/fish/mierfishing.png`;
+    mierSlide = 0;
+    mierState = 2;
+    mierImg.src = `./assets/fish/mier-2.png`;
     
 
     startRound(level);
@@ -156,6 +169,7 @@ const handleKeyPress = (event) => {
             currentRound++;
             inputPlayer = [];
             inputGame = [];
+            setMier();
 
             if (currentRound !== rounds) {
                 startRound(level); 
@@ -169,7 +183,8 @@ const handleKeyPress = (event) => {
                     timer.style.opacity = `0`;
                 }, 500);
                 console.log(`you win!!`);
-                img.src = `./assets/fish/mierfishingwin.png`;
+                mierImg.style.transform = `none`;
+                mierImg.src = `./assets/fish/mier-8.png`;
             }
         }
 
@@ -189,6 +204,13 @@ document.addEventListener(`keydown`, (event) => {
 
 playBtn.addEventListener(`click`, () => {
     if (timerActive) { return }
-    startFishing(6, 5, 8);
+    mierImg.src = `./assets/fish/mier-0.png`
+    setTimeout(() => {
+        mierImg.src = `./assets/fish/mier-1.png`
+        setTimeout(() => {
+            startFishing(1, 10, 8);
+        }, 1000);
+    // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
+    }, 0);
     // startFishing(1, 2, 20);
 });
