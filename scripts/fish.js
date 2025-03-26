@@ -21,6 +21,7 @@ let inputGame = [];
 let currentRound;
 let rounds;
 let level;
+let extraLife = true;
 
 const randomizer = (arr) => {
     return Math.trunc((Math.random() * arr.length));
@@ -68,31 +69,39 @@ const startTimer = (time) => {
 
     timerID = setInterval(() => {
         if (timeRemaining > 0 && timerActive) {
-            timeRemaining--;
-            timerText.textContent = `${timeRemaining}`;
+            timeRemaining -= .01;
+            timerText.textContent = `${Math.trunc(timeRemaining)}`;
             updateTimerBar();
-            if (timeRemaining == 3) {
+            if (timeRemaining < 4 && timeRemaining > 3) {
                 timer.style.backgroundColor = `rgb(94, 7, 7)`;
-            } else if (timeRemaining == 2) {
+            } else if (timeRemaining < 3 && timeRemaining > 2) {
                 timer.style.backgroundColor = `rgb(183, 10, 10)`;
-            } else if (timeRemaining == 1) {
+            } else if (timeRemaining < 2 && timeRemaining >= 0) {
                 timer.style.backgroundColor = `red`;
             }
         // LOSE
-        } else {
-            stopTimer();
-            console.log(`you lose!`);
-            timer.style.opacity = `0`;
-            keysDiv.style.opacity = `0`;
-            inputPlayer = [];
-            inputGame = [];
-            keysDiv.innerHTML = ``;
+        } else if (timeRemaining <= 0) {
+            if (extraLife) {
+                timeRemaining += 10
+                extraLife = false;
+                timer.style.backgroundColor = `black`;
+            } else {
+                stopTimer();
+                console.log(`you lose!`);
+                timer.style.opacity = `0`;
+                keysDiv.style.opacity = `0`;
+                inputPlayer = [];
+                inputGame = [];
+                setTimeout(() => {
+                    keysDiv.innerHTML = ``;
+                }, 1000);
+            }
         }
-    }, 1000);
+    }, 10);
 };
 
 const updateTimerBar = () => {
-    const percentage = (timeRemaining / timeOriginal) * 50;
+    const percentage = (Math.trunc(timeRemaining) / timeOriginal) * 50;
     timer.style.width = `${percentage}%`;
 };
 
@@ -125,7 +134,7 @@ const handleKeyPress = (event) => {
     if (event.key !== firstKeyInput && event.key !== firstKeyInput.toLowerCase()) {
         console.log(`wrong!`);
         timeRemaining--;
-        timerText.textContent = `${timeRemaining}`;
+        timerText.textContent = `${Math.trunc(timeRemaining)}`;
         updateTimerBar();
         keysDiv.style.animation = `wrong .1s ease-in-out`;
         setTimeout(() => {

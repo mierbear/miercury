@@ -109,11 +109,12 @@ body {
     animation: waves 5s ease-in-out infinite;
 }
 
-.img {
+.platform-img,
+.mier-img {
     position: absolute;
-    bottom: -15%;
-    right: -15%;
-    max-height: 90vh;
+    /* bottom: -15%; */
+    right: 0%;
+    max-height: 100vh;
     z-index: 9;
     object-fit: fill;
     pointer-events: none;
