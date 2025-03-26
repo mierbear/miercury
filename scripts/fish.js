@@ -2,16 +2,13 @@
 
 const sec = 1000;
 
-const settingsBtn = document.querySelector(`.settings-btn`);
 const catalogBtn = document.querySelector(`.catalog-btn`);
-const settings = document.querySelector(`.settings`);
 const catalog = document.querySelector(`.catalog`);
 const catalogInfo = document.querySelector(`.fish-info`);
 const x = document.querySelector(`.x`);
 
 let catalogShow = false;
 let catalogInfoShow = false;
-let settingsShow = false;
 
 const fishAll = document.querySelectorAll(`.fish`);
 const infoImg = document.querySelector(`.info-img`);
@@ -40,7 +37,7 @@ let currentFish = [];
 let currentRound;
 let rounds;
 let level;
-let extraLife = true;
+let extraLife = false;
 let mierState = 0;
 let mierSlide = 0;
 
@@ -63,7 +60,21 @@ const setMier = () => {
     }
 }
 
+const playBtnAppear = () => {
+    playBtn.style.pointerEvents = `all`;
+    playBtn.style.display = `flex`;
+    setTimeout(() => {
+        playBtn.style.opacity = `1`;
+    }, 1000);
+}
 
+const playBtnDisappear = () => {
+    playBtn.style.pointerEvents = `none`;
+    playBtn.style.opacity = `0`;
+    setTimeout(() => {
+        playBtn.style.display = `none`;
+    }, 2000);
+}
 
 const startRound = (level) => {
     if (level === 1) {
@@ -123,9 +134,12 @@ const startTimer = (time) => {
                 currentFish = [];
                 inputPlayer = [];
                 inputGame = [];
+                mierImg.src = `./assets/fish/mier-9.png`
                 setTimeout(() => {
                     keysDiv.innerHTML = ``;
                 }, 1000);
+                playBtn.textContent = `fish...`;
+                playBtnAppear();
             }
         }
     }, 10);
@@ -202,10 +216,12 @@ const handleKeyPress = (event) => {
                 setTimeout(() => {
                     timer.style.opacity = `0`;
                 }, 500);
+                playBtn.textContent = `fish!!!`;
+                playBtnAppear();
                 console.log(`you win!!`);
                 mierImg.style.transform = `none`;
                 mierImg.src = `./assets/fish/mier-8.png`;
-                const cf = document.querySelector(`.${currentFish[0]}`); //abri
+                const cf = document.querySelector(`.${currentFish[0]}`);
                 const cfImg = cf.querySelector(`img`);
                 cf.classList.add(`unlocked`);
                 cfImg.src = `./assets/fish/placeholder.png`;
@@ -229,10 +245,11 @@ document.addEventListener(`keydown`, (event) => {
 playBtn.addEventListener(`click`, () => {
     if (timerActive) { return }
     mierImg.src = `./assets/fish/mier-0.png`
+    playBtnDisappear();
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
         setTimeout(() => {
-            startFishing(1, 2, 8, `abri`);
+            startFishing(1, 8, 8, `abri`);
         }, 1000);
     // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     }, 0);
@@ -422,3 +439,53 @@ const fishObjects = [
     desc: `Telescope fish are deep-sea predators with tubular eyes that allow them to detect bioluminescent prey. Unlike most fish, their eyes point forward rather than to the sides, giving them an excellent depth perception in the darkness of the deep ocean. They can expand their jaws to swallow prey whole, even those larger than themselves. Fun Fact: Telescope fish can rotate their eyes to look upward while swimming horizontally, helping them spot prey above them.`,
 },
 ];
+
+const musicBtn = document.querySelector(`.music`);
+const sfxBtn = document.querySelector(`.sfx`);
+let music = true;
+let sfx = true;
+
+musicBtn.addEventListener(`click`, () => {
+    if (music) {
+        musicBtn.src = `./assets/fish/musicnone.png`;
+        music = false;
+    } else {
+        musicBtn.src = `./assets/fish/music.png`;
+        music = true;
+    }
+});
+
+sfxBtn.addEventListener(`click`, () => {
+    if (sfx) {
+        sfxBtn.src = `./assets/fish/soundnone.png`;
+        sfx = false;
+    } else {
+        sfxBtn.src = `./assets/fish/sound.png`;
+        sfx = true;
+    }
+});
+
+const x2 = document.querySelector(`.x2`);
+const settingsBtn = document.querySelector(`.settings-btn`);
+const settings = document.querySelector(`.settings-container`);
+let settingsShow = false;
+
+settingsBtn.addEventListener(`click`, () => {
+    if (settingsShow) {
+        settings.style.display = `none`;
+        settingsShow = false;
+    } else {
+        settings.style.display = `flex`;
+        settingsShow = true;
+    }
+});
+
+x2.addEventListener(`click`, () => {
+    if (settingsShow) {
+        settings.style.display = `none`;
+        settingsShow = false;
+    } else {
+        settings.style.display = `flex`;
+        settingsShow = true;
+    }
+});

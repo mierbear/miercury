@@ -33,7 +33,8 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 130px;
-    transition: all 0.5s ease;
+    transition: all 2s ease;
+    font-family: "Outfit", sans-serif;
 }
 
 .play:hover {
@@ -134,7 +135,6 @@ body {
 .catalog {
     display: none;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     position: fixed;
     width: 100vw;
@@ -213,17 +213,45 @@ body {
     max-height: 30vh;
 }
 
-.x {
+.x,
+.x2 {
     position: absolute;
     right: 9px;
     top: 0;
     transition: all .2s ease;
 }
 
-.x:hover {
+.x:hover,
+.x2:hover {
     cursor: pointer;
     transform: scale(1.2);
     color: red;
+}
+
+.settings-container {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    gap: 5%;
+    z-index: 120;
+    width: 40vw;
+    height: 40vh;
+    pointer-events: all;
+    background-color: rgb(207, 211, 215);
 }
 
 .menu {
@@ -244,6 +272,29 @@ body {
 .menu img:hover {
     cursor: pointer;
     transform: scale(1.1);
+}
+
+.audio img {
+    width: 7vw;
+    transition: all .5s ease;
+}
+
+.audio img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.unlock-button {
+    border: none;
+    border-radius: 5px;
+    transition: all 1s ease;
+    padding: 5px;
+    font-size: large;
+    cursor: pointer;
+}
+
+.unlock-button:hover {
+    transform: scale(1.4);
 }
 
 @keyframes waves {
