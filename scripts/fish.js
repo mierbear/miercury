@@ -2,6 +2,19 @@
 
 const sec = 1000;
 
+const settingsBtn = document.querySelector(`.settings-btn`);
+const catalogBtn = document.querySelector(`.catalog-btn`);
+const settings = document.querySelector(`.settings`);
+const catalog = document.querySelector(`.catalog`);
+const catalogInfo = document.querySelector(`.fish-info`);
+const x = document.querySelector(`.x`);
+
+let catalogShow = false;
+let catalogInfoShow = false;
+let settingsShow = false;
+
+const fishAll = document.querySelectorAll(`.fish`);
+
 const mierImg = document.querySelector(`.mier-img`);
 const playBtn = document.querySelector(`.play`);
 const keysDiv = document.querySelector(`.keys`);
@@ -26,12 +39,12 @@ let mierState = 0;
 let mierSlide = 0;
 
 const randomizer = (arr) => {
-    return Math.trunc((Math.random() * arr.length));
+    return arr[Math.trunc((Math.random() * arr.length))];
 };
 
 const addKeys = (count) => {
     for (let i = 0; i < count; i++) {
-        inputGame.push(keys[randomizer(keys)]);
+        inputGame.push(randomizer(keys));
     }
 };
 
@@ -71,7 +84,7 @@ const startTimer = (time) => {
     timerActive = true;
     timeOriginal = time;
     timeRemaining = Number(time);
-    timerText.textContent = `${timeRemaining}`;
+    timerText.textContent = `${Math.trunc(timeRemaining)}`;
     timer.style.opacity = `1`;
     keysDiv.style.opacity = `1`;
     timer.style.backgroundColor = `black`;
@@ -208,9 +221,41 @@ playBtn.addEventListener(`click`, () => {
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
         setTimeout(() => {
-            startFishing(1, 10, 8);
+            startFishing(1, 7, 8);
         }, 1000);
     // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     }, 0);
     // startFishing(1, 2, 20);
 });
+
+catalogBtn.addEventListener(`click`, () => {
+    if (catalogShow) {
+        catalog.style.display = `none`;
+        catalogShow = false;
+    } else {
+        catalog.style.display = `flex`;
+        catalogShow = true;
+    }
+});
+
+x.addEventListener(`click`, () => {
+    if (catalogInfoShow) {
+        catalogInfo.style.display = `none`;
+        catalogInfoShow = false;
+    } else {
+        catalogInfo.style.display = `flex`;
+        catalogInfoShow = true;
+    }
+});
+
+fishAll.forEach((fish) => {
+    fish.addEventListener(`click`, () => {
+        if (catalogInfoShow) {
+            catalogInfo.style.display = `none`;
+            catalogInfoShow = false;
+        } else {
+            catalogInfo.style.display = `flex`;
+            catalogInfoShow = true;
+        }
+    })
+})
