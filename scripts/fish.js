@@ -225,6 +225,7 @@ const handleKeyPress = (event) => {
                 const cfImg = cf.querySelector(`img`);
                 cf.classList.add(`unlocked`);
                 cfImg.src = `./assets/fish/placeholder.png`;
+                unlockFish(currentFish);
             }
         }
 
@@ -249,7 +250,7 @@ playBtn.addEventListener(`click`, () => {
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
         setTimeout(() => {
-            startFishing(1, 8, 8, `abri`);
+            startFishing(1, 2, 8, `abri`);
         }, 1000);
     // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     }, 0);
@@ -379,6 +380,12 @@ const fishObjects = [
     desc: `The Flapjack octopus is a deep-sea cephalopod known for its soft, gelatinous body and adorable, cartoonish appearance. It belongs to the umbrella octopus family, meaning it has a web of skin connecting its arms, allowing it to spread out like a parachute when gliding through the water. Unlike more active hunters, the Flapjack octopus is a passive ambush predator, hovering just above the ocean floor and using its webbed arms to trap small crustaceans and other invertebrates. This species resides at depths of 500 to 1,500 meters (1,600–4,900 feet), where the pressure is immense, and light is scarce. Fun Fact: The Flapjack octopus served as inspiration for the popular Pokémon character Omanyte and also resembles the animated character Pearl from Finding Nemo!`,
 },
 {
+    img: `./assets/fish/widowImg.png`,
+    h: `Axolotl (Widow)`,
+    sh: `Ambystoma Mexicanum`,
+    desc: `The axolotl is a neotenic salamander, meaning it retains its larval features throughout its life instead of undergoing metamorphosis. Native to lakes in Mexico, it has remarkable regenerative abilities, capable of regrowing limbs, spinal cords, and even parts of its heart and brain. Due to habitat destruction and pollution, axolotls are critically endangered in the wild. Fun Fact: Unlike most amphibians, axolotls remain aquatic their entire lives, never developing functional lungs like their relatives.`
+},
+{
     img: `./assets/fish/bongliImg.png`,
     h: `Blobfish ([the])`,
     sh: `Psychrolutes Marcidus`,
@@ -489,3 +496,52 @@ x2.addEventListener(`click`, () => {
         settingsShow = true;
     }
 });
+
+const unlockFish = (fish) => {
+    const fishEl = document.querySelector(`.fish.${fish}`);
+    fishEl.classList.add(`unlocked`);
+    let unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+    if (!unlockedFish.includes(fish)) {
+        unlockedFish.push(fish);
+    }
+    localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
+};
+
+const loadProgress = () => {
+    const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+
+    unlockedFish.forEach((fish) => {
+        const fishEl = document.querySelector(`.fish.${fish}`);
+        if (fishEl) {
+            fishEl.classList.add(`unlocked`);
+        }
+    });
+};
+
+const unlockBtn = document.querySelector(`.unlock-button`);
+
+unlockBtn.addEventListener(`click`, () => {
+    let unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+
+    fishAll.forEach((fish) => {
+        fish.classList.add(`unlocked`);
+
+        const fishIdentifier = fish.classList[1];
+        if (!unlockedFish.includes(fishIdentifier)) {
+            unlockedFish.push(fishIdentifier);
+        }
+    });
+    localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
+});
+
+const resetBtn = document.querySelector(`.reset-button`);
+
+resetBtn.addEventListener(`click`, () => {
+    localStorage.removeItem('unlockedFish');
+    fishAll.forEach((fish) => {
+        fish.classList.remove(`unlocked`);
+    });
+});
+
+
+loadProgress();
