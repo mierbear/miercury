@@ -2,14 +2,6 @@
 
 const sec = 1000;
 
-const catalogBtn = document.querySelector(`.catalog-btn`);
-const catalog = document.querySelector(`.catalog`);
-const catalogInfo = document.querySelector(`.fish-info`);
-const x = document.querySelector(`.x`);
-
-let catalogShow = false;
-let catalogInfoShow = false;
-
 const fishAll = document.querySelectorAll(`.fish`);
 const infoImg = document.querySelector(`.info-img`);
 const infoHeader = document.querySelector(`.info-header`);
@@ -224,7 +216,7 @@ const handleKeyPress = (event) => {
                 const cf = document.querySelector(`.${currentFish[0]}`);
                 const cfImg = cf.querySelector(`img`);
                 cf.classList.add(`unlocked`);
-                cfImg.src = `./assets/fish/placeholder.png`;
+                cfImg.src = `./assets/fish/placeholder.png`; //REPLACE
                 unlockFish(currentFish);
             }
         }
@@ -257,26 +249,6 @@ playBtn.addEventListener(`click`, () => {
     // startFishing(1, 2, 20);
 });
 
-catalogBtn.addEventListener(`click`, () => {
-    if (catalogShow) {
-        catalog.style.display = `none`;
-        catalogShow = false;
-    } else {
-        catalog.style.display = `flex`;
-        catalogShow = true;
-    }
-});
-
-x.addEventListener(`click`, () => {
-    if (catalogInfoShow) {
-        catalogInfo.style.display = `none`;
-        catalogInfoShow = false;
-    } else {
-        catalogInfo.style.display = `flex`;
-        catalogInfoShow = true;
-    }
-});
-
 fishAll.forEach((fish, index) => {
     fish.addEventListener(`click`, () => {
         if (fish.classList.contains(`unlocked`)) {
@@ -287,7 +259,6 @@ fishAll.forEach((fish, index) => {
             infoDesc.textContent = selectedFish.desc;
             
             catalogInfo.style.display = `flex`;
-            catalogInfoShow = true;
         } else {
             infoImg.src = ``;
             infoHeader.textContent = `???`;
@@ -295,7 +266,6 @@ fishAll.forEach((fish, index) => {
             infoDesc.textContent = `???`;
             
             catalogInfo.style.display = `flex`;
-            catalogInfoShow = true;
         }
     })
 });
@@ -327,9 +297,9 @@ const fishObjects = [
 },
 {
     img: `./assets/fish/jellyImg.png`,
-    h: ``,
-    sh: ``,
-    desc: ``,
+    h: `Cannonball Jellyfish (Sr_Jelly)`,
+    sh: `Stomolophus Meleagris`,
+    desc: `The Cannonball Jellyfish, also known as the Cabbagehead Jellyfish, is a species commonly found in the warm coastal waters of the western Atlantic and the Gulf of Mexico. It gets its name from its round, firm, dome-shaped bell, which can grow up to 25 cm (10 inches) in diameter. Unlike many jellyfish species, the Cannonball Jellyfish has very short tentacles, relying instead on a dense cluster of oral arms beneath its bell to capture plankton and small fish. These jellyfish play a crucial role in marine ecosystems, serving as a food source for sea turtles and certain large fish species. Fun Fact: Cannonball Jellyfish produce a toxin that, while harmless to humans, can stun small fish and crustaceans, making them easier to catch. Their mucus is also used in certain traditional Asian medicines and cosmetics!`,
 },
 {
     img: `./assets/fish/flooImg.png`,
@@ -472,29 +442,50 @@ sfxBtn.addEventListener(`click`, () => {
     }
 });
 
+
+const x = document.querySelector(`.x`);
 const x2 = document.querySelector(`.x2`);
+
+const catalogBtn = document.querySelector(`.catalog-btn`);
 const settingsBtn = document.querySelector(`.settings-btn`);
+
 const settings = document.querySelector(`.settings-container`);
-let settingsShow = false;
+const catalog = document.querySelector(`.catalog`);
+const catalogInfo = document.querySelector(`.fish-info`);
+
+const overlay = document.querySelector(`.overlay`);
+
+let currentMenu;
+
+const showMenu = (menu) => {
+    if (currentMenu === menu) {
+        menu.style.display = `none`;
+        overlay.classList.add(`hidden`);
+        currentMenu = null;
+    } else  {
+        if (currentMenu) {
+            currentMenu.style.display = `none`;
+        }
+        menu.style.display = `flex`;
+        overlay.classList.remove(`hidden`)
+        currentMenu = menu;
+    }
+}
+
+catalogBtn.addEventListener(`click`, () => {
+    showMenu(catalog);
+});
 
 settingsBtn.addEventListener(`click`, () => {
-    if (settingsShow) {
-        settings.style.display = `none`;
-        settingsShow = false;
-    } else {
-        settings.style.display = `flex`;
-        settingsShow = true;
-    }
+    showMenu(settings);
+});
+
+x.addEventListener(`click`, () => {
+    catalogInfo.style.display = `none`;
 });
 
 x2.addEventListener(`click`, () => {
-    if (settingsShow) {
-        settings.style.display = `none`;
-        settingsShow = false;
-    } else {
-        settings.style.display = `flex`;
-        settingsShow = true;
-    }
+    showMenu(settings);
 });
 
 const unlockFish = (fish) => {
@@ -526,6 +517,9 @@ unlockBtn.addEventListener(`click`, () => {
     fishAll.forEach((fish) => {
         fish.classList.add(`unlocked`);
 
+        const img = fish.querySelector(`img`);
+        img.src = `./assets/fish/placeholder.png`;
+
         const fishIdentifier = fish.classList[1];
         if (!unlockedFish.includes(fishIdentifier)) {
             unlockedFish.push(fishIdentifier);
@@ -540,6 +534,9 @@ resetBtn.addEventListener(`click`, () => {
     localStorage.removeItem('unlockedFish');
     fishAll.forEach((fish) => {
         fish.classList.remove(`unlocked`);
+
+        const img = fish.querySelector(`img`);
+        img.src = `./assets/fish/placeholder2.png`;
     });
 });
 
