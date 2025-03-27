@@ -1,6 +1,7 @@
 /* GENERAL */
 
-html, body {
+html,
+body {
     display: flex;
     flex-direction: column;
     height: 300vh;
@@ -28,7 +29,7 @@ html, body {
 
 .center-text h2,
 .center-text h6 {
-    font-weight: normal ;
+    font-weight: normal;
 }
 
 .center {
@@ -50,7 +51,8 @@ html, body {
     max-height: 300vh;
 }
 
-.first-half, .second-half {
+.first-half,
+.second-half {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -105,7 +107,7 @@ html, body {
 .mier {
     z-index: -1;
     position: absolute;
-    top: 20%;   
+    top: 20%;
     width: 25em;
     animation: fall-in 3.5s ease;
     transition: all 1.8s ease;
@@ -113,7 +115,7 @@ html, body {
 }
 
 .mier:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .bg,
@@ -173,7 +175,7 @@ html, body {
 
 .toggles h2:hover {
     color: #ffffff;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* OVERLAY */
@@ -197,7 +199,8 @@ html, body {
 }
 
 input[type="range"] {
-    -webkit-appearance: none; /* Override default appearance */
+    -webkit-appearance: none;
+    /* Override default appearance */
     appearance: none;
     width: 100%;
     height: 8px;
@@ -208,7 +211,7 @@ input[type="range"] {
 }
 
 input[type="range"]:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -221,7 +224,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-    cursor:pointer;
+    cursor: pointer;
     background: #ffffff;
 }
 
@@ -281,15 +284,19 @@ input[type="range"]::-moz-range-thumb {
     0% {
         opacity: 0.2;
     }
+
     25% {
         opacity: 0.3;
     }
+
     50% {
         opacity: 0;
     }
+
     85% {
         opacity: 0.3;
     }
+
     100% {
         opacity: 0.2;
     }
@@ -299,6 +306,7 @@ input[type="range"]::-moz-range-thumb {
     0% {
         top: 20%;
     }
+
     100% {
         top: -100%;
     }
@@ -309,12 +317,15 @@ input[type="range"]::-moz-range-thumb {
         top: -100%;
         opacity: 0;
     }
+
     70% {
         opacity: 1;
     }
+
     40% {
         top: 30%;
-    }   
+    }
+
     100% {
         top: 20%;
     }
@@ -324,6 +335,7 @@ input[type="range"]::-moz-range-thumb {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -333,6 +345,7 @@ input[type="range"]::-moz-range-thumb {
     0% {
         transform: translateX(0%);
     }
+
     100% {
         transform: translateX(-150%);
     }
@@ -342,9 +355,11 @@ input[type="range"]::-moz-range-thumb {
     0% {
         transform: translateX(-150%);
     }
+
     80% {
         transform: translateX(1%);
     }
+
     100% {
         transform: translateX(0%);
     }
@@ -354,15 +369,19 @@ input[type="range"]::-moz-range-thumb {
     30% {
         opacity: 1;
     }
+
     40% {
         opacity: 0.5;
     }
+
     50% {
         opacity: 1;
     }
+
     60% {
         opacity: 0.7;
     }
+
     65% {
         opacity: 1;
     }

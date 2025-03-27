@@ -1,4 +1,7 @@
 /* GENERAL */
+* {
+    font-family: "Inconsolata", monospace;
+}
 
 html,
 body {
@@ -280,6 +283,10 @@ body {
     transform: scale(1.1);
 }
 
+.audio {
+    margin-bottom: 15px;
+}
+
 .audio img {
     width: 7vw;
     transition: all .5s ease;
@@ -369,6 +376,41 @@ button.current-difficulty {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.popup-container {
+    display: none;
+    flex-direction: column-reverse;
+    /* justify-content: center; */
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    pointer-events: none;
+    transition: all 2s ease-in-out;
+}
+
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    gap: 2%;
+    z-index: 120;
+    min-width: 10vw;
+    min-height: 4vh;
+    pointer-events: none;
+    background-color: rgba(215, 222, 225, 0.799);
+    border-radius: 5px;
+    border: rgba(0, 0, 0, 0.308) solid 2px;
+    padding: 5%;
+    margin-bottom: 4vh;
+}
+
+.popup p {
+    font-size: 1.5rem;
 }
 
 @keyframes waves {

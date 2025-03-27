@@ -7,7 +7,8 @@ const infoImg = document.querySelector(`.info-img`);
 const infoHeader = document.querySelector(`.info-header`);
 const infoSubHeader = document.querySelector(`.info-sub-header`);
 const infoDesc = document.querySelector(`.info-description`);
-
+const popup = document.querySelector(`.popup-container`);
+const popupText = document.querySelector(`.popup-text`);
 
 const mierImg = document.querySelector(`.mier-img`);
 const playBtn = document.querySelector(`.play`);
@@ -42,6 +43,18 @@ const addKeys = (count) => {
         inputGame.push(randomizer(keys));
     }
 };
+
+const showPopup = (fish) => {
+    popup.style.display = `flex`;
+    popup.style.opacity = `1`;
+    popupText.textContent = `you caught ${fish}!!`;
+    setTimeout(() => {
+        popup.style.opacity = `0`;
+        setTimeout(() => {
+            popup.style.display = `none`;
+        }, 2000);
+    }, 2000);
+}
 
 const setMier = () => {
     if (mierState < 7) { mierState++ }
@@ -214,11 +227,15 @@ const handleKeyPress = (event) => {
                 mierImg.src = `./assets/fish/mier-8.png`;
                 const cf = document.querySelector(`.${currentFish[0]}`);
                 const cfImg = cf.querySelector(`img`);
+                if (!cf.classList.contains(`unlocked`)) {
+                    catalogBtn.src = `./assets/fish/catalogNotif.png`
+                }
                 cf.classList.add(`unlocked`);
                 cfImg.src = `./assets/fish/placeholder.png`; //REPLACE
-                console.log(`you caught a ${currentFish}!!`);
+                console.log(`you caught ${currentFish}!!`);
                 unlockFish(currentFish);
                 updateChances(fishNames[currentFish]);
+                showPopup(currentFish);
             }
         }
 
@@ -461,6 +478,7 @@ const showMenu = (menu) => {
 
 catalogBtn.addEventListener(`click`, () => {
     showMenu(catalog);
+    catalogBtn.src = `./assets/fish/catalog.png`;
 });
 
 settingsBtn.addEventListener(`click`, () => {
@@ -604,7 +622,7 @@ const phrog =   [1, 3, 10, `phrog`];
 const yobu =  [2, 3, 8, `yobu`];
 const jett =  [3, 4, 10, `jett`];
 const genki = [2, 3, 8, `genki`];
-const eight = [4, 2, 15, `eight-hundred`];
+const eight = [4, 2, 15, `eight`];
 
 //HARD
 const floo =    [3, 3, 8, `floo`];
@@ -634,7 +652,7 @@ const fishNames = {
     yobu: yobu,
     jett: jett,
     genki: genki,
-    eight_hundred: eight,
+    eight: eight,
     mier: mier,
     floo: floo,
     twelves: twelves,
@@ -714,9 +732,9 @@ playBtn.addEventListener(`click`, () => {
         mierImg.src = `./assets/fish/mier-1.png`
         setTimeout(() => {
             startFishing(...selectFish());
-        }, 1000);
-    // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
-    }, 0);
+        }, 700);
+    }, (Math.trunc(Math.random() * 10) + 5) * 1000);
+    // }, 0);
 });
 
 const loadProgress = () => {
