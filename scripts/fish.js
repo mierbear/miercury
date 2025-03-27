@@ -11,6 +11,7 @@ const popup = document.querySelector(`.popup-container`);
 const popupText = document.querySelector(`.popup-text`);
 
 const mierImg = document.querySelector(`.mier-img`);
+const fishImg = document.querySelector(`.fish-img`);
 const playBtn = document.querySelector(`.play`);
 const keysDiv = document.querySelector(`.keys`);
 const timer = document.querySelector(`.timer`);
@@ -38,6 +39,12 @@ const randomizer = (arr) => {
     return arr[Math.trunc((Math.random() * arr.length))];
 };
 
+const preloadImage = (src, callback) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = callback;
+}
+
 const addKeys = (count) => {
     for (let i = 0; i < count; i++) {
         inputGame.push(randomizer(keys));
@@ -47,7 +54,16 @@ const addKeys = (count) => {
 const showPopup = (fish) => {
     popup.style.display = `flex`;
     popup.style.opacity = `1`;
-    popupText.textContent = `you caught ${fish}!!`;
+    console.log(fish);
+    if (fish[0] === `twelves`) {
+        popupText.textContent = `you caught 12s!!`;
+    } else if (fish[0] === `eight`) {
+        popupText.textContent = `you caught 800!!`;
+    } else if (fish[0] === `jelly`) {
+        popupText.textContent = `you caught sr_jelly!!`;
+    } else {
+        popupText.textContent = `you caught ${fish}!!`;
+    }
     setTimeout(() => {
         popup.style.opacity = `0`;
         setTimeout(() => {
@@ -61,7 +77,8 @@ const setMier = () => {
     mierImg.src = `./assets/fish/mier-${mierState}.png`;
     if (mierState > 3) {
         mierSlide += -15;
-        mierImg.style.transform = `translateX(${mierSlide}px)`
+        mierImg.style.transform = `translateX(${mierSlide}px)`;
+        fishImg.style.transform = `translateX(${mierSlide}px)`;
     }
 }
 
@@ -76,23 +93,31 @@ const playBtnAppear = () => {
 const playBtnDisappear = () => {
     playBtn.style.pointerEvents = `none`;
     playBtn.style.opacity = `0`;
-    setTimeout(() => {
-        playBtn.style.display = `none`;
-    }, 2000);
+    // setTimeout(() => {
+    //     playBtn.style.display = `none`;
+    // }, 2000);
 }
 
 const startRound = (level) => {
     if (level === 1) {
-        addKeys(5)
+        addKeys(1)
     } else if (level === 2) {
-        addKeys(6)
+        addKeys(2)
     } else if (level === 3) {
-        addKeys(7)
+        addKeys(3)
     } else if (level === 4) {
-        addKeys(8)
+        addKeys(4)
     } else if (level === 5) {
-        addKeys(9)
+        addKeys(5)
     } else if (level === 6) {
+        addKeys(6)
+    } else if (level === 7) {
+        addKeys(7)
+    } else if (level === 8) {
+        addKeys(8)
+    } else if (level === 9) {
+        addKeys(9)
+    } else if (level === 10) {
         addKeys(10)
     };
     inputGame.forEach((key) => {
@@ -168,6 +193,7 @@ const startFishing = (l, r, time, f) => {
     mierSlide = 0;
     mierState = 2;
     mierImg.src = `./assets/fish/mier-2.png`;
+    // mierImg.style.transition = `all .5s ease;`;
 
     startRound(level);
     startTimer(time);
@@ -181,6 +207,10 @@ const startFishing = (l, r, time, f) => {
 const handleKeyPress = (event) => {
     const keyAll = document.querySelectorAll(`.keys img`);
     console.log(event.key);
+
+    const mierWin = `./assets/fish/mier-11.png`;
+    const mierWin2 = `./assets/fish/mier-12.png`;
+    const activeFish = `./assets/fish/${currentFish}Fish.png`
 
     // WRONG KEY
     if (event.key !== firstKeyInput && event.key !== firstKeyInput.toLowerCase()) {
@@ -223,8 +253,25 @@ const handleKeyPress = (event) => {
                 }, 500);
                 playBtn.textContent = `fish!!!`;
                 playBtnAppear();
+                // mierImg.style.transition = `none`;
+                fishImg.style.display = `flex`;
+                setTimeout(() => {
+                    fishImg.style.transform = `none`;
+                }, 0);
                 mierImg.style.transform = `none`;
-                mierImg.src = `./assets/fish/mier-8.png`;
+
+                preloadImage(mierWin, () => {
+                    mierImg.src = `./assets/fish/mier-11.png`;
+                });
+                preloadImage(activeFish, () => {
+                    fishImg.src = activeFish;
+                });
+                preloadImage(mierWin2, () => {
+                    setTimeout(() => {
+                        mierImg.src = mierWin2;
+                        fishImg.style.transform = `translateX(-6%) translateY(14.6%)`;
+                    }, 2000);
+                });
                 const cf = document.querySelector(`.${currentFish[0]}`);
                 const cfImg = cf.querySelector(`img`);
                 if (!cf.classList.contains(`unlocked`)) {
@@ -307,12 +354,12 @@ const fishObjects = [
 },
 {
     img: `./assets/fish/flooImg.png`,
-    h: `Skeleton Panda Sea Squirt (Floo)`,
-    sh: `Clavelina Ossipandae`,
-    desc: `The skeleton panda sea squirt is a rare type of tunicate that gets its name from its ghostly white and black appearance, resembling a panda. These tiny marine organisms attach themselves to reefs and filter-feed by drawing in water and extracting plankton. Although they look like a single organism, they are colonial animals, meaning each visible "panda" is part of a larger interconnected system of individual units working together. Fun Fact: Sea squirts are more closely related to vertebrates (including humans) than most other marine invertebrates because they belong to the phylum Chordata, sharing key embryonic traits with vertebrates.`,
+    h: `Panda Banggai Cardinalfish (Floo)`,
+    sh: `Pterapogon Kauderni`,
+    desc: `The Panda Banggai Cardinalfish is a small, strikingly patterned fish native to the Banggai Islands of Indonesia. Known for its bold black-and-white coloration and elongated fins, it closely resembles a panda in its markings. Unlike many marine fish, it does not undergo a larval stage in the open ocean. Instead, it has a unique reproductive strategy: males incubate fertilized eggs in their mouths (mouthbrooding) until the fully formed fry are ready to swim freely. This species prefers shallow seagrass beds, coral reefs, and mangrove habitats, where it forms small groups for protection against predators. Unfortunately, due to overfishing for the aquarium trade and habitat destruction, the Panda Banggai Cardinalfish is now considered an endangered species. Fun Fact: The Panda Banggai Cardinalfish is one of the few marine fish species that exhibit direct parental care, with the male carrying the eggs in his mouth for about 20 days, ensuring their safety until hatching!`,
 },
 {
-    img: `./assets/fish/800Img.png`,
+    img: `./assets/fish/eightImg.png`,
     h: `Bubble Eye Goldfish (800)`,
     sh: `Carassius Auratus`,
     desc: `The Bubble Eye goldfish is a unique and delicate variety of fancy goldfish, characterized by the fluid-filled sacs under its eyes. These sacs grow larger as the fish matures and are incredibly fragile, making them one of the most sensitive goldfish breeds. Originally bred in China, Bubble Eye goldfish lack a dorsal fin, giving them a distinct appearance and affecting their swimming ability. They require calm water conditions with no sharp objects, as even the slightest puncture to their eye sacs can lead to infections or other health complications. Fun Fact: If a Bubble Eye goldfish’s sacs are accidentally punctured, they can regenerate over time, although they may not grow back to their original size or shape!`,
@@ -349,9 +396,9 @@ const fishObjects = [
 },
 {
     img: `./assets/fish/genkiImg.png`,
-    h: `Flapjack Octopus (Cricket)`,
-    sh: `Opisthoteuthis Californiana`,
-    desc: `The Flapjack octopus is a deep-sea cephalopod known for its soft, gelatinous body and adorable, cartoonish appearance. It belongs to the umbrella octopus family, meaning it has a web of skin connecting its arms, allowing it to spread out like a parachute when gliding through the water. Unlike more active hunters, the Flapjack octopus is a passive ambush predator, hovering just above the ocean floor and using its webbed arms to trap small crustaceans and other invertebrates. This species resides at depths of 500 to 1,500 meters (1,600–4,900 feet), where the pressure is immense, and light is scarce. Fun Fact: The Flapjack octopus served as inspiration for the popular Pokémon character Omanyte and also resembles the animated character Pearl from Finding Nemo!`,
+    h: `Dumbo Octopus (Cricket)`,
+    sh: `Grimpoteuthis Bathynectes`,
+    desc: `Named after Disney’s Dumbo due to its ear-like fins, the Dumbo octopus lives in the deep ocean at depths of up to 7,000 meters (23,000 feet). Unlike most octopuses, it doesn’t use jet propulsion to move but instead flaps its ear-like fins to glide through the water. It primarily feeds on crustaceans and worms by swallowing them whole. Fun Fact: Dumbo octopuses are one of the few octopus species that lack an ink sac, as they have almost no natural predators in their deep-sea environment.`,
 },
 {
     img: `./assets/fish/widowImg.png`,
@@ -415,9 +462,9 @@ const fishObjects = [
 },
 {
     img: `./assets/fish/solisImg.png`,
-    h: `Telescope Fish (Solis)`,
-    sh: `Gigantura Chuni`,
-    desc: `Telescope fish are deep-sea predators with tubular eyes that allow them to detect bioluminescent prey. Unlike most fish, their eyes point forward rather than to the sides, giving them an excellent depth perception in the darkness of the deep ocean. They can expand their jaws to swallow prey whole, even those larger than themselves. Fun Fact: Telescope fish can rotate their eyes to look upward while swimming horizontally, helping them spot prey above them.`,
+    h: `Anglerfish (Solis)`,
+    sh: `Lophiiformes`,
+    desc: `Anglerfish are deep-sea predators known for their eerie appearance and bioluminescent lure. Found in some of the ocean’s darkest depths, these fish have a unique adaptation—a fleshy, glowing appendage called an esca that dangles from their heads, attracting unsuspecting prey. This lure is produced by symbiotic bacteria that generate light, helping the anglerfish hunt efficiently in the pitch-black deep sea. With oversized mouths and expandable stomachs, anglerfish can consume prey nearly as large as themselves, making them highly effective ambush predators. One of the most bizarre aspects of anglerfish biology is their reproductive strategy. In some species, males are significantly smaller than females and fuse permanently to their mates, relying on them for nutrients while providing sperm in return. This extreme form of parasitic mating ensures reproduction in an environment where encounters between individuals are rare. Fun Fact: Some anglerfish species live more than a mile below the ocean’s surface, where the pressure is over 1,000 times greater than at sea level—yet they survive and thrive in this extreme environment!`
 },
 ];
 
@@ -613,36 +660,36 @@ difficultiesObj.forEach(({ lvl, tooltip }) => {
 // [ LEVEL (1-6) - ROUNDS - TIME - NAME ]
 
 //EASY
-const bongli =  [1, 1, 30, `bongli`];
-const gigaegg = [1, 2, 10, `gigaegg`];
-const nico =    [1, 2, 10, `nico`];
-const phrog =   [1, 3, 10, `phrog`];
+const bongli =  [5, 1, 30, `bongli`];
+const gigaegg = [5, 2, 10, `gigaegg`];
+const nico =    [5, 2, 10, `nico`];
+const phrog =   [5, 3, 10, `phrog`];
 
 //MEDIUM
-const yobu =  [2, 3, 8, `yobu`];
-const jett =  [3, 4, 10, `jett`];
-const genki = [2, 3, 8, `genki`];
-const eight = [4, 2, 15, `eight`];
+const yobu =  [7, 3, 8, `yobu`];
+const jett =  [8, 4, 10, `jett`];
+const genki = [7, 3, 8, `genki`];
+const eight = [3, 3, 15, `eight`];
 
 //HARD
-const floo =    [3, 3, 8, `floo`];
-const twelves = [4, 4, 7, `twelves`];
-const partack = [4, 6, 12, `partack`];
-const bs =      [4, 4, 10, `bluestrings`];
-const truilt =  [3, 4, 7, `truilt`];
-const jelly =   [3, 6, 14, `jelly`];
-const kags =    [6, 4, 10, `kags`];
-const solis =   [5, 7, 10, `solis`];
+const floo =    [8, 3, 8, `floo`];
+const twelves = [9, 4, 7, `twelves`];
+const partack = [9, 6, 12, `partack`];
+const bs =      [9, 4, 10, `bluestrings`];
+const truilt =  [8, 4, 7, `truilt`];
+const jelly =   [8, 6, 14, `jelly`];
+const kags =    [10, 4, 10, `kags`];
+const solis =   [9, 7, 10, `solis`];
 
 //INSANE
-const lance = [1, 8, 5, `lance`];
-const widow = [1, 12, 8, `widow`];
-const temer = [6, 7, 8, `temer`];
-const vert =  [6, 7, 12, `vert`];
-const kero =  [6, 5, 8, `kero`];
-const gfr =   [6, 10, 12, `gfr`];
-const abri =  [6, 12, 10, `abri`];
-const mier =  [6, 15, 10, `mier`];
+const lance = [5, 8, 5, `lance`];
+const widow = [5, 12, 8, `widow`];
+const temer = [10, 7, 8, `temer`];
+const vert =  [10, 7, 12, `vert`];
+const kero =  [10, 5, 8, `kero`];
+const gfr =   [10, 10, 12, `gfr`];
+const abri =  [10, 12, 10, `abri`];
+const mier =  [10, 15, 10, `mier`];
 
 const fishNames = {
     bongli: bongli,
@@ -727,22 +774,27 @@ playBtn.addEventListener(`click`, () => {
     currentFish = [];
     mierImg.style.transform = `none`;
     mierImg.src = `./assets/fish/mier-0.png`
+    fishImg.style.transform = `none`;
+    fishImg.style.display = `none`;
+    fishImg.src = ``;
     playBtnDisappear();
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
         setTimeout(() => {
-            startFishing(...selectFish());
+            const selected = selectFish();
+            startFishing(...selected);
+            console.log(...selected);
+            // startFishing(...eight);
         }, 700);
     }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     // }, 0);
 });
 
-const loadProgress = () => {
-    const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
-    const savedFishPool = JSON.parse(localStorage.getItem(`fishPool`));
-    const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
-    localStorage.setItem(`fishPool`, JSON.stringify(fishPool));
+const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+const savedFishPool = JSON.parse(localStorage.getItem(`fishPool`));
+const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
 
+const loadProgress = () => {    
     if (savedDifficulty) {
         const savedButton = document.querySelector(`.${savedDifficulty}`);
         if (savedButton) {
@@ -754,18 +806,23 @@ const loadProgress = () => {
         }
     }
 
+    if (savedFishPool) {
+        fishPool.splice(0, fishPool.length, ...savedFishPool);
+    }
+
     unlockedFish.forEach((fish) => {
         const fishEl = document.querySelector(`.fish.${fish}`);
         if (fishEl) {
             fishEl.classList.add(`unlocked`);
         }
-        const fishImg = document.querySelector(`.${fish} img`);
-        fishImg.src = `./assets/fish/placeholder.png`; //REPLACE
+        const fishCatalogueImg = document.querySelector(`.${fish} img`);
+        fishCatalogueImg.src = `./assets/fish/placeholder.png`; //REPLACE
     });
-
-    if (savedFishPool) {
-        fishPool.splice(0, fishPool.length, ...savedFishPool);
-    }
 };
+
+// const saveProgress = () => {
+//     localStorage.setItem(`fishPool`, JSON.stringify(fishPool));
+//     localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
+// }
 
 loadProgress();

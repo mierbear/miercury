@@ -38,4 +38,10 @@ idea scrapped!! but if you see this, you know where i was going with it LOLOLOL
 TO DO LIST:
 
 - revamp fish difficulties
+- add dialogue after successfully catching fish
+- add music
+- make fish assets
+- make ocean asset
+- make background asset
+- render mier assets
 -

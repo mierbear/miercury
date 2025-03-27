@@ -119,6 +119,7 @@ body {
     animation: waves 5s ease-in-out infinite;
 }
 
+.fish-img,
 .platform-img,
 .mier-img {
     position: absolute;
@@ -131,8 +132,14 @@ body {
     transition: all .5s ease;
 }
 
+.fish-img,
 .mier-img {
     right: -4.2%;
+}
+
+.fish-img {
+    display: none;
+    /* transition: none; */
 }
 
 .catalog {
@@ -274,7 +281,7 @@ body {
 }
 
 .menu img {
-    width: 6vw;
+    width: 13vh;
     transition: all .2s ease;
 }
 
