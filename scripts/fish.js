@@ -588,7 +588,7 @@ difficultiesObj.forEach(({ lvl, tooltip }) => {
         const tooltipWidth = tip.offsetWidth;
         const tooltipHeight = tip.offsetHeight;
         tip.style.left = `${event.pageX - tooltipWidth / 2}px`;
-        tip.style.top = `${event.pageY - tooltipHeight}px`;
+        tip.style.top = `${event.pageY - tooltipHeight - 5}px`;
     });
 })
 
@@ -713,12 +713,10 @@ playBtn.addEventListener(`click`, () => {
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
         setTimeout(() => {
-            startFishing(...gigaegg);
-            // startFishing(...selectFish());
+            startFishing(...selectFish());
         }, 1000);
     // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     }, 0);
-    // startFishing(1, 2, 20);
 });
 
 const loadProgress = () => {

@@ -252,7 +252,7 @@ body {
     align-items: center;
     flex-direction: column;
     position: fixed;
-    gap: 5%;
+    gap: 2%;
     z-index: 120;
     width: 40vw;
     height: 40vh;

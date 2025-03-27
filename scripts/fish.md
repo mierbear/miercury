@@ -34,3 +34,8 @@ nico - seabunny
 yobu - bluering octopus
 
 idea scrapped!! but if you see this, you know where i was going with it LOLOLOL
+
+TO DO LIST:
+
+- revamp fish difficulties
+-
