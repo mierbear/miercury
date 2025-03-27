@@ -32,6 +32,13 @@ let level;
 let extraLife = false;
 let mierState = 0;
 let mierSlide = 0;
+let extraTime = 3;
+let extraTimePerc = .9;
+
+//EASY = 2.5 .7
+//NORMAL = 2 .5
+//HARD = 1.5 .3
+//INSANE = 1 .2
 
 const randomizer = (arr) => {
     return arr[Math.trunc((Math.random() * arr.length))];
@@ -201,7 +208,7 @@ const handleKeyPress = (event) => {
                 startRound(level); 
                 timer.style.width = `50%`;
                 stopTimer();
-                startTimer(timeRemaining + 3);
+                startTimer(timeRemaining + extraTime) + ((timeRemaining + extraTime) * extraTimePerc);
             // WIN LEVEL
             } else { 
                 stopTimer();
@@ -233,20 +240,6 @@ document.addEventListener(`keydown`, (event) => {
     if (timerActive) {
         handleKeyPress(event);
     }
-});
-
-playBtn.addEventListener(`click`, () => {
-    if (timerActive) { return }
-    mierImg.src = `./assets/fish/mier-0.png`
-    playBtnDisappear();
-    setTimeout(() => {
-        mierImg.src = `./assets/fish/mier-1.png`
-        setTimeout(() => {
-            startFishing(1, 2, 8, `abri`);
-        }, 1000);
-    // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
-    }, 0);
-    // startFishing(1, 2, 20);
 });
 
 fishAll.forEach((fish, index) => {
@@ -506,6 +499,8 @@ const loadProgress = () => {
         if (fishEl) {
             fishEl.classList.add(`unlocked`);
         }
+        const fishImg = document.querySelector(`.${fish} img`);
+        fishImg.src = `./assets/fish/placeholder.png`; //REPLACE
     });
 };
 
@@ -540,5 +535,53 @@ resetBtn.addEventListener(`click`, () => {
     });
 });
 
+// [ LEVEL (1-6) - ROUNDS - TIME - NAME ]
+
+//EASY
+const bongli =  [1, 1, 30, `bongli`];
+const gigaegg = [1, 2, 10, `gigaegg`];
+const nico =    [1, 2, 10, `nico`];
+const phrog =   [1, 3, 10, `phrog`];
+
+//MEDIUM
+const yobu =  [2, 3, 8, `yobu`];
+const jett =  [3, 4, 10, `jett`];
+const genki = [2, 3, 8, `genki`];
+const eight = [4, 2, 15, `eight-hundred`];
+const mier =  [2, 3, 8, `mier`];
+
+//HARD
+const floo =    [3, 3, 8, `floo`];
+const twelves = [4, 4, 7, `twelves`];
+const partack = [4, 6, 12, `partack`];
+const bs =      [4, 4, 10, `bluestrings`];
+const truilt =  [3, 4, 7, `truilt`];
+const jelly =   [3, 6, 14, `jelly`];
+const kags =    [6, 4, 10, `kags`];
+const solis =   [5, 7, 10, `solis`];
+
+//INSANE
+const lance = [1, 8, 5, `lance`];
+const widow = [1, 12, 8, `widow`];
+const temer = [6, 7, 8, `temer`];
+const vert =  [6, 7, 12, `vert`];
+const kero =  [6, 5, 8, `kero`];
+const gfr =   [6, 10, 12, `gfr`];
+const abri =  [6, 12, 10, `abri`];
 
 loadProgress();
+
+playBtn.addEventListener(`click`, () => {
+    if (timerActive) { return }
+    mierImg.style.transform = `none`;
+    mierImg.src = `./assets/fish/mier-0.png`
+    playBtnDisappear();
+    setTimeout(() => {
+        mierImg.src = `./assets/fish/mier-1.png`
+        setTimeout(() => {
+            startFishing(...lance);
+        }, 1000);
+    // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
+    }, 0);
+    // startFishing(1, 2, 20);
+});
