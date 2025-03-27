@@ -32,13 +32,6 @@ let level;
 let extraLife = false;
 let mierState = 0;
 let mierSlide = 0;
-let extraTime = 3;
-let extraTimePerc = .9;
-
-//EASY = 2.5 .7
-//NORMAL = 2 .5
-//HARD = 1.5 .3
-//INSANE = 1 .2
 
 const randomizer = (arr) => {
     return arr[Math.trunc((Math.random() * arr.length))];
@@ -208,7 +201,7 @@ const handleKeyPress = (event) => {
                 startRound(level); 
                 timer.style.width = `50%`;
                 stopTimer();
-                startTimer(timeRemaining + extraTime) + ((timeRemaining + extraTime) * extraTimePerc);
+                startTimer(timeRemaining + extraTime[0]) + ((timeRemaining + extraTime[0]) * extraTime[1]);
             // WIN LEVEL
             } else { 
                 stopTimer();
@@ -569,8 +562,6 @@ const kero =  [6, 5, 8, `kero`];
 const gfr =   [6, 10, 12, `gfr`];
 const abri =  [6, 12, 10, `abri`];
 
-loadProgress();
-
 playBtn.addEventListener(`click`, () => {
     if (timerActive) { return }
     mierImg.style.transform = `none`;
@@ -585,3 +576,45 @@ playBtn.addEventListener(`click`, () => {
     }, 0);
     // startFishing(1, 2, 20);
 });
+
+let extraTime = [2, .5];
+
+let easy =   [2.5, 7];
+let medium = [2, .5];
+let hard =   [1.5, .3];
+let insane = [1, .2];
+
+const difficultyBtns = document.querySelectorAll(`.difficulties button`);
+
+const difficulties = {
+    easy: easy,
+    medium: medium,
+    hard: hard,
+    insane: insane,
+};
+
+difficultyBtns.forEach((button) => {
+    button.addEventListener(`click`, () => {
+        difficultyBtns.forEach((btn) => {
+            btn.classList.remove(`current-difficulty`);
+        })
+        button.classList.add(`current-difficulty`);
+        const diff = button.classList[0]
+        extraTime = difficulties[diff];
+        localStorage.setItem('selectedDifficulty', diff);
+    })
+})
+
+const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
+if (savedDifficulty) {
+    const savedButton = document.querySelector(`.${savedDifficulty}`);
+    if (savedButton) {
+        difficultyBtns.forEach((btn) => {
+            btn.classList.remove(`current-difficulty`);
+        })
+        savedButton.classList.add(`current-difficulty`);
+        extraTime = difficulties[savedDifficulty]; 
+    }
+}
+
+loadProgress();

@@ -294,13 +294,13 @@ body {
     border: none;
     border-radius: 5px;
     transition: all 1s ease;
-    padding: 5px;
+    padding: 2%;
     font-size: large;
     cursor: pointer;
 }
 
 .unlock-button:hover {
-    transform: scale(1.4);
+    transform: scale(1.2);
 }
 
 .reset-button {
@@ -310,8 +310,8 @@ body {
     padding: 5px;
     cursor: pointer;
     position: absolute;
-    left: 2vh;
-    bottom: 2vh;
+    left: 1vh;
+    bottom: 1vh;
 }
 
 .reset-button:hover {
@@ -331,6 +331,27 @@ body {
 
 .hidden {
     display: none;
+}
+
+.difficulties button {
+    border: none;
+    border-radius: 5px;
+    transition: all .5s ease;
+    padding: 5px;
+    cursor: pointer;
+    left: 2vh;
+    bottom: 2vh;
+}
+
+.difficulties button:hover {
+    transform: scale(1.1);
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+button.current-difficulty {
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 
 @keyframes waves {
