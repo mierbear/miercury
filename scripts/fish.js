@@ -210,14 +210,15 @@ const handleKeyPress = (event) => {
                 }, 500);
                 playBtn.textContent = `fish!!!`;
                 playBtnAppear();
-                console.log(`you win!!`);
                 mierImg.style.transform = `none`;
                 mierImg.src = `./assets/fish/mier-8.png`;
                 const cf = document.querySelector(`.${currentFish[0]}`);
                 const cfImg = cf.querySelector(`img`);
                 cf.classList.add(`unlocked`);
                 cfImg.src = `./assets/fish/placeholder.png`; //REPLACE
+                console.log(`you caught a ${currentFish}!!`);
                 unlockFish(currentFish);
+                updateChances(fishNames[currentFish]);
             }
         }
 
@@ -259,9 +260,9 @@ fishAll.forEach((fish, index) => {
 const fishObjects = [
 {
     img: `./assets/fish/mierImg.png`,
-    h: `Sea Angel (Mier)`,
-    sh: `Clione Limacina`,
-    desc: `Sea angels are small, translucent marine gastropods that belong to the clade Gymnosomata. Unlike typical snails, they lack a shell and have wing-like appendages called parapodia, which they use to gracefully "fly" through the water. They are found in polar and subarctic waters, often thriving in cold oceanic environments. Despite their delicate, almost ethereal appearance, sea angels are ferocious predators, feeding primarily on their close relatives, the shelled pteropods (commonly known as "sea butterflies"). They use specialized tentacle-like structures to latch onto their prey, extracting their soft bodies with a surprising level of efficiency. Fun Fact: Sea angels produce a chemical compound that acts as a natural antifreeze, allowing them to survive in icy waters where other creatures would freeze.`,
+    h: `Orca (Mier)`,
+    sh: `Orcinus Orca`,
+    desc: `The orca, commonly known as the killer whale, is the largest member of the dolphin family and one of the ocean's most formidable predators. Found in all of the world's oceans, from the Arctic to the Antarctic, orcas are highly intelligent, social animals that live in tight-knit family groups called pods. They are apex predators, hunting a diverse range of prey, including fish, seals, penguins, and even whales. Different populations, known as "ecotypes," have specialized hunting techniques—some work together to create waves to knock seals off ice floes, while others beach themselves temporarily to catch sea lions. Their communication skills are equally impressive, with each pod developing its own unique vocal dialect. Fun Fact: Orcas are one of the few animals known to pass down cultural knowledge through generations. Different pods have distinct hunting strategies, vocalizations, and social behaviors that are learned rather than instinctual!`
 },
 {
     img: `./assets/fish/abriImg.png`,
@@ -484,19 +485,6 @@ const unlockFish = (fish) => {
     localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
 };
 
-const loadProgress = () => {
-    const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
-
-    unlockedFish.forEach((fish) => {
-        const fishEl = document.querySelector(`.fish.${fish}`);
-        if (fishEl) {
-            fishEl.classList.add(`unlocked`);
-        }
-        const fishImg = document.querySelector(`.${fish} img`);
-        fishImg.src = `./assets/fish/placeholder.png`; //REPLACE
-    });
-};
-
 const unlockBtn = document.querySelector(`.unlock-button`);
 
 unlockBtn.addEventListener(`click`, () => {
@@ -520,6 +508,7 @@ const resetBtn = document.querySelector(`.reset-button`);
 
 resetBtn.addEventListener(`click`, () => {
     localStorage.removeItem('unlockedFish');
+    localStorage.removeItem('fishPool');
     fishAll.forEach((fish) => {
         fish.classList.remove(`unlocked`);
 
@@ -527,6 +516,81 @@ resetBtn.addEventListener(`click`, () => {
         img.src = `./assets/fish/placeholder2.png`;
     });
 });
+
+let extraTime = [2, .5];
+
+let easy =   [2.5, .7];
+let medium = [2, .5];
+let hard =   [1.5, .3];
+let insane = [1, .2];
+
+const difficultyBtns = document.querySelectorAll(`.difficulties button`);
+const diffTooltip = document.querySelector(`.diff-tooltip`);
+
+const easyTooltip = document.querySelector(`.easyTooltip`);
+const mediumTooltip = document.querySelector(`.mediumTooltip`);
+const hardTooltip = document.querySelector(`.hardTooltip`);
+const insaneTooltip = document.querySelector(`.insaneTooltip`);
+const easyDiff = document.querySelector(`.easy`);
+const mediumDiff = document.querySelector(`.medium`);
+const hardDiff = document.querySelector(`.hard`);
+const insaneDiff = document.querySelector(`.insane`);
+
+const difficulties = {
+    easy: easy,
+    medium: medium,
+    hard: hard,
+    insane: insane,
+};
+
+const difficultiesObj = [
+    {
+        lvl: `.easy`,
+        tooltip: `.easy-tooltip`,
+    },
+    {
+        lvl: `.medium`,
+        tooltip: `.medium-tooltip`,
+    },
+    {
+        lvl: `.hard`,
+        tooltip: `.hard-tooltip`,
+    },
+    {
+        lvl: `.insane`,
+        tooltip: `.insane-tooltip`,
+    },
+];
+
+difficultiesObj.forEach(({ lvl, tooltip }) => {
+    const btn = document.querySelector(lvl);
+    const tip = document.querySelector(tooltip)
+
+    btn.addEventListener(`click`, () => {
+        difficultyBtns.forEach((btn) => {
+            btn.classList.remove(`current-difficulty`);
+        })
+        btn.classList.add(`current-difficulty`);
+        const diff = btn.classList[0]
+        extraTime = difficulties[diff];
+        localStorage.setItem('selectedDifficulty', diff);
+    });
+
+    btn.addEventListener(`mouseenter`, () => {
+        tip.style.display = `flex`;
+    });
+    
+    btn.addEventListener(`mouseleave`, () => {
+        tip.style.display = `none`;
+    });
+
+    btn.addEventListener(`mousemove`, (event) => {
+        const tooltipWidth = tip.offsetWidth;
+        const tooltipHeight = tip.offsetHeight;
+        tip.style.left = `${event.pageX - tooltipWidth / 2}px`;
+        tip.style.top = `${event.pageY - tooltipHeight}px`;
+    });
+})
 
 // [ LEVEL (1-6) - ROUNDS - TIME - NAME ]
 
@@ -541,7 +605,6 @@ const yobu =  [2, 3, 8, `yobu`];
 const jett =  [3, 4, 10, `jett`];
 const genki = [2, 3, 8, `genki`];
 const eight = [4, 2, 15, `eight-hundred`];
-const mier =  [2, 3, 8, `mier`];
 
 //HARD
 const floo =    [3, 3, 8, `floo`];
@@ -561,60 +624,132 @@ const vert =  [6, 7, 12, `vert`];
 const kero =  [6, 5, 8, `kero`];
 const gfr =   [6, 10, 12, `gfr`];
 const abri =  [6, 12, 10, `abri`];
+const mier =  [6, 15, 10, `mier`];
+
+const fishNames = {
+    bongli: bongli,
+    gigaegg: gigaegg,
+    nico: nico,
+    phrog: phrog,
+    yobu: yobu,
+    jett: jett,
+    genki: genki,
+    eight_hundred: eight,
+    mier: mier,
+    floo: floo,
+    twelves: twelves,
+    partack: partack,
+    bluestrings: bs,
+    truilt: truilt,
+    jelly: jelly,
+    kags: kags,
+    solis: solis,
+    lance: lance,
+    widow: widow,
+    temer: temer,
+    vert: vert,
+    kero: kero,
+    gfr: gfr,
+    abri: abri
+};
+
+const fishPool = [
+    { fish: bongli,  chance: 10 },
+    { fish: gigaegg, chance: 10 },
+    { fish: nico,    chance: 10 },
+    { fish: phrog,   chance: 10 },
+    { fish: yobu,    chance: 10 },
+    { fish: jett,    chance: 10 },
+    { fish: genki,   chance: 10 },
+    { fish: eight,   chance: 10 },
+    { fish: floo,    chance: 10 },
+    { fish: twelves, chance: 10 },
+    { fish: partack, chance: 10 },
+    { fish: jelly,   chance: 10 },
+    { fish: bs,      chance: 6 },
+    { fish: truilt,  chance: 6 },
+    { fish: kags,    chance: 6 },
+    { fish: solis,   chance: 4 },
+    { fish: temer,   chance: 4 },
+    { fish: kero,    chance: 4 },
+    { fish: lance,   chance: 3 },
+    { fish: widow,   chance: 3 },
+    { fish: vert,    chance: 3 },
+    { fish: gfr,     chance: 3 },
+    { fish: abri,    chance: 2 },
+    { fish: mier,    chance: 2 },
+];
+
+
+const selectFish = () => {
+    const totalWeight = fishPool.reduce((sum, { chance }) => sum + chance, 0);
+    const random = Math.random() * totalWeight;
+
+    let cumulativeWeight = 0;
+    for (let i = 0; i < fishPool.length; i++) {
+        cumulativeWeight += fishPool[i].chance;
+        if (random < cumulativeWeight) {
+            return fishPool[i].fish;
+        }
+    }
+};
+
+const updateChances = (fishCaught) => {
+    for (let i = 0; i < fishPool.length; i++) {
+        if (fishPool[i].fish[3] === fishCaught[3]) {
+            fishPool[i].chance = Math.max(1, fishPool[i].chance / 2);
+            break;
+        }
+    }
+    localStorage.setItem('fishPool', JSON.stringify(fishPool));
+};
 
 playBtn.addEventListener(`click`, () => {
     if (timerActive) { return }
+    currentFish = [];
     mierImg.style.transform = `none`;
     mierImg.src = `./assets/fish/mier-0.png`
     playBtnDisappear();
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
         setTimeout(() => {
-            startFishing(...lance);
+            startFishing(...gigaegg);
+            // startFishing(...selectFish());
         }, 1000);
     // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     }, 0);
     // startFishing(1, 2, 20);
 });
 
-let extraTime = [2, .5];
+const loadProgress = () => {
+    const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+    const savedFishPool = JSON.parse(localStorage.getItem(`fishPool`));
+    const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
+    localStorage.setItem(`fishPool`, JSON.stringify(fishPool));
 
-let easy =   [2.5, 7];
-let medium = [2, .5];
-let hard =   [1.5, .3];
-let insane = [1, .2];
-
-const difficultyBtns = document.querySelectorAll(`.difficulties button`);
-
-const difficulties = {
-    easy: easy,
-    medium: medium,
-    hard: hard,
-    insane: insane,
-};
-
-difficultyBtns.forEach((button) => {
-    button.addEventListener(`click`, () => {
-        difficultyBtns.forEach((btn) => {
-            btn.classList.remove(`current-difficulty`);
-        })
-        button.classList.add(`current-difficulty`);
-        const diff = button.classList[0]
-        extraTime = difficulties[diff];
-        localStorage.setItem('selectedDifficulty', diff);
-    })
-})
-
-const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
-if (savedDifficulty) {
-    const savedButton = document.querySelector(`.${savedDifficulty}`);
-    if (savedButton) {
-        difficultyBtns.forEach((btn) => {
-            btn.classList.remove(`current-difficulty`);
-        })
-        savedButton.classList.add(`current-difficulty`);
-        extraTime = difficulties[savedDifficulty]; 
+    if (savedDifficulty) {
+        const savedButton = document.querySelector(`.${savedDifficulty}`);
+        if (savedButton) {
+            difficultyBtns.forEach((btn) => {
+                btn.classList.remove(`current-difficulty`);
+            })
+            savedButton.classList.add(`current-difficulty`);
+            extraTime = difficulties[savedDifficulty]; 
+        }
     }
-}
+
+    unlockedFish.forEach((fish) => {
+        const fishEl = document.querySelector(`.fish.${fish}`);
+        if (fishEl) {
+            fishEl.classList.add(`unlocked`);
+        }
+        const fishImg = document.querySelector(`.${fish} img`);
+        fishImg.src = `./assets/fish/placeholder.png`; //REPLACE
+    });
+
+    if (savedFishPool) {
+        fishPool.splice(0, fishPool.length, ...savedFishPool);
+    }
+};
 
 loadProgress();
