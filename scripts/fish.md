@@ -45,3 +45,28 @@ TO DO LIST:
 - make background asset
 - render mier assets
 -
+
+orca
+leatherback turtle
+Panda Banggai Cardinalfish
+Bubble eye goldfish
+goblin shark
+bluering octopus
+redlipped batfish
+swordfish
+seabunny
+cannonball jellyfish
+japanese spider crab
+horned blenny
+blobfish
+boxfish
+giant isopod
+flapjack octopus
+axolotl
+ghost shark
+fiordlad penguin
+bluedotted stingray
+whitemargin unicornfish
+rosy-scales fairy-wrasse
+anglerfish
+saltwater crocodile

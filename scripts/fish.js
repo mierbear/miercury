@@ -22,6 +22,7 @@ let firstKeyInput;
 let timerID;
 let timeOriginal;
 let timeRemaining;
+let timeOverall;
 let timerActive = false;
 let start = false;
 let inputPlayer = [];
@@ -129,8 +130,9 @@ const startRound = (level) => {
 
 const startTimer = (time) => {
     timerActive = true;
-    timeOriginal = time;
-    timeRemaining = Number(time);
+    timeOverall = time + extraTime[2];
+    timeOriginal = timeOverall;
+    timeRemaining = Number(timeOriginal);
     timerText.textContent = `${Math.trunc(timeRemaining)}`;
     timer.style.opacity = `1`;
     keysDiv.style.opacity = `1`;
@@ -210,7 +212,7 @@ const handleKeyPress = (event) => {
 
     const mierWin = `./assets/fish/mier-11.png`;
     const mierWin2 = `./assets/fish/mier-12.png`;
-    const activeFish = `./assets/fish/${currentFish}Fish.png`
+    const activeFish = `./assets/fish/fish/${currentFish}Fish.png`
 
     // WRONG KEY
     if (event.key !== firstKeyInput && event.key !== firstKeyInput.toLowerCase()) {
@@ -244,6 +246,7 @@ const handleKeyPress = (event) => {
                 startRound(level); 
                 timer.style.width = `50%`;
                 stopTimer();
+                // startTimer(timeRemaining + extraTime[0]) + ((timeRemaining + extraTime[0]) * extraTime[1]);
                 startTimer(timeRemaining + extraTime[0]) + ((timeRemaining + extraTime[0]) * extraTime[1]);
             // WIN LEVEL
             } else { 
@@ -278,7 +281,7 @@ const handleKeyPress = (event) => {
                     catalogBtn.src = `./assets/fish/catalogNotif.png`
                 }
                 cf.classList.add(`unlocked`);
-                cfImg.src = `./assets/fish/placeholder.png`; //REPLACE
+                cfImg.src = `./assets/fish/fishCatalog/${currentFish}.png`;
                 console.log(`you caught ${currentFish}!!`);
                 unlockFish(currentFish);
                 updateChances(fishNames[currentFish]);
@@ -559,7 +562,7 @@ unlockBtn.addEventListener(`click`, () => {
         fish.classList.add(`unlocked`);
 
         const img = fish.querySelector(`img`);
-        img.src = `./assets/fish/placeholder.png`;
+        img.src = `./assets/fish/fishCatalog/${fish.classList[1]}.png`;
 
         const fishIdentifier = fish.classList[1];
         if (!unlockedFish.includes(fishIdentifier)) {
@@ -578,16 +581,21 @@ resetBtn.addEventListener(`click`, () => {
         fish.classList.remove(`unlocked`);
 
         const img = fish.querySelector(`img`);
-        img.src = `./assets/fish/placeholder2.png`;
+        img.src = `./assets/fish/fishCatalog/locked.png`;
     });
 });
 
-let extraTime = [2, .5];
+if (false) {
+    [(timeRemaining + extraTime[0]) + ((timeRemaining + extraTime[0]) * extraTime[1])];
+    // [WIN SECONDS, MULTIPLIER, LEVEL EXTRA SECONDS]
+}
 
-let easy =   [2.5, .7];
-let medium = [2, .5];
-let hard =   [1.5, .3];
-let insane = [1, .2];
+let extraTime = [2, .5, 2];
+
+let easy =   [3, 1, 3.5];
+let medium = [2.5, .8, 2.6];
+let hard =   [1.8, .5, 1.8];
+let insane = [1.4, .2, 1];
 
 const difficultyBtns = document.querySelectorAll(`.difficulties button`);
 const diffTooltip = document.querySelector(`.diff-tooltip`);
@@ -666,29 +674,29 @@ const nico =    [5, 2, 10, `nico`];
 const phrog =   [5, 3, 10, `phrog`];
 
 //MEDIUM
-const yobu =  [7, 3, 8, `yobu`];
-const jett =  [8, 4, 10, `jett`];
-const genki = [7, 3, 8, `genki`];
-const eight = [3, 3, 15, `eight`];
+const yobu =  [5, 3, 8, `yobu`];
+const jett =  [5, 4, 10, `jett`];
+const genki = [5, 3, 8, `genki`];
+const eight = [5, 3, 15, `eight`];
 
 //HARD
-const floo =    [8, 3, 8, `floo`];
-const twelves = [9, 4, 7, `twelves`];
-const partack = [9, 6, 12, `partack`];
-const bs =      [9, 4, 10, `bluestrings`];
-const truilt =  [8, 4, 7, `truilt`];
-const jelly =   [8, 6, 14, `jelly`];
-const kags =    [10, 4, 10, `kags`];
-const solis =   [9, 7, 10, `solis`];
+const floo =    [6, 3, 8, `floo`];
+const twelves = [6, 4, 7, `twelves`];
+const partack = [6, 6, 12, `partack`];
+const bs =      [6, 4, 10, `bluestrings`];
+const jelly =   [6, 6, 14, `jelly`];
+const truilt =  [6, 4, 7, `truilt`];
 
 //INSANE
-const lance = [5, 8, 5, `lance`];
-const widow = [5, 12, 8, `widow`];
-const temer = [10, 7, 8, `temer`];
-const vert =  [10, 7, 12, `vert`];
-const kero =  [10, 5, 8, `kero`];
-const gfr =   [10, 10, 12, `gfr`];
-const abri =  [10, 12, 10, `abri`];
+const kags =    [7, 4, 10, `kags`];
+const widow = [7, 12, 8, `widow`];
+const kero =  [8, 5, 8, `kero`];
+const temer = [8, 7, 8, `temer`];
+const vert =  [8, 7, 12, `vert`];
+const solis =   [9, 7, 10, `solis`];
+const gfr =   [9, 9, 12, `gfr`];
+const abri =  [9, 12, 10, `abri`];
+const lance = [7, 8, 5, `lance`];
 const mier =  [10, 15, 10, `mier`];
 
 const fishNames = {
@@ -784,7 +792,7 @@ playBtn.addEventListener(`click`, () => {
             const selected = selectFish();
             startFishing(...selected);
             console.log(...selected);
-            // startFishing(...eight);
+            // startFishing(...lance);
         }, 700);
     }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     // }, 0);
@@ -816,7 +824,7 @@ const loadProgress = () => {
             fishEl.classList.add(`unlocked`);
         }
         const fishCatalogueImg = document.querySelector(`.${fish} img`);
-        fishCatalogueImg.src = `./assets/fish/placeholder.png`; //REPLACE
+        fishCatalogueImg.src = `./assets/fish/fishCatalog/${fish}.png`;
     });
 };
 
