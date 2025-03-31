@@ -10,6 +10,7 @@ const infoSubHeader = document.querySelector(`.info-sub-header`);
 const infoDesc = document.querySelector(`.info-description`);
 const popup = document.querySelector(`.popup-container`);
 const popupText = document.querySelector(`.popup-text`);
+const popupTime = document.querySelector(`.popup-time`);
 
 const mierImg = document.querySelector(`.mier-img`);
 const fishImg = document.querySelector(`.fish-img`);
@@ -52,7 +53,7 @@ const addKeys = (count) => {
     }
 };
 
-const showPopup = (fish) => {
+const showPopup = (fish, time) => {
     popup.style.display = `flex`;
     popup.style.opacity = `1`;
     console.log(fish);
@@ -65,12 +66,25 @@ const showPopup = (fish) => {
     } else {
         popupText.textContent = `you caught ${fish}!!`;
     }
+    if (time < .1) {
+        popupTime.textContent = `+${time.toFixed(3)} MS LEFT!!!!`;
+    } else if (time > .1 && time < .4) {
+        popupTime.textContent = `+${time.toFixed(3)} ms left..... YOURE INSANEEE`;
+    } else if (time > .4 && time < 1) {
+        popupTime.textContent = `+${time.toFixed(3)} ms left... you're crazy lol`;
+    } else if (time > 1 && time < 2) {
+        popupTime.textContent = `+${time.toFixed(3)} second left! you almost lost it...`;
+    } else if (time > 2 && time < 3) {
+        popupTime.textContent = `+${time.toFixed(3)} seconds left! almost got away!`;
+    } else {
+        popupTime.textContent = `+${time.toFixed(3)} seconds left! good work!`;
+    }
     setTimeout(() => {
         popup.style.opacity = `0`;
         setTimeout(() => {
             popup.style.display = `none`;
-        }, 2000);
-    }, 2000);
+        }, 6000);
+    }, 6000);
 }
 
 const setMier = () => {
@@ -287,7 +301,7 @@ const handleKeyPress = (event) => {
                 console.log(`you caught ${currentFish}!!`);
                 unlockFish(currentFish);
                 updateChances(fishNames[currentFish]);
-                showPopup(currentFish);
+                showPopup(currentFish, timeRemaining);
             }
         }
 
