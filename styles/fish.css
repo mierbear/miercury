@@ -441,6 +441,33 @@ button.current-difficulty {
     font-size: 1.5rem;
 }
 
+.monologue-container {
+    flex-direction: column-reverse;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 100vw;
+    height: 100vh;
+    z-index: 40;
+    position: fixed;
+    pointer-events: none;
+    transition: all 2s ease-in-out;
+}
+
+.monologue {
+    font-size: 1.6vh;
+    position: fixed;
+    opacity: 0;
+    display: none;
+    right: 15.2vw;
+    top: 30vh;
+    background-color: rgba(255, 255, 255, 0.23);
+    border-radius: 5px;
+    padding: 5px 20px;
+    text-align: center;
+    transition: all 2s ease-in-out;
+}
+
 .bird {
     position: absolute;
     top: 12vh;
@@ -458,7 +485,7 @@ button.current-difficulty {
 .cloud {
     position: absolute;
     top: 0;
-    left: -50vw;
+    left: -80vw;
     width: 90vh;
     max-height: 100vh;
     z-index: 2;

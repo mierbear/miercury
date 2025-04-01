@@ -11,6 +11,7 @@ const infoDesc = document.querySelector(`.info-description`);
 const popup = document.querySelector(`.popup-container`);
 const popupText = document.querySelector(`.popup-text`);
 const popupTime = document.querySelector(`.popup-time`);
+const monologue = document.querySelector(`.monologue`);
 
 const mierImg = document.querySelector(`.mier-img`);
 const fishImg = document.querySelector(`.fish-img`);
@@ -199,6 +200,62 @@ const stopTimer = () => {
     timerActive = false;
 };
 
+const putMonologue = (fish) => {
+    if (fish === `bongli`) {
+        return `this looks like the..<br>like the!!`;
+    } else if (fish === `gigaegg`) {
+        return `this fish reminds me..<br>of a certain egg person..`;
+    } else if (fish === `nico`) {
+        return `awww! very cute!<br>this reminds me of nico!`;
+    } else if (fish === `phrog`) {
+        return `hmmm... looks rather gay...<br>this reminds me of phrog!!`;
+    } else if (fish === `yobu`) {
+        return `cool octopus!<br>looks a lil sus though..`;
+    } else if (fish === `jett`) {
+        return `a bug?? this is gotta be..<br>jett!`;
+    } else if (fish === `genki`) {
+        return `this looks like a rabbit!<br>just lacking the antlers..`;
+    } else if (fish === `eight`) {
+        return `why does this fish have an eight??<br>reminds me of floo's gf!!`;
+    } else if (fish === `floo`) {
+        return `panda fish?? this looks like erm...<br>floo.. what the flip.. u_u`;
+    } else if (fish === `twelves`) {
+        return `oooohh it has cute lil horns..<br>this is 12s!!`;
+    } else if (fish === `partack`) {
+        return `wha- partack!?!??!?<br>were there ******s under the sea???`;
+    } else if (fish === `bs`) {
+        return `for some reason.. this reminds me of..<br>bluestrings......`;
+    } else if (fish === `jelly`) {
+        return `this jellyfish reminds me of..<br>a certain jelly man..`;
+    } else if (fish === `truilt`) {
+        return `so colorful!!<br>just like truilt!! :3`;
+    } else if (fish === `kags`) {
+        return `woah cool.... but i wouldnt go<br>to a sauna with this fish no way!`;
+    } else if (fish === `widow`) {
+        return `wha- widow!?!??!?<br>was there pho under the sea???`;
+    } else if (fish === `kero`) {
+        return `ghost shark!! it has a cool mask..<br>this is kero!!`;
+    } else if (fish === `temer`) {
+        return `woahhh!! i wonder...<br>where does it fart?? OTL`;
+    } else if (fish === `vert`) {
+        return `you ugly as hell!!!<br>reminds me of vert's kind...`;
+    } else if (fish === `solis`) {
+        return `that is horrifying...<br>just like solis!!`;
+    } else if (fish === `gfr`) {
+        return `a raptor!?!??!?<br>you look like you would stink..`;
+    } else if (fish === `abri`) {
+        return `so fat and heavy...<br>just like abri!!!`;
+    } else if (fish === `lance`) {
+        return `pointy fish!!<br>reminds me of someone pointy!!`;
+    } else if (fish === `mier`) {
+        return `woahh!! so cool!!<br>he's literally me... B]`;
+    } else {
+        return `Unknown fish!`;
+    }
+};
+
+
+
 const startFishing = (l, r, time, f) => {
     level = l;
     rounds = r;
@@ -265,13 +322,13 @@ const handleKeyPress = (event) => {
                 startTimer(timeRemaining + (((fishNames[`${currentFish}`][2] * difficulty[4]) * difficulty[0]) + difficulty[1]));
             // WIN LEVEL
             } else { 
+                monologue.innerHTML = putMonologue(currentFish[0]);
                 stopTimer();
                 setTimeout(() => {
                     timer.style.opacity = `0`;
                 }, 500);
                 playBtn.textContent = `fish!!!`;
                 playBtnAppear();
-                // mierImg.style.transition = `none`;
                 fishImg.style.display = `flex`;
                 setTimeout(() => {
                     fishImg.style.transform = `none`;
@@ -288,6 +345,14 @@ const handleKeyPress = (event) => {
                     setTimeout(() => {
                         mierImg.src = mierWin2;
                         fishImg.style.transform = `translateX(-6%) translateY(14.6%)`;
+                        monologue.style.display = `flex`;
+                        monologue.style.opacity = `1`;
+                        setTimeout(() => {
+                            monologue.style.opacity = `0`;
+                            setTimeout(() => {
+                                monologue.style.display = `none`;
+                            }, 2000);
+                        }, 8000);
                     }, 2000);
                 });
                 const cf = document.querySelector(`.${currentFish[0]}`);
@@ -629,6 +694,7 @@ resetBtn.addEventListener(`click`, () => {
         const img = fish.querySelector(`img`);
         img.src = `./assets/fish/fishCatalog/locked.png`;
     });
+    location.reload();
 });
 
 if (false) {
@@ -800,7 +866,7 @@ const fishPool = [
     { fish: gfr,     chance: 1 },
     { fish: mier,    chance: 1 },
 ];
-
+ 
 
 const selectFish = () => {
     const totalWeight = fishPool.reduce((sum, { chance }) => sum + chance, 0);
@@ -924,7 +990,7 @@ const cloudMove = () => {
     }, 1);
     setTimeout(() => {
         currentCloud.style.transition = `none`;
-        currentCloud.style.left = `-50vw`;
+        currentCloud.style.left = `-80vw`;
     }, 40000);
 }
 
@@ -933,3 +999,5 @@ setInterval(() => {
 }, 50000);
 
 cloudMove();
+
+// const oceanSound = new 
