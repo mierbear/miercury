@@ -98,19 +98,18 @@ const setMier = () => {
 }
 
 const playBtnAppear = () => {
-    playBtn.style.pointerEvents = `all`;
     playBtn.style.display = `flex`;
     setTimeout(() => {
         playBtn.style.opacity = `1`;
+        setTimeout(() => {
+            playBtn.style.pointerEvents = `all`;
+        }, 2000);
     }, 1000);
 }
 
 const playBtnDisappear = () => {
     playBtn.style.pointerEvents = `none`;
     playBtn.style.opacity = `0`;
-    // setTimeout(() => {
-    //     playBtn.style.display = `none`;
-    // }, 2000);
 }
 
 const startRound = (level) => {
@@ -149,7 +148,7 @@ const startTimer = (time) => {
     timerText.textContent = `${Math.trunc(timeRemaining)}`;
     timer.style.opacity = `1`;
     keysDiv.style.opacity = `1`;
-    timer.style.backgroundColor = `black`;
+    timer.style.backgroundColor = `rgb(51, 53, 67)`;
 
     updateTimerBar();
 
@@ -170,7 +169,7 @@ const startTimer = (time) => {
             if (extraLife) {
                 timeRemaining += 10
                 extraLife = false;
-                timer.style.backgroundColor = `black`;
+                timer.style.backgroundColor = `rgb(51, 53, 67)`;
             } else {
                 stopTimer();
                 console.log(`you lose!`);
@@ -323,6 +322,11 @@ fishAll.forEach((fish, index) => {
     fish.addEventListener(`click`, () => {
         if (fish.classList.contains(`unlocked`)) {
             const selectedFish = fishObjects[index];
+            if (selectedFish.stars === `★★★★★`) {
+                infoStars.style.animation = `rainbow .5s ease-in-out infinite`;
+            } else {
+                infoStars.style.animation = `gold 2s ease-in-out infinite`;
+            }
             infoStars.textContent = selectedFish.stars;
             infoImg.src = selectedFish.img;
             infoHeader.textContent = selectedFish.h;
@@ -331,10 +335,11 @@ fishAll.forEach((fish, index) => {
             
             catalogInfo.style.display = `flex`;
         } else {
-            infoImg.src = ``;
-            infoHeader.textContent = `???`;
-            infoSubHeader.textContent = `???`;
-            infoDesc.textContent = `???`;
+            infoImg.src = `./assets/fish/fishCatalog/locked.png`;
+            infoStars.textContent = ``;
+            infoHeader.textContent = ``;
+            infoSubHeader.textContent = ``;
+            infoDesc.textContent = `catch this fish first!`;
             
             catalogInfo.style.display = `flex`;
         }
@@ -401,7 +406,7 @@ const fishObjects = [
 {
     stars: `★★★★☆`,
     img: `./assets/fish/partackImg.png`,
-    h: `Fiordland Penguin`,
+    h: `Fiordland Penguin (Partack)`,
     sh: `Eudyptes Pachyrhynchus`,
     desc: `The Tawaki, or Fiordland penguin, is a rare and secretive species of crested penguin native to the rugged coastlines and temperate rainforests of New Zealand’s South Island. Unlike most penguins that inhabit open tundras or icy landscapes, Tawaki prefer dense forests and rocky fjords, making them one of the most elusive penguin species. They have distinctive yellow crests above their eyes, similar to other crested penguins, and are known for their excellent swimming and diving abilities, hunting small fish, squid, and crustaceans in the cold waters of the Southern Ocean. Their breeding sites are well hidden among thick vegetation or caves, providing natural protection from predators. Fun Fact: Tawaki are one of the least-studied penguin species, and their secretive nature has led scientists to nickname them the "forest-dwelling penguins." Unlike most penguins that waddle in large groups, Tawaki often nest in isolated pairs deep within coastal rainforests!`,
 },
@@ -823,6 +828,7 @@ const updateChances = (fishCaught) => {
 playBtn.addEventListener(`click`, () => {
     if (timerActive) { return }
     currentFish = [];
+    timer.style.backgroundColor = `rgb(51, 53, 67)`;
     mierImg.style.transform = `none`;
     mierImg.src = `./assets/fish/mier-0.png`
     fishImg.style.transform = `none`;
@@ -837,8 +843,8 @@ playBtn.addEventListener(`click`, () => {
             console.log(...selected);
             // startFishing(...partack);
         }, 700);
-    }, (Math.trunc(Math.random() * 10) + 5) * 1000);
-    // }, 0);
+    // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
+    }, 0);
 });
 
 const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
@@ -877,3 +883,53 @@ const loadProgress = () => {
 // }
 
 loadProgress();
+
+const bird = document.querySelector(`.bird`)
+
+setInterval(() => {
+    bird.src = `./assets/fish/bird-0.png`
+    setTimeout(() => {
+        bird.src = `./assets/fish/bird-1.png`
+    }, 500);
+}, 3000);
+
+const birdFly = () => {
+    bird.style.transition = `none`;
+    bird.style.right = `-10vw`;
+
+    setTimeout(() => {
+        bird.style.transition = `all 15s ease-in-out`;
+        bird.style.right = `110vw`;
+    }, 50);
+};
+
+setInterval(() => {
+    birdFly();
+    console.log(`meow`);
+}, 25000);
+
+birdFly();
+
+const cloud0 = document.querySelector(`.cloud-0`);
+const cloud1 = document.querySelector(`.cloud-1`);
+const cloud2 = document.querySelector(`.cloud-2`);
+
+const clouds = [cloud0, cloud1, cloud2];
+
+const cloudMove = () => {
+    const currentCloud = randomizer(clouds);
+    currentCloud.style.transition = `all 40s ease`;
+    setTimeout(() => {
+        currentCloud.style.left = `100vw`;
+    }, 1);
+    setTimeout(() => {
+        currentCloud.style.transition = `none`;
+        currentCloud.style.left = `-50vw`;
+    }, 40000);
+}
+
+setInterval(() => {
+    cloudMove();
+}, 50000);
+
+cloudMove();

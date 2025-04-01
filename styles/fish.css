@@ -1,6 +1,7 @@
 /* GENERAL */
 * {
     font-family: "Inconsolata", monospace;
+    color: rgb(51, 53, 67);
 }
 
 html,
@@ -17,13 +18,13 @@ body {
 .center {
     width: 100%;
     height: 100vh;
-    background-color: rgb(109, 143, 215);
+    /* background-color: rgb(109, 143, 215); */
+    background: linear-gradient(to bottom, rgb(105, 166, 208), rgb(105, 166, 208), rgb(117, 180, 216), rgb(160, 233, 255));
     display: grid;
     grid-template-rows: 60% 1fr;
 }
 
 .top {
-    background-color: aliceblue;
     width: 100%;
     height: 100%;
     display: flex;
@@ -38,6 +39,7 @@ body {
     font-size: 130px;
     transition: all 2s ease;
     font-family: "Outfit", sans-serif;
+    z-index: 20;
 }
 
 .play:hover {
@@ -46,7 +48,6 @@ body {
 }
 
 .bottom {
-    background-color: wheat;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -96,7 +97,7 @@ body {
 .timer {
     margin-top: 2%;
     z-index: 15;
-    background-color: black;
+    background-color: rgb(51, 53, 67);
     width: 50%;
     border-radius: 5px;
     transition: all 2s;
@@ -108,6 +109,14 @@ body {
     align-items: center;
 }
 
+.timer-text {
+    color: white;
+    font-size: 5vh;
+    border: 5px;
+    border-radius: 10px;
+    font-family: "Outfit", sans-serif;
+}
+
 .water {
     position: absolute;
     top: 80%;
@@ -117,10 +126,12 @@ body {
     object-fit: fill;
     transform: scale(1.2);
     animation: waves 5s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .fish-img,
 .platform-img,
+.platform-shadow,
 .mier-img {
     position: absolute;
     /* bottom: -15%; */
@@ -212,20 +223,26 @@ body {
     min-width: 40vw;
     max-width: 40vw;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: space-around; */
     align-items: center;
     z-index: 100;
     gap: 10px;
     background-color: rgba(160, 214, 248, 0.636);
     pointer-events: all;
     box-sizing: border-box;
-    padding: 5%;
+    padding: 0% 5%;
 }
 
 .fish-info h1,
 .fish-info h4,
 .fish-info p {
     text-align: center;
+}
+
+.stars {
+    padding: 2.5%;
+    font-size: 4vh;
+    animation: gold 2s ease-in-out infinite;
 }
 
 .info-img {
@@ -398,7 +415,7 @@ button.current-difficulty {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    z-index: 100;
+    z-index: 40;
     pointer-events: none;
     transition: all 2s ease-in-out;
 }
@@ -410,9 +427,8 @@ button.current-difficulty {
     flex-direction: column;
     position: fixed;
     gap: 2%;
-    z-index: 120;
+    z-index: 40;
     min-width: 10vw;
-    min-height: 4vh;
     pointer-events: none;
     background-color: rgba(215, 222, 225, 0.799);
     border-radius: 5px;
@@ -424,6 +440,53 @@ button.current-difficulty {
 .popup p {
     font-size: 1.5rem;
 }
+
+.bird {
+    position: absolute;
+    top: 12vh;
+    right: -10vw;
+    width: 10%;
+    max-height: 100vh;
+    z-index: 9;
+    object-fit: fill;
+    pointer-events: none;
+    /* transition: all 15s ease-in-out; */
+    /* transition: all .5s ease; */
+    /* animation: birds 10s infinite; */
+}
+
+.cloud {
+    position: absolute;
+    top: 0;
+    left: -50vw;
+    width: 90vh;
+    max-height: 100vh;
+    z-index: 2;
+    object-fit: fill;
+    pointer-events: none;
+}
+
+.cloud-0 {
+    top: 10vh;
+}
+
+.cloud-1 {
+    top: 10vh;
+}
+
+.cloud-2 {
+    top: 6vh;
+}
+
+/* @keyframes birds {
+    0% {
+        transform: translateX(60vw);
+    }
+
+    100% {
+        transform: translateX(-60vw);
+    }
+} */
 
 @keyframes waves {
     0% {
@@ -466,6 +529,56 @@ button.current-difficulty {
 
     100% {
         transform: translate(0, 0);
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        color: rgb(255, 70, 70);
+        filter: drop-shadow(0px 0px 5px rgb(255, 70, 70));
+    }
+
+    20% {
+        color: rgb(255, 221, 117);
+        filter: drop-shadow(0px 0px 5px rgb(255, 221, 117));
+    }
+
+    40% {
+        color: rgb(167, 255, 140);
+        filter: drop-shadow(0px 0px 5px rgb(167, 255, 140));
+    }
+
+    60% {
+        color: rgb(59, 59, 255);
+        filter: drop-shadow(0px 0px 5px rgb(59, 59, 255));
+    }
+
+    80% {
+        color: rgb(225, 94, 255);
+        filter: drop-shadow(0px 0px 5px rgb(225, 94, 255));
+    }
+
+    100% {
+        color: rgb(255, 70, 70);
+        filter: drop-shadow(0px 0px 5px rgb(255, 70, 70));
+    }
+}
+
+
+@keyframes gold {
+    0% {
+        color: rgb(255, 227, 113);
+        filter: drop-shadow(0px 0px 5px rgb(255, 227, 113));
+    }
+
+    50% {
+        color: rgb(255, 255, 255);
+        filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+    }
+
+    100% {
+        color: rgb(255, 220, 80);
+        filter: drop-shadow(0px 0px 5px rgb(255, 227, 113));
     }
 }
 
