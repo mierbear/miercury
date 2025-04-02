@@ -662,25 +662,6 @@ const unlockFish = (fish) => {
     localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
 };
 
-const unlockBtn = document.querySelector(`.unlock-button`);
-
-unlockBtn.addEventListener(`click`, () => {
-    let unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
-
-    fishAll.forEach((fish) => {
-        fish.classList.add(`unlocked`);
-
-        const img = fish.querySelector(`img`);
-        img.src = `./assets/fish/fishCatalog/${fish.classList[1]}.png`;
-
-        const fishIdentifier = fish.classList[1];
-        if (!unlockedFish.includes(fishIdentifier)) {
-            unlockedFish.push(fishIdentifier);
-        }
-    });
-    localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
-});
-
 const resetBtn = document.querySelector(`.reset-button`);
 
 resetBtn.addEventListener(`click`, () => {
@@ -703,7 +684,7 @@ if (false) {
 
 let difficulty = [2.2,  1.0,  2.0,  2,  0.10,  1.00];
 
-let easy =     [2.6,  1.1,  6.0,  1,  0.15,  0.75];
+let easy =     [2.6,  1.1,  5.0,  1,  0.15,  0.75];
 let medium =   [2.2,  1.0,  3.0,  2,  0.10,  1.00];
 let hard =     [1.8,  0.9,  1.5,  2,  0.10,  1.50];
 let insane =   [1.4,  0.8,  1.0,  3,  0.09,  2.00];
@@ -902,14 +883,15 @@ playBtn.addEventListener(`click`, () => {
     start();
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
+        takebait();
         setTimeout(() => {
             const selected = selectFish();
             startFishing(...selected);
             console.log(...selected);
             // startFishing(...kero);
         }, 700);
-    // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
-    }, 0);
+    }, (Math.trunc(Math.random() * 10) + 5) * 1000);
+    // }, 0);
 });
 
 const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
@@ -1004,11 +986,17 @@ let pullFX;
 let reelFX;
 let splashFX;
 let startFX;
+let takebaitFX;
 let successFX0;
 let successFX1;
+let successFX2;
+let successFX3;
+let successFX4;
 let failFX;
 let hitFX;
 let wrongFX;
+let laughFX0;
+let laughFX1;
 
 const beach = () => {
     beachFX = new Audio('./assets/fish/audio/beach.mp3');
@@ -1042,6 +1030,12 @@ const splash = () => {
     splashFX.play();
 };
 
+const takebait = () => {
+    takebaitFX = new Audio('./assets/fish/audio/takebait.mp3');
+    takebaitFX.preload = "auto";
+    takebaitFX.play();
+};
+
 const start = () => {
     startFX = new Audio('./assets/fish/audio/start.mp3');
     startFX.preload = "auto";
@@ -1049,11 +1043,17 @@ const start = () => {
 };
 
 const success = () => {
-    successFX0 = new Audio('./assets/fish/audio/success2.mp3');
-    successFX1 = new Audio('./assets/fish/audio/success.mp3');
+    successFX0 = new Audio('./assets/fish/audio/success0.mp3');
+    successFX1 = new Audio('./assets/fish/audio/success1.mp3');
+    successFX2 = new Audio('./assets/fish/audio/success2.mp3');
+    successFX3 = new Audio('./assets/fish/audio/success3.mp3');
+    successFX4 = new Audio('./assets/fish/audio/success4.mp3');
     successFX0.preload = "auto";
     successFX1.preload = "auto";
-    const successFX = [successFX0, successFX1]
+    successFX2.preload = "auto";
+    successFX3.preload = "auto";
+    successFX4.preload = "auto";
+    const successFX = [successFX0, successFX1, successFX2, successFX3, successFX4,]
     randomizer(successFX).play();
 };
 
@@ -1064,7 +1064,7 @@ const fail = () => {
 };
 
 const hit = () => {
-    hitFX = new Audio('./assets/fish/audio/hit.mp3');
+    hitFX = new Audio('./assets/fish/audio/hit.wav');
     hitFX.preload = "auto";
     hitFX.play();
 };
@@ -1073,6 +1073,18 @@ const wrong = () => {
     wrongFX = new Audio('./assets/fish/audio/wrong.mp3');
     wrongFX.preload = "auto";
     wrongFX.play();
+};
+
+const laugh0 = () => {
+    laughFX0 = new Audio('./assets/fish/audio/laugh0.mp3');
+    laughFX0.preload = "auto";
+    laughFX0.play();
+};
+
+const laugh1 = () => {
+    laughFX1 = new Audio('./assets/fish/audio/laugh1.mp3');
+    laughFX1.preload = "auto";
+    laughFX1.play();
 };
 
 
@@ -1120,8 +1132,48 @@ const startGame = () => {
         }, 2000);
         startBeach = true;
     }
-}
+};
 
 document.addEventListener('mousedown', () => {
     startGame();
 }, { once: true });
+
+const cheatTxt = document.querySelector(`.cheat-text`);
+const unlockBtn = document.querySelector(`.unlock-button`);
+
+cheatTxt.addEventListener(`input`, () => {
+    if (cheatTxt.value === `im gay` || cheatTxt.value === `im really gay`) {
+        unlockBtn.style.backgroundColor = `white`;
+        unlockBtn.style.pointerEvents = `all`;
+    } else {
+        unlockBtn.style.backgroundColor = `gray`;
+        unlockBtn.style.pointerEvents = `none`;
+    }
+});
+
+unlockBtn.addEventListener(`click`, () => {
+    if (cheatTxt.value === `im gay`) {
+        unlockBtn.textContent = `lol`;
+        let unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+        fishAll.forEach((fish) => {
+            fish.classList.add(`unlocked`);
+    
+            const img = fish.querySelector(`img`);
+            img.src = `./assets/fish/fishCatalog/${fish.classList[1]}.png`;
+    
+            const fishIdentifier = fish.classList[1];
+            if (!unlockedFish.includes(fishIdentifier)) {
+                unlockedFish.push(fishIdentifier);
+            }
+        });
+        localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
+    }
+});
+
+// unlockBtn.addEventListener(`mouseenter`, () => {
+//     unlockBtn.textContent = `lol cheater`;
+// });
+
+// unlockBtn.addEventListener(`mouseleave`, () => {
+//     unlockBtn.textContent = `unlock everything`;
+// });

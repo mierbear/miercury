@@ -196,6 +196,7 @@ body {
     transition: all 0.5s ease;
     border-radius: 10%;
     border: rgb(51, 53, 67) 1px solid;
+    font-weight: 600;
 }
 
 .fish img {
@@ -228,7 +229,6 @@ body {
     /* justify-content: space-around; */
     align-items: center;
     z-index: 100;
-    gap: 10px;
     background-color: rgb(215 237 252 / 83%);
     pointer-events: all;
     box-sizing: border-box;
@@ -241,6 +241,14 @@ body {
     text-align: center;
 }
 
+.fish-info h4 {
+    padding-bottom: 15px;
+}
+
+.fish-info p {
+    text-align: justify;
+}
+
 .stars {
     padding: 2.5%;
     font-size: 4vh;
@@ -250,6 +258,7 @@ body {
 .info-img {
     max-width: 40vw;
     max-height: 25vh;
+    padding: 15px;
 }
 
 .x,
@@ -291,7 +300,8 @@ body {
     width: 40vw;
     height: 40vh;
     pointer-events: all;
-    background-color: rgb(207, 211, 215);
+    background-color: rgba(195, 205, 215, 0.818);
+    border-radius: 15px;
 }
 
 .menu {
@@ -329,6 +339,22 @@ body {
     transform: scale(1.1);
 }
 
+.cheat {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 5vh;
+    padding: 5px;
+}
+
+.cheat-text {
+    width: 60%;
+    text-align: center;
+    height: 50%;
+}
+
 .unlock-button {
     border: none;
     border-radius: 5px;
@@ -336,6 +362,9 @@ body {
     padding: 2%;
     font-size: large;
     cursor: pointer;
+    width: 40%;
+    background-color: gray;
+    pointer-events: none;
 }
 
 .unlock-button:hover {
