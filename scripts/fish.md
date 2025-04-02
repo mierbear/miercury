@@ -41,6 +41,7 @@ TO DO LIST:
 - render fish better
 - add sfx
 - improve ui
+- improve fish catalogue info
 
 orca
 leatherback turtle

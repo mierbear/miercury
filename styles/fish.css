@@ -34,12 +34,14 @@ body {
 
 .play {
     display: flex;
+    position: absolute;
     justify-content: center;
     align-items: center;
     font-size: 130px;
-    transition: all 2s ease;
+    transition: all 3s ease-out;
     font-family: "Outfit", sans-serif;
     z-index: 20;
+    top: -20vh;
 }
 
 .play:hover {
@@ -179,13 +181,13 @@ body {
     z-index: 100;
     gap: 10px;
     padding: 20px;
-    background-color: rgba(140, 199, 231, 0.253);
+    background-color: rgba(140, 186, 231, 0.225);
     pointer-events: all;
     border-radius: 15px;
 }
 
 .fish {
-    background-color: rgb(213, 223, 228);
+    background-color: rgba(183, 211, 230, 0.94);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -193,11 +195,11 @@ body {
     width: 8vw;
     transition: all 0.5s ease;
     border-radius: 10%;
-    border: black 1px solid;
+    border: rgb(51, 53, 67) 1px solid;
 }
 
 .fish img {
-    width: 100%;
+    width: 105%;
     transition: all 0.5s ease;
     z-index: 100;
 }
@@ -227,7 +229,7 @@ body {
     align-items: center;
     z-index: 100;
     gap: 10px;
-    background-color: rgba(160, 214, 248, 0.636);
+    background-color: rgb(215 237 252 / 83%);
     pointer-events: all;
     box-sizing: border-box;
     padding: 0% 5%;
@@ -247,7 +249,7 @@ body {
 
 .info-img {
     max-width: 40vw;
-    max-height: 30vh;
+    max-height: 25vh;
 }
 
 .x,
@@ -296,10 +298,11 @@ body {
     display: flex;
     flex-direction: column;
     position: fixed;
-    right: 2.5vh;
+    right: -20vh;
     bottom: 2.5vh;
     gap: 2.5vh;
     z-index: 100;
+    transition: all 2s ease-in-out;
 }
 
 .menu img {
@@ -381,12 +384,12 @@ body {
 
 .difficulties button:hover {
     transform: scale(1.1);
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(51, 53, 67);
     color: white;
 }
 
 button.current-difficulty {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(51, 53, 67);
     color: white;
 }
 
@@ -395,7 +398,6 @@ button.current-difficulty {
     display: none;
     flex-direction: column;
     background-color: rgba(15, 15, 18, 0.7);
-    color: white;
     padding: 10px;
     border-radius: 5px;
     /* min-width: 20vw; */
@@ -405,6 +407,10 @@ button.current-difficulty {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.diff-tooltip p {
+    color: white;
 }
 
 .popup-container {
@@ -432,7 +438,7 @@ button.current-difficulty {
     pointer-events: none;
     background-color: rgba(215, 222, 225, 0.799);
     border-radius: 5px;
-    border: rgba(0, 0, 0, 0.308) solid 2px;
+    border: rgba(51, 53, 67, 0.316) solid 2px;
     padding: 5%;
     margin-bottom: 4vh;
 }
@@ -459,7 +465,7 @@ button.current-difficulty {
     position: fixed;
     opacity: 0;
     display: none;
-    right: 15.2vw;
+    right: 15.5vw;
     top: 30vh;
     background-color: rgba(255, 255, 255, 0.23);
     border-radius: 5px;
@@ -514,6 +520,17 @@ button.current-difficulty {
         transform: translateX(-60vw);
     }
 } */
+
+.start {
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    font-size: 3vh;
+    bottom: 27vh;
+    font-weight: bold;
+    animation: grow-shrink 4s ease-in-out infinite;
+    transition: all 2s ease;
+}
 
 @keyframes waves {
     0% {
@@ -599,13 +616,27 @@ button.current-difficulty {
     }
 
     50% {
-        color: rgb(255, 255, 255);
-        filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+        color: rgb(0, 0, 0);
+        filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
     }
 
     100% {
         color: rgb(255, 220, 80);
         filter: drop-shadow(0px 0px 5px rgb(255, 227, 113));
+    }
+}
+
+@keyframes grow-shrink {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }
 
