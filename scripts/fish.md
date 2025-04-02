@@ -1,3 +1,13 @@
+TO DO LIST:
+
+- render fish better
+- add more bg stuff??
+
+THIS IS THE FINAL STRETCH, NO MORE CODING (?)
+IM NOT ADDING MUSIC
+
+//////////// IGNORE V
+
 800 - bubble eye goldfish
 
 partack - penguin
@@ -34,14 +44,6 @@ nico - seabunny
 yobu - bluering octopus
 
 idea scrapped!! but if you see this, you know where i was going with it LOLOLOL
-
-TO DO LIST:
-
-- add music
-- render fish better
-- add sfx
-- improve ui
-- improve fish catalogue info
 
 orca
 leatherback turtle
@@ -100,3 +102,34 @@ setMier();
                 startTimer(timeRemaining + extraTime[0]) + ((timeRemaining + extraTime[0]) * extraTime[1]);
 
 what do you think i could do to better balance this properly?
+
+unlockBtn.addEventListener(`click`, () => {
+if (cheatTxt.value === `im really gay`) {
+if (cheatProceed) {
+laugh1();
+unlockBtn.textContent = `you've unlocked everything!`;
+let unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+fishAll.forEach((fish) => {
+fish.classList.add(`unlocked`);
+
+                const img = fish.querySelector(`img`);
+                img.src = `./assets/fish/fishCatalog/${fish.classList[1]}.png`;
+
+                const fishIdentifier = fish.classList[1];
+                if (!unlockedFish.includes(fishIdentifier)) {
+                    unlockedFish.push(fishIdentifier);
+                }
+            }, { once: true });
+            localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
+        } else {
+            unlockBtn.textContent = `type in the first code.`;
+        }
+    } else if (cheatTxt.value === `im gay`) {
+        unlockBtn.textContent = `now input "im really gay"`;
+        cheatProceed = true;
+        laugh0();
+    }
+
+});
+
+lol

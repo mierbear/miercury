@@ -181,7 +181,7 @@ const startTimer = (time) => {
             } else {
                 stopTimer();
                 console.log(`you lose!`);
-                fail();
+                playSound(fail());
                 timer.style.opacity = `0`;
                 keysDiv.style.opacity = `0`;
                 currentFish = [];
@@ -304,7 +304,7 @@ const handleKeyPress = (event) => {
     // WRONG KEY
     if (event.key !== firstKeyInput && event.key !== firstKeyInput.toLowerCase()) {
         console.log(`wrong!`);
-        wrong();
+        playSound(wrong());
         timeRemaining -= difficulty[5];
         timerText.textContent = `${Math.trunc(timeRemaining)}`;
         updateTimerBar();
@@ -317,7 +317,7 @@ const handleKeyPress = (event) => {
     // RIGHT KEY
     if (event.key === firstKeyInput || event.key === firstKeyInput.toLowerCase()) {
         console.log("correct");
-        hit();
+        playSound(hit());
         inputPlayer.push(event.key);
         console.log(inputPlayer);
 
@@ -327,8 +327,8 @@ const handleKeyPress = (event) => {
         // WIN ROUND
         if (inputPlayer.length === inputGame.length) {
             currentRound++;
-            reel();
-            splash();
+            playSound(reel());
+            playSound(splash());
             inputPlayer = [];
             inputGame = [];
             setMier();
@@ -344,8 +344,8 @@ const handleKeyPress = (event) => {
                 startTimer(timeRemaining + (((fishNames[`${currentFish}`][2] * difficulty[4]) * difficulty[0]) + difficulty[1]));
             // WIN LEVEL
             } else { 
-                success();
-                pull();
+                playSound(success());
+                playSound(pull());
                 monologue.innerHTML = putMonologue(currentFish[0]);
                 stopTimer();
                 setTimeout(() => {
@@ -424,7 +424,7 @@ fishAll.forEach((fish, index) => {
             
             catalogInfo.style.display = `flex`;
         } else {
-            infoImg.src = `./assets/fish/fishCatalog/locked.png`;
+            infoImg.src = `./assets/fish/fishCatalog/locked-2.png`;
             infoStars.textContent = ``;
             infoHeader.textContent = ``;
             infoSubHeader.textContent = ``;
@@ -880,18 +880,18 @@ playBtn.addEventListener(`click`, () => {
     fishImg.style.display = `none`;
     fishImg.src = ``;
     playBtnDisappear();
-    start();
+    playSound(start());
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
-        takebait();
+        playSound(takebait());
         setTimeout(() => {
             const selected = selectFish();
             startFishing(...selected);
             console.log(...selected);
             // startFishing(...kero);
         }, 700);
-    }, (Math.trunc(Math.random() * 10) + 5) * 1000);
-    // }, 0);
+    // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
+    }, 0);
 });
 
 const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
@@ -952,7 +952,6 @@ const birdFly = () => {
 
 setInterval(() => {
     birdFly();
-    console.log(`meow`);
 }, 25000);
 
 birdFly();
@@ -972,7 +971,7 @@ const cloudMove = () => {
     setTimeout(() => {
         currentCloud.style.transition = `none`;
         currentCloud.style.left = `-80vw`;
-    }, 40000);
+    }, 50000);
 }
 
 setInterval(() => {
@@ -1015,31 +1014,31 @@ const beachStop = () => {
 const pull = () => {
     pullFX = new Audio('./assets/fish/audio/pull.mp3');
     pullFX.preload = "auto";
-    pullFX.play();
+    return pullFX;
 };
 
 const reel = () => {
     reelFX = new Audio('./assets/fish/audio/reel.mp3');
     reelFX.preload = "auto";
-    reelFX.play();
+    return reelFX;
 };
 
 const splash = () => {
     splashFX = new Audio('./assets/fish/audio/splash.mp3');
     splashFX.preload = "auto";
-    splashFX.play();
+    return splashFX;
 };
 
 const takebait = () => {
     takebaitFX = new Audio('./assets/fish/audio/takebait.mp3');
     takebaitFX.preload = "auto";
-    takebaitFX.play();
+    return takebaitFX;
 };
 
 const start = () => {
     startFX = new Audio('./assets/fish/audio/start.mp3');
     startFX.preload = "auto";
-    startFX.play();
+    return startFX;
 };
 
 const success = () => {
@@ -1054,66 +1053,72 @@ const success = () => {
     successFX3.preload = "auto";
     successFX4.preload = "auto";
     const successFX = [successFX0, successFX1, successFX2, successFX3, successFX4,]
-    randomizer(successFX).play();
+    return randomizer(successFX);
 };
 
 const fail = () => {
     failFX = new Audio('./assets/fish/audio/fail.mp3');
     failFX.preload = "auto";
-    failFX.play();
+    return failFX;
 };
 
 const hit = () => {
     hitFX = new Audio('./assets/fish/audio/hit.wav');
     hitFX.preload = "auto";
-    hitFX.play();
+    return hitFX;
 };
 
 const wrong = () => {
     wrongFX = new Audio('./assets/fish/audio/wrong.mp3');
     wrongFX.preload = "auto";
-    wrongFX.play();
+    return wrongFX;
 };
 
 const laugh0 = () => {
     laughFX0 = new Audio('./assets/fish/audio/laugh0.mp3');
     laughFX0.preload = "auto";
-    laughFX0.play();
+    return laughFX0;
 };
 
 const laugh1 = () => {
     laughFX1 = new Audio('./assets/fish/audio/laugh1.mp3');
     laughFX1.preload = "auto";
-    laughFX1.play();
+    return laughFX1;
 };
 
+// const musicBtn = document.querySelector(`.music`);
+// let music = true;
 
-const musicBtn = document.querySelector(`.music`);
+// musicBtn.addEventListener(`click`, () => {
+//     if (music) {
+//         musicBtn.src = `./assets/fish/musicnone.png`;
+//         music = false;
+//     } else {
+//         musicBtn.src = `./assets/fish/music.png`;
+//         music = true;
+//     }
+// });
+
 const sfxBtn = document.querySelector(`.sfx`);
-let music = true;
 let sfx = true;
-
-musicBtn.addEventListener(`click`, () => {
-    if (music) {
-        musicBtn.src = `./assets/fish/musicnone.png`;
-        music = false;
-        beachStop();
-    } else {
-        musicBtn.src = `./assets/fish/music.png`;
-        music = true;
-        beach();
-    }
-});
 
 sfxBtn.addEventListener(`click`, () => {
     if (sfx) {
         sfxBtn.src = `./assets/fish/soundnone.png`;
         sfx = false;
+        beachStop();
     } else {
         sfxBtn.src = `./assets/fish/sound.png`;
         sfx = true;
+        beach();
     }
 });
+
+const playSound = (sound) => {
+    if (sfx) {
+        sound.play();
+    }
+};
 
 let startBeach = false;
 
@@ -1169,11 +1174,3 @@ unlockBtn.addEventListener(`click`, () => {
         localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
     }
 });
-
-// unlockBtn.addEventListener(`mouseenter`, () => {
-//     unlockBtn.textContent = `lol cheater`;
-// });
-
-// unlockBtn.addEventListener(`mouseleave`, () => {
-//     unlockBtn.textContent = `unlock everything`;
-// });
