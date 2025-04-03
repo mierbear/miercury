@@ -2,6 +2,7 @@
 
 const sec = 1000;
 
+const fishContainer = document.querySelector(`.fishes`);
 const fishAll = document.querySelectorAll(`.fish`);
 const infoStars = document.querySelector(`.stars`);
 const infoImg = document.querySelector(`.info-img`);
@@ -36,6 +37,7 @@ let level;
 let extraLife = false;
 let mierState = 0;
 let mierSlide = 0;
+let win = false;
 
 const randomizer = (arr) => {
     return arr[Math.trunc((Math.random() * arr.length))];
@@ -274,7 +276,6 @@ const putMonologue = (fish) => {
 };
 
 
-
 const startFishing = (l, r, time, f) => {
     level = l;
     rounds = r;
@@ -393,6 +394,14 @@ const handleKeyPress = (event) => {
                 unlockFish(currentFish);
                 updateChances(fishNames[currentFish]);
                 showPopup(currentFish, timeRemaining);
+                setTimeout(() => {
+                    // WIN GAME
+                    if (!checkCert && !win && !cheatedStatus) {
+                        winStats = [fishCaught, fishHooked, hitCount, mistakes, savedDifficulty, diffChange];
+                        localStorage.setItem(`winStats`, JSON.stringify(winStats));
+                        checkWin(fishContainer, 'unlocked');
+                    }
+                }, 4000);
             }
         }
 
@@ -403,6 +412,14 @@ const handleKeyPress = (event) => {
         }
     }
 };
+
+let winCaught;
+let winHooked;
+let winCount;
+let winMistakes;
+let winDiff;
+let winDiffChange;
+let winStats = [];
 
 document.addEventListener(`keydown`, (event) => {
     if (timerActive) {
@@ -676,6 +693,7 @@ resetBtn.addEventListener(`click`, () => {
     localStorage.removeItem('hitCount');
     localStorage.removeItem('mistakes');
     localStorage.removeItem('cheatedStatus');
+    localStorage.removeItem('win');
     fishAll.forEach((fish) => {
         fish.classList.remove(`unlocked`);
 
@@ -900,7 +918,7 @@ playBtn.addEventListener(`click`, () => {
             const selected = selectFish();
             startFishing(...selected);
             console.log(...selected);
-            // startFishing(...mier);
+            // startFishing(...bs);
         }, 700);
     // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     }, 0);
@@ -939,7 +957,7 @@ const clouds = [cloud0, cloud1, cloud2];
 
 const cloudMove = () => {
     const currentCloud = randomizer(clouds);
-    currentCloud.style.transition = `all 50s`;
+    currentCloud.style.transition = `all 40s`;
     setTimeout(() => {
         currentCloud.style.left = `100vw`;
     }, 1);
@@ -1095,36 +1113,11 @@ const playSound = (sound) => {
     }
 };
 
-let startBeach = false;
-
-// I HATE GOOGLE
-const menu = document.querySelector(`.menu`);
-const startTxt = document.querySelector(`.start`);
-const counterContainer = document.querySelector(`.counter-container`);
-
-const startGame = () => {
-    if (!startBeach) {
-        beach();
-        playBtn.style.top = `20vh`;
-        menu.style.right = `2.5vh`;
-        counterContainer.style.left = `2.5vh`;
-        startTxt.style.opacity = `0`;
-        setTimeout(() => {
-            startTxt.style.display = `none`;
-        }, 2000);
-        startBeach = true;
-    }
-};
-
-document.addEventListener('mousedown', () => {
-    startGame();
-}, { once: true });
-
 const cheatTxt = document.querySelector(`.cheat-text`);
 const unlockBtn = document.querySelector(`.unlock-button`);
 
 cheatTxt.addEventListener(`input`, () => {
-    if (cheatTxt.value === `im gay` || cheatTxt.value === `im really gay`) {
+    if (cheatTxt.value === `im a stupid cheater`) {
         unlockBtn.style.backgroundColor = `white`;
         unlockBtn.style.pointerEvents = `all`;
     } else {
@@ -1134,7 +1127,7 @@ cheatTxt.addEventListener(`input`, () => {
 });
 
 unlockBtn.addEventListener(`click`, () => {
-    if (cheatTxt.value === `im gay`) {
+    if (cheatTxt.value === `im a stupid cheater`) {
         cheatedToggle();
         unlockBtn.textContent = `lol`;
         let unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
@@ -1220,6 +1213,8 @@ const savedHitCount = JSON.parse(localStorage.getItem(`hitCount`));
 const savedMistakes = JSON.parse(localStorage.getItem(`mistakes`));
 const savedDiffChange = JSON.parse(localStorage.getItem(`diffChange`));
 const savedCheatedStatus = JSON.parse(localStorage.getItem(`cheatedStatus`));
+const savedWin = JSON.parse(localStorage.getItem(`win`));
+const savedWinStats = JSON.parse(localStorage.getItem(`winStats`));
 const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
 
 const loadProgress = () => {
@@ -1268,6 +1263,14 @@ const loadProgress = () => {
         mistakesEl.textContent = `mistakes: ${savedMistakes}`;
     }
 
+    if (savedWin) {
+        win = savedWin;
+    }
+
+    if (savedWinStats) {
+        winStats = savedWinStats;
+    }
+
     unlockedFish.forEach((fish) => {
         const fishEl = document.querySelector(`.fish.${fish}`);
         if (fishEl) {
@@ -1284,3 +1287,193 @@ const loadProgress = () => {
 // }
 
 loadProgress();
+
+const certificate = document.querySelector(`.congrats-container`);
+const congrats = document.querySelector(`.congrats-txt`);
+let checkCert = false;
+
+const checkWin = (parent, classList) => {
+    const children = parent.children 
+    const allUnlocked = Array.from(children).every(child => child.classList.contains(classList));
+    if (allUnlocked) {
+        checkCert = true;
+        win = true;
+        localStorage.setItem(`win`, JSON.stringify(win));
+        const hitPerc = (winStats[0] / winStats[1]) * 100;
+        const hitPerc2 = (winStats[2] / (winStats[3] + winStats[2])) * 100;
+        congrats.innerHTML = `congrats! you have caught all fish!<br>
+        at the time you caught all of them you had:<br>
+        <br>
+        you caught ${winStats[0]} out of ${winStats[1]} fishes hooked! (${hitPerc.toFixed(2)}%)<br>
+        you hit ${winStats[2]} out of ${winStats[2] + winStats[3]} keys! (${hitPerc2.toFixed(2)}%)<br>
+        you've beat the game on ${winStats[4]}<br>
+        and changed the difficulty ${winStats[5]} times!<br>
+        <br>
+        ${parseFloat(hitPerc.toFixed(2)) >= 86.76 &&
+        parseFloat(hitPerc2.toFixed(2)) >= 98.94 &&
+        winStats[4] === 'insane' &&
+        winStats[5] === 0
+        ? 'you have bested me...<br>good job hehe :3'
+        : 'good work!'}`;
+
+        certificate.style.display = `flex`;
+        setTimeout(() => {
+            certificate.style.opacity = `1`;
+        }, 1);
+
+        document.addEventListener('mousedown', () => {
+            certificate.style.opacity = `0`;
+            setTimeout(() => {
+                certificate.style.display = `none`;
+            }, 2000);
+        });
+    } else {
+        console.log(`you havent gotten all of them yet!`);
+    }
+}
+
+if (win && !cheatedStatus) {
+    checkWin(fishContainer, 'unlocked');
+}
+
+localStorage.setItem(`!!! i see you`, JSON.stringify(`you lil cheater lol`));
+
+const preloadAssets = (assets, onComplete) => {
+    let loadedCount = 0;
+    const totalAssets = assets.length;
+
+    assets.forEach(asset => {
+        const img = new Image();
+        img.src = asset;
+        img.onload = () => {
+            loadedCount++;
+            console.log(`Loaded: ${asset}`);
+            if (loadedCount === totalAssets) {
+                finishLoading();
+            }
+        };
+        img.onerror = () => {
+            console.error(`Failed to load: ${asset}`);
+        };
+    });
+};
+
+
+let startBeach = false;
+const menu = document.querySelector(`.menu`);
+const startTxt = document.querySelector(`.start`);
+const counterContainer = document.querySelector(`.counter-container`);
+
+const preloadAudio = (audioFiles, onComplete) => {
+    let loadedCount = 0;
+    const totalAudio = audioFiles.length;
+
+    audioFiles.forEach(audioSrc => {
+        const audio = new Audio(audioSrc);
+        audio.preload = "auto";
+        audio.oncanplaythrough = () => {
+            loadedCount++;
+            console.log(`Loaded audio: ${audioSrc}`);
+            if (loadedCount === totalAudio) {
+                finishLoading();
+            }
+        };
+        audio.onerror = () => {
+            console.error(`Failed to load audio: ${audioSrc}`);
+        };
+    });
+};
+
+const audioToLoad = [
+    `./assets/fish/audio/hit.wav`,
+    `./assets/fish/audio/fail.mp3`,
+    `./assets/fish/audio/pull.mp3`,
+    `./assets/fish/audio/reel.mp3`,
+    `./assets/fish/audio/splash.mp3`,
+    `./assets/fish/audio/start.mp3`,
+    `./assets/fish/audio/takebait.mp3`,
+    `./assets/fish/audio/wrong.mp3`,
+    `./assets/fish/audio/beach.mp3`,
+    `./assets/fish/audio/success0.mp3`,
+    `./assets/fish/audio/success1.mp3`,
+    `./assets/fish/audio/success2.mp3`,
+    `./assets/fish/audio/success3.mp3`,
+    `./assets/fish/audio/success4.mp3`,
+];
+
+
+const assetsToLoad = [
+    `./assets/fish/W.png`,
+    `./assets/fish/A.png`,
+    `./assets/fish/S.png`,
+    `./assets/fish/D.png`,
+    `./assets/fish/ArrowUp.png`,
+    `./assets/fish/ArrowLeft.png`,
+    `./assets/fish/ArrowDown.png`,
+    `./assets/fish/ArrowRight.png`,
+    `./assets/fish/fish/mierFish.png`,
+    `./assets/fish/fish/abriFish.png`,
+    `./assets/fish/fish/flooFish.png`,
+    `./assets/fish/fish/eightFish.png`,
+    `./assets/fish/fish/vertFish.png`,
+    `./assets/fish/fish/yobuFish.png`,
+    `./assets/fish/fish/phrogFish.png`,
+    `./assets/fish/fish/lanceFish.png`,
+    `./assets/fish/fish/nicoFish.png`,
+    `./assets/fish/fish/jellyFish.png`,
+    `./assets/fish/fish/temerFish.png`,
+    `./assets/fish/fish/twelvesFish.png`,
+    `./assets/fish/fish/bongliFish.png`,
+    `./assets/fish/fish/gigaeggFish.png`,
+    `./assets/fish/fish/jettFish.png`,
+    `./assets/fish/fish/genkiFish.png`,
+    `./assets/fish/fish/widowFish.png`,
+    `./assets/fish/fish/keroFish.png`,
+    `./assets/fish/fish/partackFish.png`,
+    `./assets/fish/fish/kagsFish.png`,
+    `./assets/fish/fish/bluestringsFish.png`,
+    `./assets/fish/fish/truiltFish.png`,
+    `./assets/fish/fish/solisFish.png`,
+    `./assets/fish/fish/gfrFish.png`,
+    `./assets/fish/mier-0.png`,
+    `./assets/fish/mier-1.png`,
+    `./assets/fish/mier-2.png`,
+    `./assets/fish/mier-3.png`,
+    `./assets/fish/mier-4.png`,
+    `./assets/fish/mier-5.png`,
+    `./assets/fish/mier-6.png`,
+    `./assets/fish/mier-7.png`,
+    `./assets/fish/mier-9.png`,
+    `./assets/fish/mier-10.png`,
+    `./assets/fish/mier-11.png`,
+    `./assets/fish/mier-12.png`,
+];
+
+preloadAudio(audioToLoad);
+preloadAssets(assetsToLoad);
+let loadCount = 0
+
+const finishLoading = () => {
+    loadCount++
+    if (loadCount === 2) {
+        console.log('All assets preloaded!');
+        startTxt.textContent = `click to start!`
+        document.addEventListener('mousedown', () => {
+            startGame();
+        }, { once: true });
+    }
+}
+
+const startGame = () => {
+    if (!startBeach) {
+        beach();
+        playBtn.style.top = `20vh`;
+        menu.style.right = `2.5vh`;
+        counterContainer.style.left = `2.5vh`;
+        startTxt.style.opacity = `0`;
+        setTimeout(() => {
+            startTxt.style.display = `none`;
+        }, 2000);
+        startBeach = true;
+    }
+};

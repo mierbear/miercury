@@ -584,6 +584,35 @@ button.current-difficulty {
     text-shadow: -3px 3px 2px rgba(16, 46, 135, 0.333);
 }
 
+.congrats-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1400;
+    transition: all 2s ease-in-out;
+    opacity: 0;
+}
+
+.congrats-img {
+    position: absolute;
+    z-index: 1400;
+    height: 80%;
+}
+
+.congrats-txt {
+    position: absolute;
+    z-index: 1600;
+    padding-right: 13vw;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 @keyframes waves {
     0% {
         transform: scale(1.2) translate(0, 0);
