@@ -303,6 +303,7 @@ const handleKeyPress = (event) => {
 
     // WRONG KEY
     if (event.key !== firstKeyInput && event.key !== firstKeyInput.toLowerCase()) {
+        updateMistakes();
         console.log(`wrong!`);
         playSound(wrong());
         timeRemaining -= difficulty[5];
@@ -316,6 +317,7 @@ const handleKeyPress = (event) => {
 
     // RIGHT KEY
     if (event.key === firstKeyInput || event.key === firstKeyInput.toLowerCase()) {
+        updateHitCount();
         console.log("correct");
         playSound(hit());
         inputPlayer.push(event.key);
@@ -344,6 +346,7 @@ const handleKeyPress = (event) => {
                 startTimer(timeRemaining + (((fishNames[`${currentFish}`][2] * difficulty[4]) * difficulty[0]) + difficulty[1]));
             // WIN LEVEL
             } else { 
+                updateFishCount();
                 playSound(success());
                 playSound(pull());
                 monologue.innerHTML = putMonologue(currentFish[0]);
@@ -667,6 +670,12 @@ const resetBtn = document.querySelector(`.reset-button`);
 resetBtn.addEventListener(`click`, () => {
     localStorage.removeItem('unlockedFish');
     localStorage.removeItem('fishPool');
+    localStorage.removeItem('fishCaught');
+    localStorage.removeItem('fishHooked');
+    localStorage.removeItem('diffChange');
+    localStorage.removeItem('hitCount');
+    localStorage.removeItem('mistakes');
+    localStorage.removeItem('cheatedStatus');
     fishAll.forEach((fish) => {
         fish.classList.remove(`unlocked`);
 
@@ -738,6 +747,8 @@ difficultiesObj.forEach(({ lvl, tooltip }) => {
         btn.classList.add(`current-difficulty`);
         const diff = btn.classList[0]
         difficulty = difficulties[diff];
+        updateDiffCount();
+        difficultyShow.textContent = `difficulty: ${diff}`
         localStorage.setItem('selectedDifficulty', diff);
     });
 
@@ -884,52 +895,16 @@ playBtn.addEventListener(`click`, () => {
     setTimeout(() => {
         mierImg.src = `./assets/fish/mier-1.png`
         playSound(takebait());
+        updateFishHooked();
         setTimeout(() => {
             const selected = selectFish();
             startFishing(...selected);
             console.log(...selected);
-            // startFishing(...kero);
+            // startFishing(...mier);
         }, 700);
     // }, (Math.trunc(Math.random() * 10) + 5) * 1000);
     }, 0);
 });
-
-const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
-const savedFishPool = JSON.parse(localStorage.getItem(`fishPool`));
-const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
-
-const loadProgress = () => {    
-    if (savedDifficulty) {
-        const savedButton = document.querySelector(`.${savedDifficulty}`);
-        if (savedButton) {
-            difficultyBtns.forEach((btn) => {
-                btn.classList.remove(`current-difficulty`);
-            })
-            savedButton.classList.add(`current-difficulty`);
-            difficulty = difficulties[savedDifficulty]; 
-        }
-    }
-
-    if (savedFishPool) {
-        fishPool.splice(0, fishPool.length, ...savedFishPool);
-    }
-
-    unlockedFish.forEach((fish) => {
-        const fishEl = document.querySelector(`.fish.${fish}`);
-        if (fishEl) {
-            fishEl.classList.add(`unlocked`);
-        }
-        const fishCatalogueImg = document.querySelector(`.${fish} img`);
-        fishCatalogueImg.src = `./assets/fish/fishCatalog/${fish}.png`;
-    });
-};
-
-// const saveProgress = () => {
-//     localStorage.setItem(`fishPool`, JSON.stringify(fishPool));
-//     localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
-// }
-
-loadProgress();
 
 const bird = document.querySelector(`.bird`)
 
@@ -1125,12 +1100,14 @@ let startBeach = false;
 // I HATE GOOGLE
 const menu = document.querySelector(`.menu`);
 const startTxt = document.querySelector(`.start`);
+const counterContainer = document.querySelector(`.counter-container`);
 
 const startGame = () => {
     if (!startBeach) {
         beach();
         playBtn.style.top = `20vh`;
         menu.style.right = `2.5vh`;
+        counterContainer.style.left = `2.5vh`;
         startTxt.style.opacity = `0`;
         setTimeout(() => {
             startTxt.style.display = `none`;
@@ -1151,13 +1128,14 @@ cheatTxt.addEventListener(`input`, () => {
         unlockBtn.style.backgroundColor = `white`;
         unlockBtn.style.pointerEvents = `all`;
     } else {
-        unlockBtn.style.backgroundColor = `gray`;
+        unlockBtn.style.backgroundColor = `rgb(123, 130, 144)`;
         unlockBtn.style.pointerEvents = `none`;
     }
 });
 
 unlockBtn.addEventListener(`click`, () => {
     if (cheatTxt.value === `im gay`) {
+        cheatedToggle();
         unlockBtn.textContent = `lol`;
         let unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
         fishAll.forEach((fish) => {
@@ -1174,3 +1152,135 @@ unlockBtn.addEventListener(`click`, () => {
         localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
     }
 });
+
+const fishCaughtEl = document.querySelector(`.fish-caught`);
+const fishHookedEl = document.querySelector(`.fish-hooked`);
+
+let fishCaught = 0;
+let fishHooked = 0;
+
+const updateFishCount = () => {
+    fishCaught++;
+    fishCaughtEl.textContent = `fish caught: ${fishCaught}`;
+    localStorage.setItem(`fishCaught`, JSON.stringify(fishCaught));
+};
+
+const updateFishHooked = () => {
+    fishHooked++;
+    fishHookedEl.textContent = `fish hooked: ${fishHooked}`;
+    localStorage.setItem(`fishHooked`, JSON.stringify(fishHooked));
+};
+
+const hitCountEl = document.querySelector(`.hit-count`);
+const mistakesEl = document.querySelector(`.mistakes`);
+const diffChangeEl = document.querySelector(`.difficulty-change-count`);
+
+let hitCount = 0;
+let mistakes = 0;
+let diffChange = 0;
+
+const updateHitCount = () => {
+    hitCount++;
+    hitCountEl.textContent = `hit count: ${hitCount}`;
+    localStorage.setItem(`hitCount`, JSON.stringify(hitCount));
+}
+
+const updateMistakes = () => {
+    mistakes++;
+    mistakesEl.textContent = `mistakes: ${mistakes}`;
+    localStorage.setItem(`mistakes`, JSON.stringify(mistakes));
+}
+
+const difficultyShow = document.querySelector(`.difficulty-show`);
+
+const updateDiffCount = () => {
+    diffChange++;
+    diffChangeEl.textContent = `difficulty change count: ${diffChange}`;
+    localStorage.setItem(`diffChange`, JSON.stringify(diffChange));
+}
+
+const cheated = document.querySelector(`.cheated`);
+cheated.style.color = `red`;
+cheated.style.fontWeight = `bolder`;
+cheated.style.fontSize = `3vh`;
+cheated.style.textShadow = `-3px 3px 0px rgba(16, 46, 135, 0.333)`;
+let cheatedStatus = false;
+
+const cheatedToggle = () => {
+    cheated.style.display = `flex`;
+    cheatedStatus = true;
+    localStorage.setItem(`cheatedStatus`, JSON.stringify(cheatedStatus));
+}
+
+const unlockedFish = JSON.parse(localStorage.getItem(`unlockedFish`)) || [];
+const savedFishPool = JSON.parse(localStorage.getItem(`fishPool`));
+const savedFishCaught = JSON.parse(localStorage.getItem(`fishCaught`));
+const savedFishHooked = JSON.parse(localStorage.getItem(`fishHooked`));
+const savedHitCount = JSON.parse(localStorage.getItem(`hitCount`));
+const savedMistakes = JSON.parse(localStorage.getItem(`mistakes`));
+const savedDiffChange = JSON.parse(localStorage.getItem(`diffChange`));
+const savedCheatedStatus = JSON.parse(localStorage.getItem(`cheatedStatus`));
+const savedDifficulty = localStorage.getItem(`selectedDifficulty`);
+
+const loadProgress = () => {
+    if (savedCheatedStatus) {
+        cheatedToggle();
+    }
+
+    if (savedDifficulty) {
+        difficultyShow.textContent = `difficulty: ${savedDifficulty}`;
+        const savedButton = document.querySelector(`.${savedDifficulty}`);
+        if (savedButton) {
+            difficultyBtns.forEach((btn) => {
+                btn.classList.remove(`current-difficulty`);
+            })
+            savedButton.classList.add(`current-difficulty`);
+            difficulty = difficulties[savedDifficulty]; 
+        }
+    }
+
+    if (savedDiffChange) {
+        diffChange = savedDiffChange;
+        diffChangeEl.textContent = `difficulty change count: ${savedDiffChange}`;
+    }
+
+    if (savedFishPool) {
+        fishPool.splice(0, fishPool.length, ...savedFishPool);
+    }
+
+    if (savedFishCaught) {
+        fishCaught = savedFishCaught;
+        fishCaughtEl.textContent = `fish caught: ${savedFishCaught}`;
+    }
+
+    if (savedFishHooked) {
+        fishHooked = savedFishHooked;
+        fishHookedEl.textContent = `fish hooked: ${savedFishHooked}`;
+    }
+
+    if (savedHitCount) {
+        hitCount = savedHitCount;
+        hitCountEl.textContent = `hit count: ${savedHitCount}`;
+    }
+
+    if (savedMistakes) {
+        mistakes = savedMistakes;
+        mistakesEl.textContent = `mistakes: ${savedMistakes}`;
+    }
+
+    unlockedFish.forEach((fish) => {
+        const fishEl = document.querySelector(`.fish.${fish}`);
+        if (fishEl) {
+            fishEl.classList.add(`unlocked`);
+        }
+        const fishCatalogueImg = document.querySelector(`.${fish} img`);
+        fishCatalogueImg.src = `./assets/fish/fishCatalog/${fish}.png`;
+    });
+};
+
+// const saveProgress = () => {
+//     localStorage.setItem(`fishPool`, JSON.stringify(fishPool));
+//     localStorage.setItem(`unlockedFish`, JSON.stringify(unlockedFish));
+// }
+
+loadProgress();

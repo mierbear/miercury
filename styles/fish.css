@@ -290,6 +290,26 @@ body {
     pointer-events: none;
 }
 
+.counter-container {
+    z-index: 30;
+    pointer-events: none;
+    position: absolute;
+    gap: 1vh;
+    flex-direction: column;
+    display: flex;
+    bottom: 2.5vh;
+    left: -30vh;
+    transition: all 2s ease-in-out;
+}
+
+.counter-container p {
+    color: white;
+}
+
+.cheated {
+    display: none;
+}
+
 .settings {
     display: flex;
     justify-content: center;
@@ -364,7 +384,7 @@ body {
     font-size: large;
     cursor: pointer;
     width: 40%;
-    background-color: gray;
+    background-color: rgb(123, 130, 144);
     pointer-events: none;
 }
 
@@ -560,6 +580,8 @@ button.current-difficulty {
     font-weight: bold;
     animation: grow-shrink 4s ease-in-out infinite;
     transition: all 2s ease;
+    color: white;
+    text-shadow: -3px 3px 2px rgba(16, 46, 135, 0.333);
 }
 
 @keyframes waves {
