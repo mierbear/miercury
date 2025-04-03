@@ -250,6 +250,14 @@ body {
     text-align: justify;
 }
 
+.fish-info a {
+    padding-top: 15px;
+    font-size: larger;
+    color: rgb(215, 241, 255);
+    animation: grow-shrink 2s ease-in-out infinite;
+}
+
+
 .stars {
     padding: 2.5%;
     font-size: 4vh;
