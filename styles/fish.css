@@ -200,9 +200,10 @@ body {
 }
 
 .fish img {
-    width: 105%;
+    max-width: 80%;
     transition: all 0.5s ease;
     z-index: 100;
+    max-height: 10vh;
 }
 
 .fish:hover {
@@ -229,7 +230,7 @@ body {
     /* justify-content: space-around; */
     align-items: center;
     z-index: 100;
-    background-color: rgba(63, 85, 107, 0.898);
+    background-color: rgba(183, 211, 230, 0.94);
     pointer-events: all;
     box-sizing: border-box;
     padding: 0% 5%;
@@ -239,7 +240,7 @@ body {
 .fish-info h4,
 .fish-info p {
     text-align: center;
-    color: white;
+    color: rgb(51, 53, 67);
 }
 
 .fish-info h4 {
@@ -248,26 +249,31 @@ body {
 
 .fish-info p {
     text-align: justify;
+    font-size: smaller;
 }
 
 .fish-info a {
     padding-top: 15px;
     font-size: larger;
-    color: rgb(215, 241, 255);
+    color: rgb(0, 72, 255);
     animation: grow-shrink 2s ease-in-out infinite;
 }
 
 
 .stars {
     padding: 2.5%;
-    font-size: 4vh;
     animation: gold 2s ease-in-out infinite;
 }
 
 .info-img {
     max-width: 40vw;
-    max-height: 25vh;
+    height: 25vh;
     padding: 15px;
+    transition: all 3s ease;
+}
+
+.info-img:hover {
+    transform: scale(1.5);
 }
 
 .x,
