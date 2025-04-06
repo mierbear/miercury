@@ -970,13 +970,13 @@ playBtn.addEventListener(`click`, () => {
         playSound(takebait());
         updateFishHooked();
         setTimeout(() => {
-            // const selected = selectFish();
-            // startFishing(...selected);
-            // console.log(...selected);
-            startFishing(...mier);
+            const selected = selectFish();
+            startFishing(...selected);
+            console.log(...selected);
+            // startFishing(...mier);
         }, 700);
-    // }, (Math.trunc(Math.random() * 7) + 5) * 1000);
-    }, 0);
+    }, (Math.trunc(Math.random() * 7) + 5) * 1000);
+    // }, 0);
 });
 
 const bird = document.querySelector(`.bird`)
