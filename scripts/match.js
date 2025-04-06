@@ -159,8 +159,20 @@ const setHighscore = () => {
     if (score > highscore) {
         highscore = score;
         highscoreEl.textContent = String(highscore);
+        localStorage.setItem(`matchHighScore`, JSON.stringify(score));
     }
 }
+
+const savedHighScore = JSON.parse(localStorage.getItem(`matchHighScore`));
+
+const loadProgress = () => {
+    if (savedHighScore) {
+        highscore = savedHighScore;
+        highscoreEl.textContent = String(savedHighScore);
+    }
+}
+
+loadProgress();
 
 const startGame = () => {
     resetGame();

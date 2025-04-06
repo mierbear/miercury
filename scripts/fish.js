@@ -970,13 +970,13 @@ playBtn.addEventListener(`click`, () => {
         playSound(takebait());
         updateFishHooked();
         setTimeout(() => {
-            const selected = selectFish();
-            startFishing(...selected);
-            console.log(...selected);
-            // startFishing(...bs);
+            // const selected = selectFish();
+            // startFishing(...selected);
+            // console.log(...selected);
+            startFishing(...mier);
         }, 700);
-    }, (Math.trunc(Math.random() * 7) + 5) * 1000);
-    // }, 0);
+    // }, (Math.trunc(Math.random() * 7) + 5) * 1000);
+    }, 0);
 });
 
 const bird = document.querySelector(`.bird`)
@@ -1287,11 +1287,15 @@ const loadProgress = () => {
             savedButton.classList.add(`current-difficulty`);
             difficulty = difficulties[savedDifficulty]; 
         }
+    } else {
+        localStorage.setItem('selectedDifficulty', `medium`);
     }
 
     if (savedDiffChange) {
         diffChange = savedDiffChange;
         diffChangeEl.textContent = `difficulty change count: ${savedDiffChange}`;
+    } else {
+        localStorage.setItem(`diffChange`, `0`);
     }
 
     if (savedFishPool) {
@@ -1357,12 +1361,12 @@ const checkWin = (parent, classList) => {
         const hitPerc = (winStats[0] / winStats[1]) * 100;
         const hitPerc2 = (winStats[2] / (winStats[3] + winStats[2])) * 100;
         congrats.innerHTML = `congrats! you have caught all fish!<br>
-        at the time you caught all of them you had:<br>
+        at the time you caught all of them you...<br>
         <br>
-        you caught ${winStats[0]} out of ${winStats[1]} fishes hooked! (${hitPerc.toFixed(2)}%)<br>
-        you hit ${winStats[2]} out of ${winStats[2] + winStats[3]} keys! (${hitPerc2.toFixed(2)}%)<br>
-        you've beat the game on ${winStats[4]}<br>
-        and changed the difficulty ${winStats[5]} times!<br>
+        ● caught ${winStats[0]} out of ${winStats[1]} fishes hooked! (${hitPerc.toFixed(2)}%)<br>
+        ● hit ${winStats[2]} out of ${winStats[2] + winStats[3]} keys! (${hitPerc2.toFixed(2)}%)<br>
+        ● beat the game on ${winStats[4]}!<br>
+        ● changed the difficulty ${winStats[5]} times!<br>
         <br>
         ${parseFloat(hitPerc.toFixed(2)) > 86.76 &&
         parseFloat(hitPerc2.toFixed(2)) > 98.94 &&
