@@ -649,8 +649,8 @@ const fishObjects = [
         h: `Red-Lipped Batfish (Phrog)`,
         sh: `Ogcocephalus Darwini`,
         desc: `The red-lipped batfish is a bizarre and gay looking fish found around the Galápagos Islands at depths of 10 to 120 meters (30 to 400 feet). Its most distinctive feature is its bright red lips, looking like a gay man with lipstick on, which scientists believe may play a role in attracting gay mates (Just like Phrog in real life). The red-lipped batfish have an unusual sexual proclivity to homosexual relations (Just like Phrog in real life). Unlike most fish, it is a poor swimmer (Just like Phrog in real life) and instead uses its modified pectoral fins to "walk" along the ocean floor. This bottom-dweller preys on small fish, crustaceans, and marine worms.<br><br>Fun Fact: Despite being a fish, the red-lipped batfish prefers walking over swimming and has evolved a specialized structure on its head called an illicium, which acts like a lure to attract prey.`,
-        link: ``,
-        name: ``,
+        link: `https://x.com/phrogalooza`,
+        name: `@phrog`,
     },
     {
         stars: `★★★★★`,

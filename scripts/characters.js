@@ -215,13 +215,13 @@ preloadImage(preloadMier, () => {
 
 mierangel.addEventListener(`click`, function() {
     if (!mierangel.classList.contains(`current-mier`)) {
-        fadeOut();
-        setMierStyles(mierangel);
-        mierCount();
         const newSrc = `./assets/characters/mierangelalt.png`;
         preloadImage(newSrc, () => {
+            fadeOut();
             setTimeout(() => {
                 mierImg.src = newSrc;
+                setMierStyles(mierangel);
+                mierCount();
                 setMierText(1);
                 fadeIn();
             }, 300);
@@ -231,13 +231,12 @@ mierangel.addEventListener(`click`, function() {
     }
 });
 
+
 miertyrant.addEventListener(`click`, function() {
     if (!miertyrant.classList.contains(`current-mier`)) {
-        fadeOut();
-        setMierStyles(miertyrant);
-        mierCount();
         const newSrc = `./assets/characters/miertyrant.png`;
         preloadImage(newSrc, () => {
+            fadeOut();
             setTimeout(() => {
                 if (mierPeek) {
                     leaveAngel();
@@ -246,25 +245,25 @@ miertyrant.addEventListener(`click`, function() {
                 }
                 mierImg.src = newSrc;
                 mierImg.style.right = `0`;
+                setMierStyles(miertyrant);
+                mierCount();
                 setMierText(2);
                 fadeIn();
                 if (mierImg.style.transform !== `translateX(0%)`) {
                     setTimeout(() => {
-                        mierImg.style.transform = `translateX(0%)`
+                        mierImg.style.transform = `translateX(0%)`;
                     }, 300);
-                };
+                }
                 setTimeout(() => {
                     const pp = document.querySelector('.pp');
                     if (pp) {
                         pp.addEventListener('mouseenter', () => {
                             ppInfo.style.display = 'flex';
                         });
-        
                         pp.addEventListener('mousemove', (event) => {
                             ppInfo.style.left = `${event.pageX + 20}px`;
                             ppInfo.style.top = `${event.pageY + 20}px`;
                         });
-        
                         pp.addEventListener('mouseleave', () => {
                             ppInfo.style.display = 'none';
                         });
@@ -275,13 +274,12 @@ miertyrant.addEventListener(`click`, function() {
     }
 });
 
+
 miericemage.addEventListener(`click`, function() {
     if (!miericemage.classList.contains(`current-mier`)) {
-        fadeOut();
-        setMierStyles(miericemage);
-        mierCount();
         const newSrc = `./assets/characters/miericemage.png`;
         preloadImage(newSrc, () => {
+            fadeOut();
             setTimeout(() => {
                 if (mierPeek) {
                     leaveAngel();
@@ -290,17 +288,20 @@ miericemage.addEventListener(`click`, function() {
                 }
                 mierImg.src = newSrc;
                 mierImg.style.right = `0`;
+                setMierStyles(miericemage);
+                mierCount();
                 setMierText(0);
                 fadeIn();
                 if (mierImg.style.transform !== `translateX(0%)`) {
                     setTimeout(() => {
-                        mierImg.style.transform = `translateX(0%)`
+                        mierImg.style.transform = `translateX(0%)`;
                     }, 300);
                 }
             }, 300);
         });
     }
 });
+
 
 const mierWhy = document.querySelector('.mier-why');
 const mierWhyInfo = document.querySelector('.mier-why-info');
@@ -329,27 +330,21 @@ const quinceImg = document.querySelector(`.quince-img`);
 let blood = false;
 
 quinceImg.addEventListener(`click`, () => {
+    const newSrc = blood ? `./assets/characters/quincealt.png` : `./assets/characters/quince.png`;
 
-    if (!blood) {
+    preloadImage(newSrc, () => {
         quinceImg.style.animation = `fade-out .3s ease`;
         quinceImg.style.opacity = `0`;
+
         setTimeout(() => {
-            quinceImg.src = `./assets/characters/quince.png`;
+            quinceImg.src = newSrc;
             quinceImg.style.animation = `fade-in .2s ease`;
             quinceImg.style.opacity = `1`;
+            blood = !blood;
         }, 300);
-        blood = true;
-    } else {
-        quinceImg.style.animation = `fade-out .3s ease`;
-        quinceImg.style.opacity = `0`;
-        setTimeout(() => {
-            quinceImg.src = `./assets/characters/quincealt.png`;
-            quinceImg.style.animation = `fade-in .2s ease`;
-            quinceImg.style.opacity = `1`;
-        }, 300);
-        blood = false;
-    }
+    });
 });
+
 
 // SKULL BOYS
 

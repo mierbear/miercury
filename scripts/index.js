@@ -143,7 +143,7 @@ x.addEventListener(`click`, function() {
         contentBox.style.transform = `translateX(-150%)`;
         x.textContent = `O`;
         closed = true;
-    } else if (closed === true) {
+    } else {
         contentBox.style.animation = `container-slide-out 2.2s ease-out`;
         contentBox.style.transform = `translateX(0%)`;
         x.textContent = `C`;
@@ -151,27 +151,27 @@ x.addEventListener(`click`, function() {
     }
 });
 
-let headerClosed = false;
-
 // HEADER
 
+let headerClosed = false;
+
 h.addEventListener(`click`, function() {
-    if (!closed) {
+    if (!headerClosed) {
         header.style.animation = `header-slide-out 0.5s ease-in`;
         header.style.transform = `translateY(-150%)`;
         setTimeout(() => {
             centerText.style.opacity = `0`;
         }, 0.5 * second)
         h.textContent = `O`;
-        closed = true;
-    } else if (closed === true) {
+        headerClosed = true;
+    } else {
         header.style.animation = `header-slide-out .65s ease-out`;
         header.style.transform = `translateY(0%)`;
         setTimeout(() => {
             centerText.style.opacity = `1`;
         }, 0.5 * second)
         h.textContent = `H`;
-        closed = false;
+        headerClosed = false;
     }
 });
 

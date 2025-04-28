@@ -16,6 +16,8 @@ const love = document.querySelectorAll(`.love`);
 const xg = document.querySelector(`.xg`);
 const xa = document.querySelector(`.xa`);
 const xm = document.querySelector(`.xm`);
+const brag = document.querySelector('.brag');
+const bragInfo = document.querySelector('.brag-info');
 let smile = false;
 let knockFX;
 
@@ -86,6 +88,8 @@ kyle.addEventListener('click', function() {
         gameList.style.backgroundColor = `black`;
         love.forEach((love) => {
             love.style.animation = `love2 2s ease-in-out infinite`;
+        bragInfo.style.color = `white`;
+        bragInfo.style.backgroundColor = `rgba(0, 0, 0, 0.7)`;
         })
     } else {
         setTimeout(() => {
@@ -114,5 +118,23 @@ kyle.addEventListener('click', function() {
         love.forEach((love) => {
             love.style.animation = `love 2s ease-in-out infinite`;
         })
+        bragInfo.style.color = `black`;
+        bragInfo.style.backgroundColor = `rgba(255, 255, 255, 0.7)`;
     }
+});
+
+
+brag.addEventListener('mouseenter', () => {
+    bragInfo.style.display = 'flex';
+});
+
+brag.addEventListener('mousemove', (event) => {
+    const tooltipWidth = bragInfo.offsetWidth;
+    const tooltipHeight = bragInfo.offsetHeight;
+    bragInfo.style.left = `${event.pageX - tooltipWidth - 40}px`;
+    bragInfo.style.top = `${event.pageY - tooltipHeight / 2}px`;
+});
+
+brag.addEventListener('mouseleave', () => {
+    bragInfo.style.display = 'none';
 });

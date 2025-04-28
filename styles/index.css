@@ -277,6 +277,11 @@ input[type="range"]::-moz-range-thumb {
     font-size: 12px;
 }
 
+.link {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-family: monospace;
+}
 
 /* ANIMATIONS */
 
