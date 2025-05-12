@@ -1,6 +1,7 @@
 "use strict";
 
 const kyle = document.querySelector('.kyle');
+const ageEl = document.querySelector(`.age`);
 const center = document.querySelector('.center');
 const text = document.querySelector('.about-me');
 const headerText = document.querySelector(`.title`);
@@ -34,6 +35,22 @@ function stopKnock() {
         knockFX.currentTime = 0;
     }
 };
+
+const birthYear = 2002;
+const birthMonth = 10;
+const birthDay = 11;
+
+const today = new Date();
+const currentYear = today.getFullYear();
+
+const birthdayThisYear = new Date(currentYear, birthMonth - 1, birthDay);
+
+let age = currentYear - birthYear;
+if (today < birthdayThisYear) {
+  age--;
+}
+
+ageEl.textContent = age;
 
 games.addEventListener(`click`, function() {
     gameList.classList.toggle(`hidden`);
